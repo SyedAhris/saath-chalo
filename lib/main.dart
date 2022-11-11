@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/pages/login_page_passenger.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 void main() {
@@ -14,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        textTheme: GoogleFonts.nunitoTextTheme(),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xfffF6E5D),
-          secondary: const Color(0xFFFFC107),
-
+          primary: const Color(0xffF65E5D),
+          secondary: const Color(0xffFF9494),
         ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -37,11 +38,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
