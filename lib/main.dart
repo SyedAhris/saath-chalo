@@ -15,7 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        textTheme: GoogleFonts.nunitoTextTheme(),
+        textTheme: GoogleFonts.nunitoTextTheme(
+            Theme.of(context).textTheme.apply(
+              bodyColor: const Color(0xff36454F),
+         )
+        ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color(0xffF65E5D),
           secondary: const Color(0xffFF9494),
@@ -36,7 +40,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final int _counter = 0;
 
 
   @override

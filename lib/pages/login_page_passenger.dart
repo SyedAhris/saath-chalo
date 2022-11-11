@@ -41,7 +41,12 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                 children:  [
                   TextField(
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: Color(0xffDCDEDF))
+                      ),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: Color(0xffDCDEDF))
+                      ),
                       labelText: 'E-mail',
                       hintText: 'e.g. john@gmail.com',
                     ),
@@ -50,7 +55,12 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                     padding: const EdgeInsets.only(top: 20),
                     child: TextField(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(color: Color(0xffDCDEDF))
+                        ),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(color: Color(0xffDCDEDF))
+                        ),
                         labelText: 'Password',
                       ),
                     ),
@@ -64,7 +74,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
               child: Row(
               children: [
                 Checkbox(value: checkBoxVal,
-
+                    side: const BorderSide(color: Color(0xffDCDEDF)),
                     checkColor: Colors.white,
                     activeColor: const Color(0xffF65E5D),
                     onChanged:(value){
@@ -80,7 +90,33 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
               ),
             ),
 
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: SizedBox(
+                width: 360,
+                height: 50,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
+                    onPressed: () {
 
+                },
+                    child: const Text("Login", style: TextStyle(fontSize: 18))
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 25,right: 25, left: 25),
+              child: Row(
+                children: const [
+                  Expanded(child: Divider(color: Colors.black)),
+                  Text("   Or Login With    "),
+                  Expanded(child: Divider(color: Colors.black)),
+                ],
+              ),
+            )
 
           ],
 
