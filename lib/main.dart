@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/pages/login_page_passenger.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Color(),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -58,8 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPagePassenger())
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
