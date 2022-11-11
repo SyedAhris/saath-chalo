@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/pages/login_page_passenger.dart';
-import 'package:hexcolor/hexcolor.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Color(),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xfffF6E5D),
+          secondary: const Color(0xFFFFC107),
+
+        ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
