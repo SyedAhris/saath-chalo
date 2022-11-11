@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sign_button/sign_button.dart';
 
 class LoginPagePassenger extends StatefulWidget {
   const LoginPagePassenger({Key? key}) : super(key: key);
@@ -85,7 +86,14 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                     ),
                 const Text("Remember Me", style: TextStyle(fontSize: 13, color: Color(0xffF65E5D))),
                 const SizedBox(width: 100),
-                const Text("Forgot Password?", style: TextStyle(fontSize: 13, color: Color(0xff0000EE))),
+                GestureDetector(
+                  onTap: (){
+
+                  },
+                    child: const Text("Forgot Password?",
+                        style: TextStyle(fontSize: 13, color: Color(0xff0000EE))
+                    )
+                ),
               ],
               ),
             ),
@@ -116,10 +124,52 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                   Expanded(child: Divider(color: Colors.black)),
                 ],
               ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SignInButton.mini(
+                    buttonType: ButtonType.facebook,
+                    onPressed: () {
+
+                    },
+                  ),
+                  SignInButton.mini(
+                    buttonType: ButtonType.google,
+                    onPressed: () {
+
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Do not have an account?"),
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: (){
+
+                    },
+                    child: const Text("Sign Up",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Color(0xffF65E5D),
+                            fontWeight: FontWeight.w900
+                        )
+                    ),
+                  )
+                ],
+              ),
             )
-
           ],
-
         ),
       ),
     );
