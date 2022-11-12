@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/login_page_driver.dart';
-import 'package:flutterdemo/passenger_pages/login_page_passenger.dart';
+import 'package:flutterdemo/driver_pages/LoginPage/login_page_driver.dart';
+import 'package:flutterdemo/passenger_pages/LoginPage/login_page_passenger.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SaathChalo',
       theme: ThemeData(
         textTheme:
             GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme.apply(
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           secondary: const Color(0xffFF9494),
         ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'SaathChalo'),
     );
   }
 }
@@ -41,11 +41,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final int _counter = 0;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Center(child: Text(widget.title)),
       ),
       body: Center(
         child: Column(
@@ -62,12 +63,15 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LoginPageDriver()));
+        onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPageDriver())
+          );
         },
         child: const Icon(Icons.add),
       ),
+        ),
+
+    )
     );
   }
 }
