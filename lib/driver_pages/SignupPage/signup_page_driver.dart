@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
+
+import '../../constants/constants.dart';
+import '../../globalComponents/main_app_bar.dart';
 
 class SignupDriver extends StatefulWidget {
   const SignupDriver({Key? key}) : super(key: key);
@@ -179,7 +181,7 @@ class _SignupDriverState extends State<SignupDriver> {
                           child: const Text("Login Here",
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: Color(0xffF65E5D),
+                                  color: MainColors.primary,
                                   fontWeight: FontWeight.w900)),
                         )
                       ],

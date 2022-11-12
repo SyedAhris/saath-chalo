@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 
 class SignupPassenger extends StatefulWidget {
@@ -178,7 +179,7 @@ class _SignupPassengerState extends State<SignupPassenger> {
                           child: const Text("Login Here",
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: Color(0xffF65E5D),
+                                  color: MainColors.primary,
                                   fontWeight: FontWeight.w900)),
                         )
                       ],

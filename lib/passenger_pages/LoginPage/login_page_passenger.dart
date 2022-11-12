@@ -70,9 +70,9 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                     children: [
                       Checkbox(
                           value: checkBoxVal,
-                          side: const BorderSide(color: MainColors.primary),
+                          side: const BorderSide(color: MainColors.grey),
                           checkColor: Colors.white,
-                          activeColor: const Color(0xffF65E5D),
+                          activeColor: MainColors.primary,
                           onChanged: (value) {
                             setState(() {
                               checkBoxVal = value as bool;
@@ -80,7 +80,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                           }),
                       const Text("Remember Me",
                           style: TextStyle(
-                              fontSize: 13, color: Color(0xffF65E5D))),
+                              fontSize: 13, color: MainColors.primary)),
                       const SizedBox(width: 100),
                       GestureDetector(
                           onTap: () {},
@@ -137,7 +137,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                         child: const Text("Sign Up",
                             style: TextStyle(
                                 fontSize: 15,
-                                color: Color(0xffF65E5D),
+                                color: MainColors.primary,
                                 fontWeight: FontWeight.w900)),
                       )
                     ],
