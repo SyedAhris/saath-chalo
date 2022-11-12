@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/constants.dart';
+import '../../globalComponents/main_app_bar.dart';
+
 class SignupDriver extends StatefulWidget {
   const SignupDriver({Key? key}) : super(key: key);
 
@@ -11,9 +14,7 @@ class _SignupDriverState extends State<SignupDriver> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Center(child: Text('SaathChalo          ')),
-        ),
+        appBar: const MainAppBar(title: "SaathChalo"),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 35),
@@ -36,7 +37,7 @@ class _SignupDriverState extends State<SignupDriver> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.only(left: 20),
                     child: Row(
                       children: const [
                         Text("Create an account to get all the features",
@@ -180,7 +181,7 @@ class _SignupDriverState extends State<SignupDriver> {
                           child: const Text("Login Here",
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: Color(0xffF65E5D),
+                                  color: MainColors.primary,
                                   fontWeight: FontWeight.w900)),
                         )
                       ],

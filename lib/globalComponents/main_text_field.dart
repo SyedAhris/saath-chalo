@@ -15,10 +15,10 @@ class MainTextField extends StatelessWidget {
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: MainColors.primary)),
+              borderSide: const BorderSide(color: MainColors.grey)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: MainColors.primary)),
+              borderSide: const BorderSide(color: MainColors.grey)),
           labelText: labelText,
           hintText: hintText),
     );

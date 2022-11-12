@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/SignupPage/signup_page_driver.dart';
+import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:sign_button/sign_button.dart';
+
+import '../../constants/constants.dart';
 
 class LoginPageDriver extends StatefulWidget {
   const LoginPageDriver({Key? key}) : super(key: key);
@@ -15,9 +18,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('SaathChalo          ')),
-      ),
+      appBar: const MainAppBar(title: "SaathChalo"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 50),
@@ -88,7 +89,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                           value: checkBoxVal,
                           side: const BorderSide(color: Color(0xffDCDEDF)),
                           checkColor: Colors.white,
-                          activeColor: const Color(0xffF65E5D),
+                          activeColor: MainColors.primary,
                           onChanged: (value) {
                             setState(() {
                               checkBoxVal = value as bool;
@@ -96,7 +97,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                           }),
                       const Text("Remember Me",
                           style: TextStyle(
-                              fontSize: 13, color: Color(0xffF65E5D))),
+                              fontSize: 13, color: MainColors.primary)),
                       const SizedBox(width: 100),
                       GestureDetector(
                           onTap: () {},
@@ -162,7 +163,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                         child: const Text("Sign Up",
                             style: TextStyle(
                                 fontSize: 15,
-                                color: Color(0xffF65E5D),
+                                color: MainColors.primary,
                                 fontWeight: FontWeight.w900)),
                       )
                     ],
