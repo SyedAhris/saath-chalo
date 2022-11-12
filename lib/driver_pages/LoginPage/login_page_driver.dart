@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/SignupPage/signup_page_driver.dart';
 import 'package:sign_button/sign_button.dart';
 
 class LoginPageDriver extends StatefulWidget {
@@ -20,7 +21,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 75),
+          padding: const EdgeInsets.only(top: 50),
           child: Center(
             child: Column(
               children: [
@@ -102,7 +103,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 25),
+                  padding: const EdgeInsets.only(top: 35),
                   child: SizedBox(
                     width: 360,
                     height: 50,
@@ -151,7 +152,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 25),
+                  padding: const EdgeInsets.only(top: 25, bottom: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -159,7 +160,9 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                       const SizedBox(width: 10),
                       GestureDetector(
                         onTap: (){
-
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context)=>SignupDriver())
+                          );
                         },
                         child: const Text("Sign Up",
                             style: TextStyle(
