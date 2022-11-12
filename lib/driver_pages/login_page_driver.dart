@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/signup_page_driver.dart';
 import 'package:sign_button/sign_button.dart';
 
 class LoginPageDriver extends StatefulWidget {
@@ -159,7 +160,9 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                       const SizedBox(width: 10),
                       GestureDetector(
                         onTap: (){
-
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context)=>SignupDriver())
+                          );
                         },
                         child: const Text("Sign Up",
                             style: TextStyle(
