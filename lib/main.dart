@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/login_page_driver.dart';
+import 'package:flutterdemo/passenger_pages/login_page_passenger.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +16,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.nunitoTextTheme(
+            Theme.of(context).textTheme.apply(
+              bodyColor: const Color(0xff36454F),
+         )
+        ),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xffF65E5D),
+          secondary: const Color(0xffFF9494),
+        ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -29,13 +41,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPageDriver())
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
