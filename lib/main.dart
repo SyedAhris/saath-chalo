@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/pages/login_page_driver.dart';
 import 'package:flutterdemo/pages/login_page_passenger.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -65,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPagePassenger())
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPageDriver())
           );
         },
         child: const Icon(Icons.add),
