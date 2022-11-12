@@ -153,17 +153,17 @@ class _SignupPassengerState extends State<SignupPassenger> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 15),
+                    padding: const EdgeInsets.only(top: 15, bottom: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Do not have an account?"),
+                        const Text("Already have an account?"),
                         const SizedBox(width: 10),
                         GestureDetector(
                           onTap: (){
 
                           },
-                          child: const Text("Sign Up",
+                          child: const Text("Login Here",
                               style: TextStyle(
                                   fontSize: 15,
                                   color: Color(0xffF65E5D),
