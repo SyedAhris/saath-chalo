@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/passenger_pages/SignupPage/signup_page_passenger.dart';
 import 'package:sign_button/sign_button.dart';
 
+import '../../globalComponents/main_text_field.dart';
+
 class LoginPagePassenger extends StatefulWidget {
   const LoginPagePassenger({Key? key}) : super(key: key);
 
@@ -43,32 +45,11 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                 Padding(
                   padding: const EdgeInsets.only(top: 32,right: 32,left: 32),
                   child: Column(
-                    children:  [
-                      TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                          ),
-                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                          ),
-                          labelText: 'E-mail',
-                          hintText: 'e.g. john@gmail.com',
-                        ),
-                      ),
-                       Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                            ),
-                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                            ),
-                            labelText: 'Password',
-                          ),
-                        ),
+                    children:  const [
+                      MainTextField(labelText: "E-mail",hintText: "e.g. john@gmail.com",),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: MainTextField(labelText: "Password",hintText: "",),
                       ),
                     ],
                   ),
@@ -102,21 +83,9 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                   ),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 25),
-                  child: SizedBox(
-                    width: 360,
-                    height: 50,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                        ),
-                        onPressed: () {
-
-                    },
-                        child: const Text("Login", style: TextStyle(fontSize: 18))
-                    ),
-                  ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 25),
+                  child: MainButton(text: "Login",),
                 ),
 
                 Padding(
@@ -183,3 +152,31 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
     );
   }
 }
+
+class MainButton extends StatelessWidget {
+  const MainButton({
+    Key? key,
+    required this.text,
+    this.width = 360,
+    this.height = 50
+  }) : super(key: key);
+  final String text;
+  final double width;
+  final double height;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+          onPressed: () {
+      },
+          child: Text(text, style: const TextStyle(fontSize: 18))
+      ),
+    );
+  }
+}
+
