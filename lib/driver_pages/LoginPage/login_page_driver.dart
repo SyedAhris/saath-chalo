@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/passenger_pages/signup_page_passenger.dart';
+import 'package:flutterdemo/driver_pages/SignupPage/signup_page_driver.dart';
 import 'package:sign_button/sign_button.dart';
 
-class LoginPagePassenger extends StatefulWidget {
-  const LoginPagePassenger({Key? key}) : super(key: key);
+class LoginPageDriver extends StatefulWidget {
+  const LoginPageDriver({Key? key}) : super(key: key);
 
   @override
-  State<LoginPagePassenger> createState() => _LoginPagePassengerState();
+  State<LoginPageDriver> createState() => _LoginPageDriverState();
 }
 
-class _LoginPagePassengerState extends State<LoginPagePassenger> {
+class _LoginPageDriverState extends State<LoginPageDriver> {
   bool checkBoxVal=false;
 
   @override
@@ -21,17 +21,17 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 35),
+          padding: const EdgeInsets.only(top: 50),
           child: Center(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 0, right: 90, left: 20),
+                  padding: const EdgeInsets.only(top: 0, right: 130),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text("Login", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,)),
-                      Text(" as Passenger", style: TextStyle(fontSize: 28)),
+                      Text(" as Driver", style: TextStyle(fontSize: 28)),
                     ],
                   ),
                 ),
@@ -103,7 +103,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 25),
+                  padding: const EdgeInsets.only(top: 35),
                   child: SizedBox(
                     width: 360,
                     height: 50,
@@ -161,7 +161,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                       GestureDetector(
                         onTap: (){
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context)=>SignupPassenger())
+                              MaterialPageRoute(builder: (context)=>SignupDriver())
                           );
                         },
                         child: const Text("Sign Up",
