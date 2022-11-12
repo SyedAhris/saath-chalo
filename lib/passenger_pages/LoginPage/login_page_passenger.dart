@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
+import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/passenger_pages/SignupPage/signup_page_passenger.dart';
 import 'package:sign_button/sign_button.dart';
 
@@ -19,9 +20,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('SaathChalo          ')),
-      ),
+      appBar: const MainAppBar(title: "SaathChalo"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 35),

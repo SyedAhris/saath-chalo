@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/LoginPage/login_page_driver.dart';
-import 'package:flutterdemo/globalComponents/side_bar.dart';
-import 'package:flutterdemo/passenger_pages/LoginPage/login_page_passenger.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'home_page/home_page.dart';

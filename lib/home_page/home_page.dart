@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../driver_pages/LoginPage/login_page_driver.dart';
+import '../globalComponents/main_app_bar.dart';
 import '../globalComponents/side_bar.dart';
 import '../passenger_pages/LoginPage/login_page_passenger.dart';
 
@@ -18,10 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: const SideBar(),
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(widget.title)
-        ),
+        appBar: const MainAppBar(title: "SaathChalo",),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 0),

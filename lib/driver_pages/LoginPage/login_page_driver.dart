@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/SignupPage/signup_page_driver.dart';
+import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:sign_button/sign_button.dart';
 
 class LoginPageDriver extends StatefulWidget {
@@ -15,9 +16,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('SaathChalo          ')),
-      ),
+      appBar: const MainAppBar(title: "SaathChalo"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 50),
