@@ -25,33 +25,39 @@ class _SignupPassengerState extends State<SignupPassenger> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text("Sign up", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,)),
+                        Text("Sign up",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            )),
                         Text(" as Passenger", style: TextStyle(fontSize: 28)),
                       ],
                     ),
                   ),
-
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Row(
                       children: const [
-                        Text("Create an account to get all the features", style: TextStyle(fontSize: 15)),
+                        Text("Create an account to get all the features",
+                            style: TextStyle(fontSize: 15)),
                       ],
                     ),
                   ),
-
                   Padding(
-                    padding: const EdgeInsets.only(top: 32,right: 40,left: 20),
+                    padding:
+                        const EdgeInsets.only(top: 32, right: 40, left: 20),
                     child: Column(
                       children: [
                         TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                            ),
-                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    const BorderSide(color: Color(0xffDCDEDF))),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    const BorderSide(color: Color(0xffDCDEDF))),
                             labelText: 'First Name',
                             hintText: 'e.g. Mohammad',
                           ),
@@ -60,12 +66,14 @@ class _SignupPassengerState extends State<SignupPassenger> {
                           padding: const EdgeInsets.only(top: 20),
                           child: TextField(
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
                               labelText: 'Last Name',
                               hintText: 'e.g. Irtiza',
                             ),
@@ -75,12 +83,14 @@ class _SignupPassengerState extends State<SignupPassenger> {
                           padding: const EdgeInsets.only(top: 20),
                           child: TextField(
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
                               labelText: 'Phone Number',
                               hintText: 'e.g. 090078601',
                             ),
@@ -90,12 +100,14 @@ class _SignupPassengerState extends State<SignupPassenger> {
                           padding: const EdgeInsets.only(top: 20),
                           child: TextField(
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
                               labelText: 'Email',
                               hintText: 'e.g. irtiza@gmail.com',
                             ),
@@ -105,12 +117,14 @@ class _SignupPassengerState extends State<SignupPassenger> {
                           padding: const EdgeInsets.only(top: 20),
                           child: TextField(
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
                               labelText: 'Password',
                               hintText: 'e.g. **********',
                             ),
@@ -120,12 +134,14 @@ class _SignupPassengerState extends State<SignupPassenger> {
                           padding: const EdgeInsets.only(top: 20),
                           child: TextField(
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xffDCDEDF))),
                               labelText: 'Confirm Password',
                               hintText: 'e.g. **********',
                             ),
@@ -134,7 +150,6 @@ class _SignupPassengerState extends State<SignupPassenger> {
                       ],
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 25, right: 15),
                     child: SizedBox(
@@ -142,16 +157,14 @@ class _SignupPassengerState extends State<SignupPassenger> {
                       height: 50,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
                           ),
-                          onPressed: () {
-
-                          },
-                          child: const Text("Create User", style: TextStyle(fontSize: 18))
-                      ),
+                          onPressed: () {},
+                          child: const Text("Create User",
+                              style: TextStyle(fontSize: 18))),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 15, bottom: 15),
                     child: Row(
@@ -160,26 +173,22 @@ class _SignupPassengerState extends State<SignupPassenger> {
                         const Text("Already have an account?"),
                         const SizedBox(width: 10),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Navigator.of(context).pop();
                           },
                           child: const Text("Login Here",
                               style: TextStyle(
                                   fontSize: 15,
                                   color: Color(0xffF65E5D),
-                                  fontWeight: FontWeight.w900
-                              )
-                          ),
+                                  fontWeight: FontWeight.w900)),
                         )
                       ],
                     ),
                   )
-
                 ],
               ),
             ),
           ),
-        )
-    );
+        ));
   }
 }

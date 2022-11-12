@@ -10,14 +10,13 @@ class LoginPageDriver extends StatefulWidget {
 }
 
 class _LoginPageDriverState extends State<LoginPageDriver> {
-  bool checkBoxVal=false;
+  bool checkBoxVal = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('SaathChalo          ')),
-
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -30,42 +29,50 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text("Login", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,)),
+                      Text("Login",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          )),
                       Text(" as Driver", style: TextStyle(fontSize: 28)),
                     ],
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(right: 138),
-                  child: Text("Please login to continue", style: TextStyle(fontSize: 17)),
+                  child: Text("Please login to continue",
+                      style: TextStyle(fontSize: 17)),
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.only(top: 32,right: 32,left: 32),
+                  padding: const EdgeInsets.only(top: 32, right: 32, left: 32),
                   child: Column(
-                    children:  [
+                    children: [
                       TextField(
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                          ),
-                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                              borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide:
+                                  const BorderSide(color: Color(0xffDCDEDF))),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide:
+                                  const BorderSide(color: Color(0xffDCDEDF))),
                           labelText: 'E-mail',
                           hintText: 'e.g. john@gmail.com',
                         ),
                       ),
-                       Padding(
+                      Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                            ),
-                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: Color(0xffDCDEDF))
-                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    const BorderSide(color: Color(0xffDCDEDF))),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    const BorderSide(color: Color(0xffDCDEDF))),
                             labelText: 'Password',
                           ),
                         ),
@@ -73,35 +80,32 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                     ],
                   ),
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.only( right: 20, left: 20),
+                  padding: const EdgeInsets.only(right: 20, left: 20),
                   child: Row(
-                  children: [
-                    Checkbox(value: checkBoxVal,
-                        side: const BorderSide(color: Color(0xffDCDEDF)),
-                        checkColor: Colors.white,
-                        activeColor: const Color(0xffF65E5D),
-                        onChanged:(value){
+                    children: [
+                      Checkbox(
+                          value: checkBoxVal,
+                          side: const BorderSide(color: Color(0xffDCDEDF)),
+                          checkColor: Colors.white,
+                          activeColor: const Color(0xffF65E5D),
+                          onChanged: (value) {
                             setState(() {
-                              checkBoxVal=value as bool;
+                              checkBoxVal = value as bool;
                             });
-                         }
-                        ),
-                    const Text("Remember Me", style: TextStyle(fontSize: 13, color: Color(0xffF65E5D))),
-                    const SizedBox(width: 100),
-                    GestureDetector(
-                      onTap: (){
-
-                      },
-                        child: const Text("Forgot Password?",
-                            style: TextStyle(fontSize: 13, color: Color(0xff0000EE))
-                        )
-                    ),
-                  ],
+                          }),
+                      const Text("Remember Me",
+                          style: TextStyle(
+                              fontSize: 13, color: Color(0xffF65E5D))),
+                      const SizedBox(width: 100),
+                      GestureDetector(
+                          onTap: () {},
+                          child: const Text("Forgot Password?",
+                              style: TextStyle(
+                                  fontSize: 13, color: Color(0xff0000EE)))),
+                    ],
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(top: 35),
                   child: SizedBox(
@@ -109,18 +113,16 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                     height: 50,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                         ),
-                        onPressed: () {
-
-                    },
-                        child: const Text("Login", style: TextStyle(fontSize: 18))
-                    ),
+                        onPressed: () {},
+                        child: const Text("Login",
+                            style: TextStyle(fontSize: 18))),
                   ),
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.only(top: 25,right: 25, left: 25),
+                  padding: const EdgeInsets.only(top: 25, right: 25, left: 25),
                   child: Row(
                     children: const [
                       Expanded(child: Divider(color: Colors.black)),
@@ -129,7 +131,6 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(top: 25),
                   child: Row(
@@ -137,20 +138,15 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                     children: [
                       SignInButton.mini(
                         buttonType: ButtonType.facebook,
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                       ),
                       SignInButton.mini(
                         buttonType: ButtonType.google,
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                       ),
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(top: 25, bottom: 25),
                   child: Row(
@@ -159,18 +155,15 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                       const Text("Do not have an account?"),
                       const SizedBox(width: 10),
                       GestureDetector(
-                        onTap: (){
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context)=>SignupDriver())
-                          );
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SignupDriver()));
                         },
                         child: const Text("Sign Up",
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Color(0xffF65E5D),
-                                fontWeight: FontWeight.w900
-                            )
-                        ),
+                                fontWeight: FontWeight.w900)),
                       )
                     ],
                   ),
