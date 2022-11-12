@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/login_page_driver.dart';
+import 'package:flutterdemo/passenger_pages/login_page_passenger.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'widgets/card_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +47,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: MyWidget(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => LoginPageDriver()));
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
