@@ -16,7 +16,7 @@ class _SignupPassengerState extends State<SignupPassenger> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.only(top: 35),
             child: Center(
               child: Column(
                 children: [
@@ -131,6 +131,46 @@ class _SignupPassengerState extends State<SignupPassenger> {
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25, right: 15),
+                    child: SizedBox(
+                      width: 355,
+                      height: 50,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          ),
+                          onPressed: () {
+
+                          },
+                          child: const Text("Create User", style: TextStyle(fontSize: 18))
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Do not have an account?"),
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: (){
+
+                          },
+                          child: const Text("Sign Up",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xffF65E5D),
+                                  fontWeight: FontWeight.w900
+                              )
+                          ),
+                        )
                       ],
                     ),
                   )

@@ -102,7 +102,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 25),
+                  padding: const EdgeInsets.only(top: 35),
                   child: SizedBox(
                     width: 360,
                     height: 50,
@@ -151,7 +151,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 25),
+                  padding: const EdgeInsets.only(top: 25, bottom: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

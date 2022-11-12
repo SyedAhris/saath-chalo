@@ -20,7 +20,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 50),
+          padding: const EdgeInsets.only(top: 35),
           child: Center(
             child: Column(
               children: [
@@ -151,7 +151,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 25),
+                  padding: const EdgeInsets.only(top: 25, bottom: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
