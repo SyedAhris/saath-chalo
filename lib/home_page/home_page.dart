@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
 import '../driver_pages/LoginPage/login_page_driver.dart';
 import '../globalComponents/main_app_bar.dart';
@@ -18,8 +19,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const SideBar(),
-        appBar: const MainAppBar(title: "SaathChalo",),
+        drawer: SideBar(
+          tapHome: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const PassengerHome())),
+        ),
+        appBar: const MainAppBar(
+          title: "SaathChalo",
+        ),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 0),
@@ -37,7 +43,8 @@ class _HomePageState extends State<HomePage> {
                       child: ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPagePassenger()));
+                                builder: (context) =>
+                                    const LoginPagePassenger()));
                           },
                           style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 25)),
@@ -52,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                       child: ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPageDriver()));
+                                builder: (context) => const LoginPageDriver()));
                           },
                           style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 25)),

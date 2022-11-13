@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
 
-class MainLocationTextField extends StatelessWidget {
-  const MainLocationTextField(
+class LocationTextField extends StatelessWidget {
+  const LocationTextField(
       {Key? key, required this.labelText, required this.hintText})
       : super(key: key);
   final String labelText;
@@ -12,6 +12,8 @@ class MainLocationTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
