@@ -107,7 +107,12 @@ class MyWidget extends StatelessWidget {
                           Icons.pin_drop_outlined,
                           color: Colors.green,
                         ),
-                        Text('Main Campus IBA, Karachi'),
+                        Text(
+                          'Main Campus IBA, Karachi',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -117,7 +122,12 @@ class MyWidget extends StatelessWidget {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20, 5, 0, 10),
+                  padding: EdgeInsets.fromLTRB(
+                    20,
+                    5,
+                    0,
+                    10,
+                  ),
                   child: Expanded(
                     child: Row(
                       children: [
@@ -125,7 +135,12 @@ class MyWidget extends StatelessWidget {
                           Icons.pin_drop_outlined,
                           color: Colors.red,
                         ),
-                        Text('Main Campus IBA, Karachi'),
+                        Text(
+                          'Main Campus IBA, Karachi',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -142,7 +157,12 @@ class MyWidget extends StatelessWidget {
                         Icon(
                           Icons.access_time,
                         ),
-                        Text('12:56 AM'),
+                        Text(
+                          '12:56 AM',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                          ),
+                        ),
                       ],
                     ),
                     flex: 3,
@@ -156,7 +176,12 @@ class MyWidget extends StatelessWidget {
                         Icon(
                           Icons.calendar_month,
                         ),
-                        Text('26/11/2022'),
+                        Text(
+                          '26/11/2022',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                          ),
+                        ),
                       ],
                     ),
                     flex: 3,
@@ -172,13 +197,38 @@ class MyWidget extends StatelessWidget {
                         //   Icons.local_atm,
                         //   color: Colors.green,
                         // ),
-                        Text('Est PKR 5000'),
+                        Text(
+                          'Est PKR 5000',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
+            Center(
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.check_circle_outline,
+                      color: Colors.green,
+                    ),
+                    Text(
+                      'Driver has accepted',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'Nunito',
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

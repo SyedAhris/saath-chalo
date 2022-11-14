@@ -39,52 +39,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final int _counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text(widget.title)),
-        ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Choose Login Type", style: TextStyle(fontSize: 25)),
-                Padding(
-                  padding: const EdgeInsets.only(top: 50),
-                  child: SizedBox(
-                    width: 220,
-                    height: 70,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginPagePassenger()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 25)),
-                        child: const Text("Passenger")),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 50, bottom: 100),
-                  child: SizedBox(
-                    width: 220,
-                    height: 70,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginPageDriver()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 25)),
-                        child: const Text("Driver")),
-                  ),
-                ),
-              ],
+      appBar: AppBar(
+        title: Center(child: Text(widget.title)),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
             ),
-          ),
-        ));
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => LoginPageDriver()));
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
