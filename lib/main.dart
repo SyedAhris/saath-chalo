@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/LoginPage/login_page_driver.dart';
-import 'package:flutterdemo/passenger_pages/LoginPage/login_page_passenger.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -15,13 +14,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SaathChalo',
       theme: ThemeData(
-        textTheme:
-            GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme.apply(
-                  bodyColor: const Color(0xff36454F),
-                )),
+        textTheme: GoogleFonts.nunitoTextTheme(
+            Theme.of(context).textTheme.apply(
+              bodyColor: const Color(0xff36454F),
+         )
+        ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xffF65E5D),
-          secondary: const Color(0xffFF9494),
+          primary: MainColors.primary,
+          secondary: MainColors.secondary,
         ),
       ),
       home: const MyHomePage(title: 'SaathChalo'),
@@ -39,7 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,26 +47,57 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Center(child: Text(widget.title)),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("Choose Login Type", style: TextStyle(fontSize: 25)),
+              Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: SizedBox(
+                  width: 220,
+                  height: 70,
+                  child: ElevatedButton(
+                      onPressed: (){
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context)=>LoginPagePassenger()
+                            )
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 25)
+                      ),
+                      child: const Text("Passenger")),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 50,bottom: 100),
+                child: SizedBox(
+                  width: 220,
+                  height: 70,
+                  child: ElevatedButton(
+                      onPressed: (){
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context)=>LoginPageDriver()
+                            )
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 25)
+                      ),
+                      child: const Text("Driver")),
+                ),
+              ),
+            ],
+
+      ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LoginPageDriver()));
-        },
-        child: const Icon(Icons.add),
-      ),
+
+    )
     );
   }
 }
