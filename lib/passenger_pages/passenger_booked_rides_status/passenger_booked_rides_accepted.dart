@@ -5,14 +5,14 @@ import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import '../../globalComponents/main_button.dart';
 import '../passenger_home/location_text_field.dart';
 
-class PassengerBookedRidesPending extends StatefulWidget {
-  const PassengerBookedRidesPending({Key? key}) : super(key: key);
+class PassengerBookedRidesAccepted extends StatefulWidget {
+  const PassengerBookedRidesAccepted({Key? key}) : super(key: key);
 
   @override
-  State<PassengerBookedRidesPending> createState() => _PassengerBookedRidesPendingState();
+  State<PassengerBookedRidesAccepted> createState() => _PassengerBookedRidesAcceptedState();
 }
 
-class _PassengerBookedRidesPendingState extends State<PassengerBookedRidesPending> {
+class _PassengerBookedRidesAcceptedState extends State<PassengerBookedRidesAccepted> {
 
 
   @override
@@ -47,7 +47,7 @@ class _PassengerBookedRidesPendingState extends State<PassengerBookedRidesPendin
                         journeyDate: "26/11/2022",
                         journeyTime: "09:15",
                         estCost: 600,
-                        status: "None"
+                        status: "Accepted"
                     ),
                     const Padding(
                       padding: EdgeInsets.only(top: 20),
@@ -70,7 +70,7 @@ class _PassengerBookedRidesPendingState extends State<PassengerBookedRidesPendin
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 230,bottom: 20),
+                      padding: const EdgeInsets.only(top: 200,bottom: 20),
                       child: Row(
                         children: [
                           const MainButton(text: "Update Request",width: 200,),

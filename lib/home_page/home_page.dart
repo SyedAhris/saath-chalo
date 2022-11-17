@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/passenger_pages/PassengerRideHistory/passenger_ride_history.dart';
-import 'package:flutterdemo/passenger_pages/passenger_booked_rides_status/passenger_booked_rides_pending.dart';
 import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
 import '../driver_pages/LoginPage/login_page_driver.dart';
@@ -46,8 +44,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-                                    //const LoginPagePassenger()));
-                                const PassengerBookedRidesPending()));
+                                    const LoginPagePassenger()));
                           },
                           style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 25)),
