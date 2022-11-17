@@ -32,41 +32,60 @@ class _PassengerBookedRidesPendingState extends State<PassengerBookedRidesPendin
           // height: 631,
           child: Padding(
               padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  BookedRideCard(
-                      name: "Syed Abdul Shakoor",
-                      car: "Black Suzuki WagonR",
-                      numberPlate: "ABC-123",
-                      journeyStart: "Institute of Business Administration",
-                      journeyEnd: "Askari 4",
-                      rating: 4.5,
-                      acStatus: true,
-                      journeyDate: "26/11/2022",
-                      journeyTime: "09:15",
-                      estCost: 600,
-                      status: "None"
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: LocationTextField(
-                      labelText: "PickUp",
-                      hintText: "e.g IBA - Karachi University",
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    BookedRideCard(
+                        name: "Syed Abdul Shakoor",
+                        car: "Black Suzuki WagonR",
+                        numberPlate: "ABC-123",
+                        journeyStart: "Institute of Business Administration",
+                        journeyEnd: "Askari 4",
+                        rating: 4.5,
+                        acStatus: true,
+                        journeyDate: "26/11/2022",
+                        journeyTime: "09:15",
+                        estCost: 600,
+                        status: "None"
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: LocationTextField(
-                        labelText: "DropOff", hintText: "e.g Chaar Meenar"),
-                  ),
-                  const Expanded(
-                    child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: MainButton(text: "Search")),
-                  )
-                ],
-              )),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20),
+                      child: LocationTextField(
+                        labelText: "PickUp",
+                        hintText: "e.g IBA - Karachi University",
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20),
+                      child: LocationTextField(
+                          labelText: "DropOff", hintText: "e.g Chaar Meenar"),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 280,bottom: 10),
+                      child: Row(
+                        children: [
+                          const MainButton(text: "Update Request",width: 200,),
+                          const SizedBox(width: 20),
+                          SizedBox(
+                            width: 75,
+                            height: 50,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                ),
+                                onPressed: () {},
+                                child: const Icon(Icons.restore_from_trash_sharp)),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+          ),
         ),
       )
     );

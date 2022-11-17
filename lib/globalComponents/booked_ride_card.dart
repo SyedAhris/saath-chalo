@@ -61,8 +61,10 @@ class BookedRideCard extends StatelessWidget {
                 Column(
                   children: [
                     Text(rating.toString()),
+                    const SizedBox(height: 3),
                     const Text("2/3"),
-                    acStatus==true? const Icon(Icons.circle,color: Colors.green)
+                    const SizedBox(height: 3),
+                    acStatus==true? const Icon(Icons.circle,color: Colors.green,size: 18,)
                         : const Icon(Icons.circle,color: Colors.red)
                   ],
                 ),
