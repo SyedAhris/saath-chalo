@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/driver_home/choose_date_button.dart';
+import 'package:flutterdemo/driver_pages/driver_home/chose_time_button.dart';
+import 'package:flutterdemo/driver_pages/driver_home/recurring_ride_widget.dart';
 import 'package:flutterdemo/globalComponents/location_text_field.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
 
-class PassengerHome extends StatelessWidget {
-  const PassengerHome({Key? key}) : super(key: key);
+class DriverHome extends StatelessWidget {
+  const DriverHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(title: "Home"),
+      appBar: const MainAppBar(title: "Create Ride"),
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -24,7 +27,7 @@ class PassengerHome extends StatelessWidget {
               padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                children: const [
+                children: [
                   LocationTextField(
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
@@ -34,10 +37,21 @@ class PassengerHome extends StatelessWidget {
                     child: LocationTextField(
                         labelText: "DropOff", hintText: "e.g Chaar Meenar"),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [ChooseDateButton(), ChoseTimeButton()],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: RecurringRideWidget(),
+                  ),
                   Expanded(
                     child: Align(
                         alignment: Alignment.bottomCenter,
-                        child: MainButton(text: "Search")),
+                        child: MainButton(text: "Black Wagon R")),
                   )
                 ],
               )),
