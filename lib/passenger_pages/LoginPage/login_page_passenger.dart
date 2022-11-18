@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/common/PasswordReset/password_reset.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/passenger_pages/PassengerRideHistory/passenger_ride_history.dart';
 import 'package:flutterdemo/passenger_pages/SignupPage/signup_page_passenger.dart';
+import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 import 'package:sign_button/sign_button.dart';
 
 import '../../globalComponents/main_button.dart';
@@ -84,17 +86,37 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                               fontSize: 13, color: MainColors.primary)),
                       const SizedBox(width: 100),
                       GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context)=>PasswordReset()
+                                )
+                            );
+                          },
                           child: const Text("Forgot Password?",
                               style: TextStyle(
                                   fontSize: 13, color: Color(0xff0000EE)))),
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 25),
-                  child: MainButton(
-                    text: "Login",
+                Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: SizedBox(
+                    width: 360,
+                    height: 50,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape:
+                          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context)=>PassengerHome()
+                            )
+                          );
+                        },
+                        child: const Text("Login", style: TextStyle(fontSize: 18))),
                   ),
                 ),
                 Padding(
