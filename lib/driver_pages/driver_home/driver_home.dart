@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/globalComponents/location_text_field.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
+import 'package:flutterdemo/globalComponents/vehicle_tile_compressed.dart';
 
 class DriverHome extends StatelessWidget {
   const DriverHome({Key? key}) : super(key: key);
@@ -33,6 +34,18 @@ class DriverHome extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20),
                     child: LocationTextField(
                         labelText: "DropOff", hintText: "e.g Chaar Meenar"),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: LocationTextField(
+                        labelText: "DropOff", hintText: "e.g Chaar Meenar"),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: VehicleTileCompressed(
+                      car: "Black Wagon R",
+                      numberPlate: "AZS-123",
+                    ),
                   ),
                   Expanded(
                     child: Align(
