@@ -39,11 +39,6 @@ class DriverHome extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: LocationTextField(
-                        labelText: "DropOff", hintText: "e.g Chaar Meenar"),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [ChooseDateButton(), ChoseTimeButton()],
