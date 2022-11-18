@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/driver_home/choose_date_button.dart';
+import 'package:flutterdemo/driver_pages/driver_home/chose_time_button.dart';
 import 'package:flutterdemo/globalComponents/location_text_field.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
-import 'package:flutterdemo/globalComponents/vehicle_tile_compressed.dart';
 
 class DriverHome extends StatelessWidget {
   const DriverHome({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class DriverHome extends StatelessWidget {
               padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                children: const [
+                children: [
                   LocationTextField(
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
@@ -42,9 +43,9 @@ class DriverHome extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: VehicleTileCompressed(
-                      car: "Black Wagon R",
-                      numberPlate: "AZS-123",
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [ChooseDateButton(), ChoseTimeButton()],
                     ),
                   ),
                   Expanded(
