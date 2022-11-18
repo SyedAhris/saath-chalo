@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/driver_home/choose_date_button.dart';
 import 'package:flutterdemo/driver_pages/driver_home/chose_time_button.dart';
+import 'package:flutterdemo/driver_pages/driver_home/recurring_ride_widget.dart';
 import 'package:flutterdemo/globalComponents/location_text_field.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
@@ -47,6 +48,10 @@ class DriverHome extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [ChooseDateButton(), ChoseTimeButton()],
                     ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: RecurringRideWidget(),
                   ),
                   Expanded(
                     child: Align(
