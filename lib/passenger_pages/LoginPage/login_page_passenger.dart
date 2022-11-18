@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
+import 'package:flutterdemo/passenger_pages/PassengerRideHistory/passenger_ride_history.dart';
 import 'package:flutterdemo/passenger_pages/SignupPage/signup_page_passenger.dart';
 import 'package:sign_button/sign_button.dart';
 
@@ -132,7 +133,9 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignupPassenger()));
+                              builder: (context) =>
+                                  SignupPassenger()
+                          ));
                         },
                         child: const Text("Sign Up",
                             style: TextStyle(
