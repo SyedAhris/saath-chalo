@@ -11,7 +11,7 @@ class PassengerHome extends StatelessWidget {
     return Scaffold(
       appBar: const MainAppBar(title: "Home"),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.none,
                 image: NetworkImage(
@@ -24,12 +24,12 @@ class PassengerHome extends StatelessWidget {
               padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                children: const [
-                  LocationTextField(
+                children: [
+                  const LocationTextField(
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 20),
                     child: LocationTextField(
                         labelText: "DropOff", hintText: "e.g Chaar Meenar"),
@@ -37,7 +37,10 @@ class PassengerHome extends StatelessWidget {
                   Expanded(
                     child: Align(
                         alignment: Alignment.bottomCenter,
-                        child: MainButton(text: "Search")),
+                        child: MainButton(
+                          text: "Search",
+                          onTap: () {},
+                        )),
                   )
                 ],
               )),

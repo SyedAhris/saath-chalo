@@ -51,7 +51,10 @@ class DriverHome extends StatelessWidget {
                   Expanded(
                     child: Align(
                         alignment: Alignment.bottomCenter,
-                        child: MainButton(text: "Black Wagon R")),
+                        child: MainButton(
+                          text: "Black Wagon R",
+                          onTap: () {},
+                        )),
                   )
                 ],
               )),

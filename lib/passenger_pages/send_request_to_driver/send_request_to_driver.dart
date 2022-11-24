@@ -69,8 +69,12 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
                         child: Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              MainButton(text: "Confirm", width: 300)
+                            children: [
+                              MainButton(
+                                text: "Confirm",
+                                width: 300,
+                                onTap: () {},
+                              )
                             ],
                           ),
                         ),
