@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/Vehicles/AddVehicles/AddVehiclesView.dart';
+import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 
 import 'package:provider/provider.dart';
 
+import '../../../constants/constants.dart';
 import '../VehiclesJson.dart';
 import '../VehiclesProvider.dart';
+import 'VehiclesListTile.dart';
 
 class VehiclesListView extends StatefulWidget {
   const VehiclesListView({Key? key}) : super(key: key);
@@ -23,6 +27,9 @@ class _VehiclesListViewState extends State<VehiclesListView> {
   Widget build(BuildContext context) {
     final vehicles = context.watch<VehiclesProvider>().vehicles;
     return Scaffold(
+      appBar: MainAppBar(
+        title: 'Vehicles',
+      ),
       body: context.watch<VehiclesProvider>().isVehiclesFetching
           ? const Center(
               child: CircularProgressIndicator(),
@@ -34,68 +41,17 @@ class _VehiclesListViewState extends State<VehiclesListView> {
                   vehicles: vehicles[index],
                 );
               }),
-    );
-  }
-}
-
-class VehiclesListTile extends StatelessWidget {
-  const VehiclesListTile({
-    Key? key,
-    required this.vehicles,
-  }) : super(key: key);
-
-  final VehiclesJson vehicles;
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: ListTile(
-        title: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${vehicles.color} ${vehicles.make} ${vehicles.model}",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/manPic.png'),
-                    ),
-                    Text(vehicles.numberOfPassengers.toString()),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(vehicles.plateNumber),
-                Row(
-                  children: [
-                    const Text(
-                      "AC",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-
-                    Padding(
-                      padding: EdgeInsets.only(left: 8,),
-                      child: CircleAvatar(
-                        radius: 8,
-                        backgroundColor: vehicles.isAc ? Colors.green : Colors.grey,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddVehicles()),
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: MainColors.primary,
       ),
     );
   }
 }
+
