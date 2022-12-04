@@ -20,6 +20,9 @@ class LoginPagePassenger extends StatefulWidget {
 class _LoginPagePassengerState extends State<LoginPagePassenger> {
   bool checkBoxVal = false;
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,16 +55,18 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                 Padding(
                   padding: const EdgeInsets.only(top: 32, right: 32, left: 32),
                   child: Column(
-                    children: const [
+                    children: [
                       MainTextField(
                         labelText: "E-mail",
                         hintText: "e.g. john@gmail.com",
+                        controller: emailController,
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: MainTextField(
                           labelText: "Password",
                           hintText: "",
+                          controller: passwordController,
                         ),
                       ),
                     ],
@@ -87,11 +92,8 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                       const SizedBox(width: 100),
                       GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context)=>PasswordReset()
-                                )
-                            );
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PasswordReset()));
                           },
                           child: const Text("Forgot Password?",
                               style: TextStyle(
@@ -106,17 +108,15 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                     height: 50,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape:
-                          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context)=>PassengerHome()
-                            )
-                          );
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PassengerHome()));
                         },
-                        child: const Text("Login", style: TextStyle(fontSize: 18))),
+                        child: const Text("Login",
+                            style: TextStyle(fontSize: 18))),
                   ),
                 ),
                 Padding(
@@ -155,9 +155,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  SignupPassenger()
-                          ));
+                              builder: (context) => SignupPassenger()));
                         },
                         child: const Text("Sign Up",
                             style: TextStyle(

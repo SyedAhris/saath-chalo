@@ -70,9 +70,10 @@ class _PassengerBookedRidesPendingState
                         padding: const EdgeInsets.only(top: 230, bottom: 20),
                         child: Row(
                           children: [
-                            const MainButton(
+                            MainButton(
                               text: "Update Request",
                               width: 200,
+                              onTap: () {},
                             ),
                             const SizedBox(width: 20),
                             SizedBox(
