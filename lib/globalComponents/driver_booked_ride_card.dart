@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DriverBookedRideCard extends StatelessWidget {
   DriverBookedRideCard({
@@ -100,37 +101,48 @@ class DriverBookedRideCard extends StatelessWidget {
                   Text(estCost.toString()),
                 ],
               ),
+              const SizedBox(height: 15),
+              const Align(
+                alignment: Alignment.centerLeft,
+                  child: Text("Passengers: ")
+              ),
 
-              // Expanded(
-              //   child: Column(
-              //    children: [
-              //      Text("Passengers: "),
-              //      Expanded(
-              //        child: Container(
-              //          child: ListView.builder(
-              //            shrinkWrap: true,
-              //            itemCount: passengers.length,
-              //            itemBuilder: (BuildContext context, int index) {
-              //              return Container(
-              //                height: 200,
-              //                child: Row(
-              //                  children: [
-              //                    Text(index.toString()+"."+passengers[index]),
-              //                    Icon(Icons.star_border),
-              //                    Icon(Icons.star_border),
-              //                    Icon(Icons.star_border),
-              //                    Icon(Icons.star_border),
-              //                    Icon(Icons.star_border),
-              //                  ],
-              //                ),
-              //              );
-              //            },
-              //          ),
-              //        ),
-              //      )
-              //    ],
-              //   ),
-              // )
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: passengers.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text((index+1).toString()+". "),
+                            Text(
+                                passengers[index].length>=16? "${passengers[index].substring(0,15)}..."
+                                    : passengers[index]),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            RatingBar(
+                              itemCount: 5,
+                                allowHalfRating: true,
+                                itemSize: 23,
+                                ratingWidget: RatingWidget(
+                                    full: const Icon(Icons.star,color: Colors.orangeAccent),
+                                    half: const Icon(Icons.star_half, color: Colors.orangeAccent),
+                                    empty: const Icon(Icons.star_border,color: Colors.orangeAccent,)
+                                ),
+                              onRatingUpdate: (double value) {  }, //change this when implementing ratings
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
