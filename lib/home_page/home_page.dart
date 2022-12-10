@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/scheduled_ride_details_now_booking/scheduled_ride_booking.dart';
 import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
 import '../driver_pages/LoginPage/login_page_driver.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
         drawer: SideBar(
           tapHome: () => Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const PassengerHome())),
+
         ),
         appBar: const MainAppBar(
           title: "SaathChalo",
@@ -44,7 +46,9 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-                                    const LoginPagePassenger()));
+//                                const LoginPagePassenger()));
+                            const ScheduledRideBooking()));
+
                           },
                           style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 25)),
