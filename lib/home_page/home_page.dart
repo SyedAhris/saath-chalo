@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
+import 'package:flutterdemo/driver_pages/LoginPage/login_page_driver.dart';
+import 'package:flutterdemo/globalComponents/passenger_side_bar.dart';
 
-import '../driver_pages/LoginPage/login_page_driver.dart';
 import '../globalComponents/main_app_bar.dart';
-import '../globalComponents/side_bar.dart';
 import '../passenger_pages/LoginPage/login_page_passenger.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,10 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: SideBar(
-          tapHome: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const PassengerHome())),
-        ),
+        drawer: const PassengerSideBar(),
         appBar: const MainAppBar(
           title: "SaathChalo",
         ),

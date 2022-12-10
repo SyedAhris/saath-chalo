@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/common/PasswordReset/password_reset.dart';
 import 'package:flutterdemo/driver_pages/SignupPage/signup_page_driver.dart';
+import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:sign_button/sign_button.dart';
 
@@ -100,7 +102,9 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                               fontSize: 13, color: MainColors.primary)),
                       const SizedBox(width: 100),
                       GestureDetector(
-                          onTap: () {},
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => const PasswordReset())),
                           child: const Text("Forgot Password?",
                               style: TextStyle(
                                   fontSize: 13, color: Color(0xff0000EE)))),
@@ -117,7 +121,9 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                         ),
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const DriverHome())),
                         child: const Text("Login",
                             style: TextStyle(fontSize: 18))),
                   ),
@@ -158,7 +164,7 @@ class _LoginPageDriverState extends State<LoginPageDriver> {
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignupDriver()));
+                              builder: (context) => const SignupDriver()));
                         },
                         child: const Text("Sign Up",
                             style: TextStyle(
