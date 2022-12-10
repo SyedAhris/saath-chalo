@@ -1,6 +1,4 @@
-
-
-import 'VehiclesJson.dart';
+import 'vehicles_json.dart';
 
 abstract class VehiclesRepository {
   Future<List<VehiclesJson>> fetchUsersList();
@@ -25,7 +23,7 @@ class MockVehiclesRepository implements VehiclesRepository {
         year: "2019",
         plateNumber: "ABC-123",
         numberOfPassengers: 3,
-        isAc : true,
+        isAc: true,
         color: 'Black',
       ),
       VehiclesJson(
@@ -34,7 +32,7 @@ class MockVehiclesRepository implements VehiclesRepository {
         year: "2017",
         plateNumber: "ABC-124",
         numberOfPassengers: 3,
-        isAc : false,
+        isAc: false,
         color: 'Blue',
       ),
       VehiclesJson(
@@ -43,11 +41,10 @@ class MockVehiclesRepository implements VehiclesRepository {
         year: "2022",
         plateNumber: "ABC-125",
         numberOfPassengers: 3,
-        isAc : true,
+        isAc: true,
         color: 'White',
       ),
     ];
     return vehicles;
   }
-
 }

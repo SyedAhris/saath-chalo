@@ -20,7 +20,7 @@ class LocationTextField extends StatelessWidget {
               borderSide: const BorderSide(color: MainColors.grey)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: MainColors.grey)),
+              borderSide: const BorderSide(color: MainColors.grey)),
           labelText: labelText,
           hintText: hintText),
     );

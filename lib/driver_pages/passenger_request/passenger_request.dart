@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/globalComponents/passenger_card.dart';
+import 'package:flutterdemo/globalComponents/passenger_side_bar.dart';
 
 import '../../globalComponents/main_app_bar.dart';
-import '../../globalComponents/side_bar.dart';
-import '../../passenger_pages/passenger_home/passenger_home.dart';
 
 class PassengerRequest extends StatefulWidget {
-  PassengerRequest({
+  const PassengerRequest({
     Key? key,
     required this.status,
     required this.name,
@@ -15,11 +14,11 @@ class PassengerRequest extends StatefulWidget {
     required this.rating,
   }) : super(key: key);
 
-  bool status;
-  String name;
-  String journeyStart;
-  String journeyEnd;
-  double rating;
+  final bool status;
+  final String name;
+  final String journeyStart;
+  final String journeyEnd;
+  final double rating;
   @override
   State<PassengerRequest> createState() => _PassengerRequestState();
 }
@@ -28,10 +27,7 @@ class _PassengerRequestState extends State<PassengerRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(
-        tapHome: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const PassengerHome())),
-      ),
+      drawer: const PassengerSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
       body: Container(
         decoration: const BoxDecoration(
@@ -69,9 +65,9 @@ class _PassengerRequestState extends State<PassengerRequest> {
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.red),
                             onPressed: () {},
-                            child: Text("Deny")),
+                            child: const Text("Deny")),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
                       SizedBox(
@@ -81,7 +77,7 @@ class _PassengerRequestState extends State<PassengerRequest> {
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.green),
                             onPressed: () {},
-                            child: Text("Approve")),
+                            child: const Text("Approve")),
                       ),
                     ],
                   ),

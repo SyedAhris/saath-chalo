@@ -25,7 +25,7 @@ class VehicleTileCompressed extends StatelessWidget {
             primary: Colors.white, backgroundColor: MainColors.primary),
         child: Row(
           children: [
-            Icon(Icons.car_crash),
+            const Icon(Icons.car_crash),
             Text(car),
             Expanded(
                 child: Align(

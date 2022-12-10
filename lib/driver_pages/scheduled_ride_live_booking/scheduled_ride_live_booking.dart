@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/globalComponents/driver_booked_ride_card.dart';
+import 'package:flutterdemo/globalComponents/driver_side_bar.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
-import 'package:flutterdemo/globalComponents/side_bar.dart';
-import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
 class ScheduledRideLiveBooking extends StatefulWidget {
   const ScheduledRideLiveBooking({Key? key}) : super(key: key);
 
   @override
-  State<ScheduledRideLiveBooking> createState() => _ScheduledRideLiveBookingState();
+  State<ScheduledRideLiveBooking> createState() =>
+      _ScheduledRideLiveBookingState();
 }
 
 class _ScheduledRideLiveBookingState extends State<ScheduledRideLiveBooking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(
-        tapHome: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const PassengerHome())),
-      ),
+      drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
       body: Container(
         decoration: const BoxDecoration(
@@ -29,7 +26,7 @@ class _ScheduledRideLiveBookingState extends State<ScheduledRideLiveBooking> {
           padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
           child: SafeArea(
             child: Column(
-              children: [
+              children: const [
                 DriverBookedRideCard(
                   car: "Black Suzuki WagonR",
                   numberPlate: "ABC-123",
@@ -39,10 +36,7 @@ class _ScheduledRideLiveBookingState extends State<ScheduledRideLiveBooking> {
                   journeyDate: "26/11/2022",
                   journeyTime: "09:15",
                   estCost: 600,
-                  passengers: [
-                    "Mohammad Irtiza",
-                    "Ahris"
-                  ],
+                  passengers: ["Mohammad Irtiza", "Ahris"],
                 ),
               ],
             ),

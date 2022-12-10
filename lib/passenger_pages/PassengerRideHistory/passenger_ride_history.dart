@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/ride_list_tile.dart';
 
@@ -40,7 +38,7 @@ class PassengerRideHistory extends StatelessWidget {
                   ),
                 ],
               ),
-              RideListTile(),
+              const RideListTile(),
               Row(
                 children: const <Widget>[
                   Text(

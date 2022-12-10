@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
 import 'package:flutterdemo/globalComponents/driver_booked_ride_card.dart';
+import 'package:flutterdemo/globalComponents/driver_side_bar.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
-import 'package:flutterdemo/globalComponents/side_bar.dart';
-import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
 class ScheduledRideDetails extends StatefulWidget {
   const ScheduledRideDetails({Key? key}) : super(key: key);
@@ -17,10 +16,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(
-        tapHome: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const PassengerHome())),
-      ),
+      drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
       body: Container(
         decoration: const BoxDecoration(
@@ -32,7 +28,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
           child: SafeArea(
             child: Column(
               children: [
-                DriverBookedRideCard(
+                const DriverBookedRideCard(
                   car: "Black Suzuki WagonR",
                   numberPlate: "ABC-123",
                   journeyStart: "Institute of Business Administration",

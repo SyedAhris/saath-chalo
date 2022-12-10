@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../VehiclesJson.dart';
+import '../vehicles_json.dart';
 
 class VehiclesListTile extends StatelessWidget {
   const VehiclesListTile({
@@ -27,12 +27,12 @@ class VehiclesListTile extends StatelessWidget {
                   children: [
                     Text(
                       "${vehicles.color} ${vehicles.make} ${vehicles.model}",
-                      style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.people_outlined,
                           color: Colors.black,
                         ),
@@ -57,13 +57,13 @@ class VehiclesListTile extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             left: 8,
                           ),
                           child: CircleAvatar(
                             radius: 8,
                             backgroundColor:
-                            vehicles.isAc ? Colors.green : Colors.grey,
+                                vehicles.isAc ? Colors.green : Colors.grey,
                           ),
                         )
                       ],
