@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
 import 'package:flutterdemo/globalComponents/driver_booked_ride_card.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
@@ -55,7 +56,11 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white
                       ),
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                              const PassengerRequests()));
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children:const [

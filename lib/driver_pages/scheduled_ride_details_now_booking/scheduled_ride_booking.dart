@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/scheduled_ride_live_booking/scheduled_ride_live_booking.dart';
 import 'package:flutterdemo/globalComponents/driver_booked_ride_card.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
@@ -50,7 +51,14 @@ class _ScheduledRideBookingState extends State<ScheduledRideBooking> {
                   child: MainButton(
                     width: 250,
                       text: "Start Ride",
-                      onTap: (){}),
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+//                                const LoginPagePassenger()));
+                            const ScheduledRideLiveBooking()
+                        )
+                        );
+                      }),
                 )
               ],
             ),

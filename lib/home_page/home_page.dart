@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) =>
 //                                const LoginPagePassenger()));
                             const ScheduledRideDetails()));
-
                           },
                           style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 25)),
