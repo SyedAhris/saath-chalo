@@ -2,7 +2,6 @@
 //
 //     final vehiclesJson = vehiclesJsonFromMap(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class VehiclesJson {
@@ -24,27 +23,28 @@ class VehiclesJson {
   final int numberOfPassengers;
   final bool isAc;
 
-  factory VehiclesJson.fromJson(String str) => VehiclesJson.fromMap(json.decode(str));
+  factory VehiclesJson.fromJson(String str) =>
+      VehiclesJson.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory VehiclesJson.fromMap(Map<String, dynamic> json) => VehiclesJson(
-    make: json["make"],
-    model: json["model"],
-    year: json["year"],
-    plateNumber: json["plateNumber"],
-    color: json["color"],
-    numberOfPassengers: json["numberOfPassengers"],
-    isAc: json["isAC"],
-  );
+        make: json["make"],
+        model: json["model"],
+        year: json["year"],
+        plateNumber: json["plateNumber"],
+        color: json["color"],
+        numberOfPassengers: json["numberOfPassengers"],
+        isAc: json["isAC"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "make": make,
-    "model": model,
-    "year": year,
-    "plateNumber": plateNumber,
-    "color": color,
-    "numberOfPassengers": numberOfPassengers,
-    "isAC": isAc,
-  };
+        "make": make,
+        "model": model,
+        "year": year,
+        "plateNumber": plateNumber,
+        "color": color,
+        "numberOfPassengers": numberOfPassengers,
+        "isAC": isAc,
+      };
 }

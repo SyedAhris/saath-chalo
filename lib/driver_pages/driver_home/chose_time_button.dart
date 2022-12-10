@@ -12,7 +12,7 @@ class ChoseTimeButton extends StatelessWidget {
             primary: Colors.black, backgroundColor: Colors.white),
         onPressed: () => {},
         child: Row(
-          children: [
+          children: const [
             Icon(
               Icons.access_time_outlined,
               size: 20,

@@ -12,7 +12,7 @@ class ChooseDateButton extends StatelessWidget {
             primary: Colors.black, backgroundColor: Colors.white),
         onPressed: () => {},
         child: Row(
-          children: [
+          children: const [
             Icon(
               Icons.calendar_today_outlined,
               size: 20,

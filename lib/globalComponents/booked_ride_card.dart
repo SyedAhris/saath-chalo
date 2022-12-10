@@ -44,8 +44,14 @@ class BookedRideCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:  [
-                    Text(name),
-                    Text(car),
+                    Text(
+                        name.length>=20? "${name.substring(0,20)}..."
+                            : name
+                    ),
+                    Text(
+                        car.length>=20? "${car.substring(0,20)}..."
+                        : car
+                    ),
                     Text(numberPlate)
                   ],
                 ),

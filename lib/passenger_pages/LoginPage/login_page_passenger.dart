@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/common/PasswordReset/password_reset.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
-import 'package:flutterdemo/passenger_pages/PassengerRideHistory/passenger_ride_history.dart';
 import 'package:flutterdemo/passenger_pages/SignupPage/signup_page_passenger.dart';
 import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 import 'package:sign_button/sign_button.dart';
 
-import '../../globalComponents/main_button.dart';
 import '../../globalComponents/main_text_field.dart';
 
 class LoginPagePassenger extends StatefulWidget {
@@ -62,7 +60,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                         controller: emailController,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         child: MainTextField(
                           labelText: "Password",
                           hintText: "",
@@ -93,7 +91,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                       GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => PasswordReset()));
+                                builder: (context) => const PasswordReset()));
                           },
                           child: const Text("Forgot Password?",
                               style: TextStyle(
@@ -113,7 +111,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PassengerHome()));
+                              builder: (context) => const PassengerHome()));
                         },
                         child: const Text("Login",
                             style: TextStyle(fontSize: 18))),
@@ -155,7 +153,7 @@ class _LoginPagePassengerState extends State<LoginPagePassenger> {
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignupPassenger()));
+                              builder: (context) => const SignupPassenger()));
                         },
                         child: const Text("Sign Up",
                             style: TextStyle(
