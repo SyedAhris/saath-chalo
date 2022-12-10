@@ -6,7 +6,7 @@ import '../../globalComponents/side_bar.dart';
 import '../../passenger_pages/passenger_home/passenger_home.dart';
 
 class PassengerRequest extends StatefulWidget {
-   PassengerRequest({
+  PassengerRequest({
     Key? key,
     required this.status,
     required this.name,
@@ -49,10 +49,9 @@ class _PassengerRequestState extends State<PassengerRequest> {
                     journeyStart: widget.journeyStart,
                     journeyEnd: widget.journeyEnd,
                     rating: widget.rating,
-                    onTap: (){},
-                    onTap1: (){},
-                    onTap2: (){}
-                ),
+                    onTap: () {},
+                    onTap1: () {},
+                    onTap2: () {}),
               ),
             ),
             Expanded(
@@ -67,25 +66,21 @@ class _PassengerRequestState extends State<PassengerRequest> {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red
-                          ),
-                            onPressed: (){
-
-                            },
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.red),
+                            onPressed: () {},
                             child: Text("Deny")),
                       ),
-                      SizedBox(width: 50,),
+                      SizedBox(
+                        width: 50,
+                      ),
                       SizedBox(
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green
-                          ),
-                            onPressed: (){
-
-                            },
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.green),
+                            onPressed: () {},
                             child: Text("Approve")),
                       ),
                     ],

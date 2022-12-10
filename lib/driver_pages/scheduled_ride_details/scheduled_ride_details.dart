@@ -41,51 +41,40 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                   journeyDate: "26/11/2022",
                   journeyTime: "09:15",
                   estCost: 600,
-                  passengers: [
-                    "Mohammad Irtiza",
-                    "Ahris"
-                  ],
+                  passengers: ["Mohammad Irtiza", "Ahris"],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: SizedBox(
                     width: 300,
                     height: 50,
-
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white
-                      ),
-                        onPressed: (){
+                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                              const PassengerRequests()));
+                              builder: (context) => const PassengerRequests()));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children:const [
+                          children: const [
                             Text(
                               "Passenger Requests",
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.bold
-                              ),
+                                  fontWeight: FontWeight.bold),
                             ),
                             Icon(
                               Icons.arrow_forward,
                               color: Colors.black,
                             )
                           ],
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 310, bottom: 20),
-                  child: MainButton(
-                      width: 250,
-                      text: "Cancel Ride",
-                      onTap: (){}),
+                  child:
+                      MainButton(width: 250, text: "Cancel Ride", onTap: () {}),
                 )
               ],
             ),
