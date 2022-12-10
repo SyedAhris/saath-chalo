@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/scheduled_ride_details/scheduled_ride_details.dart';
-import 'package:flutterdemo/driver_pages/scheduled_ride_details_now_booking/scheduled_ride_booking.dart';
-import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
 import '../driver_pages/LoginPage/login_page_driver.dart';
 import '../globalComponents/main_app_bar.dart';
-import '../globalComponents/side_bar.dart';
 import '../passenger_pages/LoginPage/login_page_passenger.dart';
 
 class HomePage extends StatefulWidget {
@@ -42,8 +38,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-//                                const LoginPagePassenger()));
-                            const ScheduledRideDetails()));
+                                const LoginPagePassenger()));
                           },
                           style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 25)),
