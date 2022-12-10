@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/driver_home/choose_date_button.dart';
 import 'package:flutterdemo/driver_pages/driver_home/chose_time_button.dart';
 import 'package:flutterdemo/driver_pages/driver_home/recurring_ride_widget.dart';
+import 'package:flutterdemo/globalComponents/driver_side_bar.dart';
 import 'package:flutterdemo/globalComponents/location_text_field.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
@@ -13,8 +14,9 @@ class DriverHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MainAppBar(title: "Create Ride"),
+      drawer: const DriverSideBar(),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.none,
                 image: NetworkImage(
@@ -24,28 +26,29 @@ class DriverHome extends StatelessWidget {
           height: double.infinity,
           // height: 631,
           child: Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 30),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  LocationTextField(
+                  const LocationTextField(
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
                     child: LocationTextField(
                         labelText: "DropOff", hintText: "e.g Chaar Meenar"),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [ChooseDateButton(), ChoseTimeButton()],
+                      children: const [ChooseDateButton(), ChoseTimeButton()],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
                     child: RecurringRideWidget(),
                   ),
                   Expanded(

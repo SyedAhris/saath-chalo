@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/globalComponents/location_text_field.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
+import 'package:flutterdemo/globalComponents/passenger_side_bar.dart';
 
 class PassengerHome extends StatelessWidget {
   const PassengerHome({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class PassengerHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const PassengerSideBar(),
       appBar: const MainAppBar(title: "Home"),
       body: Container(
         decoration: const BoxDecoration(

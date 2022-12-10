@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SideBar extends StatelessWidget {
-  const SideBar({Key? key, required this.tapHome}) : super(key: key);
-  final VoidCallback tapHome;
+  const SideBar({Key? key, required this.listTiles, required this.onTapLogOut})
+      : super(key: key);
+  final List<ListTile> listTiles;
+  final VoidCallback onTapLogOut;
 
   @override
   Widget build(BuildContext context) {
@@ -43,29 +45,14 @@ class SideBar extends StatelessWidget {
               ]),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: SideBarText(text: "Home"),
-            onTap: tapHome,
-          ),
-          const ListTile(
-            leading: Icon(Icons.done_outline_sharp),
-            title: SideBarText(text: "Booked Rides"),
-          ),
-          const ListTile(
-            leading: Icon(Icons.history),
-            title: SideBarText(text: "Ride History"),
-          ),
-          const ListTile(
-            leading: Icon(Icons.notifications),
-            title: SideBarText(text: "Notification"),
-          ),
-          const Expanded(
+          Column(children: listTiles.toList()),
+          Expanded(
             child: Align(
               alignment: FractionalOffset.bottomCenter,
               child: ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: SideBarText(text: "Logout"),
+                leading: const Icon(Icons.exit_to_app),
+                title: const SideBarText(text: "Logout"),
+                onTap: onTapLogOut,
               ),
             ),
           )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/driver_pages/LoginPage/login_page_driver.dart';
+import 'package:flutterdemo/globalComponents/passenger_side_bar.dart';
 
-import '../driver_pages/LoginPage/login_page_driver.dart';
 import '../globalComponents/main_app_bar.dart';
 import '../passenger_pages/LoginPage/login_page_passenger.dart';
 
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: const PassengerSideBar(),
         appBar: const MainAppBar(
           title: "SaathChalo",
         ),
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-                                const LoginPagePassenger()));
+                                    const LoginPagePassenger()));
                           },
                           style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 25)),

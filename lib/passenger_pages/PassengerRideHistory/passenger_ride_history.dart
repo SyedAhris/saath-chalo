@@ -1,23 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutterdemo/globalComponents/card_list.dart';
+import 'package:flutterdemo/globalComponents/main_app_bar.dart';
+import 'package:flutterdemo/globalComponents/ride_list_tile.dart';
 
 class PassengerRideHistory extends StatelessWidget {
   const PassengerRideHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
+    return Scaffold(
+      appBar: const MainAppBar(title: "Ride History"),
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(2),
+          padding: const EdgeInsets.all(2),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Approved",
                     style: TextStyle(
@@ -39,9 +40,9 @@ class PassengerRideHistory extends StatelessWidget {
                   ),
                 ],
               ),
-              MyWidget(),
+              RideListTile(),
               Row(
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Pending",
                     style: TextStyle(
@@ -63,9 +64,9 @@ class PassengerRideHistory extends StatelessWidget {
                   ),
                 ],
               ),
-              MyWidget(),
+              const RideListTile(),
               Row(
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Rejected",
                     style: TextStyle(
@@ -87,7 +88,7 @@ class PassengerRideHistory extends StatelessWidget {
                   ),
                 ],
               ),
-              MyWidget(),
+              const RideListTile(),
             ],
           ),
         ),
