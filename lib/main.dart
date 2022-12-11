@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/driver_ride_history/driver_ride_history.dart';
-import 'package:flutterdemo/driver_pages/scheduled_rides/scheduled_rides.dart';
-import 'package:flutterdemo/passenger_pages/passenger_booked_rides/passenger_booked_rides.dart';
-import 'package:flutterdemo/passenger_pages/passenger_ride_history/passenger_ride_history.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/constants.dart';
-import 'driver_pages/Vehicles/VehiclesList/VehicleListView.dart';
-import 'driver_pages/Vehicles/VehiclesProvider.dart';
+import 'driver_pages/Vehicles/vehicles_provider.dart';
 import 'home_page/home_page.dart';
 
 void main() {
@@ -39,7 +34,7 @@ class MyApp extends StatelessWidget {
           secondary: MainColors.secondary,
         ),
       ),
-      home: ScheduledRides(),
+      home: const HomePage(title: 'SaathChalo'),
     );
   }
 }
