@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/passenger_pages/passenger_ride_history/passenger_ride_history.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           secondary: MainColors.secondary,
         ),
       ),
-      home: const HomePage(title: 'SaathChalo'),
+      home: PassengerRideHistory(),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/passenger_pages/PassengerBookedRides/passenger_booked_rides.dart';
+import 'package:flutterdemo/passenger_pages/passenger_booked_rides_status/passenger_booked_rides_accepted.dart';
 import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
 import '../driver_pages/LoginPage/login_page_driver.dart';
@@ -22,6 +24,8 @@ class _HomePageState extends State<HomePage> {
         drawer: SideBar(
           tapHome: () => Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const PassengerHome())),
+          tapBookedRides: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => PassengerBookedRides())),
         ),
         appBar: const MainAppBar(
           title: "SaathChalo",

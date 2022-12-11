@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SideBar extends StatelessWidget {
-  const SideBar({Key? key, required this.tapHome}) : super(key: key);
+  const SideBar({Key? key, required this.tapHome, required this.tapBookedRides})
+      : super(key: key);
   final VoidCallback tapHome;
+  final VoidCallback tapBookedRides;
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +50,10 @@ class SideBar extends StatelessWidget {
             title: SideBarText(text: "Home"),
             onTap: tapHome,
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.done_outline_sharp),
             title: SideBarText(text: "Booked Rides"),
+            onTap: tapBookedRides,
           ),
           const ListTile(
             leading: Icon(Icons.history),
