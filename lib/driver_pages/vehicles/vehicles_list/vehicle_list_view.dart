@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/Vehicles/AddVehicles/add_vehicles_view.dart';
+import 'package:flutterdemo/driver_pages/vehicles/add_vehicles/add_vehicles_view.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 import 'package:provider/provider.dart';
 

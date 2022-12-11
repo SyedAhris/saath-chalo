@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/globalComponents/google_map.dart';
 import 'package:flutterdemo/globalComponents/side_bar.dart';
 import 'package:flutterdemo/home_page/home_page.dart';
 import 'package:flutterdemo/passenger_pages/PassengerRideHistory/passenger_ride_history.dart';
@@ -30,10 +31,11 @@ class PassengerSideBar extends StatelessWidget {
               title: const SideBarText(text: "Ride History"),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const PassengerRideHistory()))),
-          const ListTile(
-            leading: Icon(Icons.notifications),
-            title: SideBarText(text: "Notification"),
-          ),
+          ListTile(
+              leading: const Icon(Icons.notifications),
+              title: const SideBarText(text: "Notification"),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const MapSample()))),
         ]);
   }
 }

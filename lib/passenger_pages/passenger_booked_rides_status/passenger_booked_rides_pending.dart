@@ -35,7 +35,7 @@ class _PassengerBookedRidesPendingState
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      BookedRideCard(
+                      const BookedRideCard(
                           name: "Syed Abdul Shakoor",
                           car: "Black Suzuki WagonR",
                           numberPlate: "ABC-123",
