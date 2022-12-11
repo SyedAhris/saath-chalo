@@ -3,8 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/globalComponents/ride_history_card.dart';
 
-class PassengerRideHistory extends StatelessWidget {
-  const PassengerRideHistory({super.key});
+class DriverRideHistory extends StatelessWidget {
+  const DriverRideHistory({super.key});
 
   @override
   Widget build(BuildContext context) {

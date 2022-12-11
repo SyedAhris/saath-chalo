@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutterdemo/globalComponents/card_list.dart';
+import 'package:flutterdemo/globalComponents/ride_history_card.dart';
 
-class PassengerBookedRides extends StatelessWidget {
-  const PassengerBookedRides({super.key});
+class ScheduledRides extends StatelessWidget {
+  const ScheduledRides({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class PassengerBookedRides extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      "Approved",
+                      "Ride Now",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -30,21 +31,16 @@ class PassengerBookedRides extends StatelessWidget {
                       child: Divider(
                         thickness: 1,
                         indent: 5,
-                        endIndent: 5,
+                        endIndent: 50,
                       ),
-                    ),
-                    Icon(
-                      Icons.check_circle_outline_outlined,
-                      size: 28,
-                      color: Colors.green,
                     ),
                   ],
                 ),
-                MyWidget(),
+                RideHistoryCard(),
                 Row(
                   children: <Widget>[
                     Text(
-                      "Pending",
+                      "Upcoming Rides",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -54,41 +50,12 @@ class PassengerBookedRides extends StatelessWidget {
                       child: Divider(
                         thickness: 1,
                         indent: 5,
-                        endIndent: 5,
+                        endIndent: 50,
                       ),
-                    ),
-                    Icon(
-                      Icons.access_time_outlined,
-                      size: 28,
-                      color: Colors.grey,
                     ),
                   ],
                 ),
-                MyWidget(),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      "Rejected",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito'),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        indent: 5,
-                        endIndent: 5,
-                      ),
-                    ),
-                    Icon(
-                      Icons.cancel_outlined,
-                      size: 28,
-                      color: Colors.red,
-                    ),
-                  ],
-                ),
-                MyWidget(),
+                RideHistoryCard(),
               ],
             ),
           ),

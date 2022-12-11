@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/passenger_pages/PassengerBookedRides/passenger_booked_rides.dart';
+import 'package:flutterdemo/passenger_pages/passenger_booked_rides/passenger_booked_rides.dart';
 import 'package:flutterdemo/passenger_pages/passenger_booked_rides_status/passenger_booked_rides_accepted.dart';
 import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 
