@@ -7,13 +7,13 @@ import '../../../models/rides_json.dart';
 
 
 class PassengerHomeProvider with ChangeNotifier {
-  List<PassengerHomeListDetails> rides = [];
+  List<PassengerHomeListDetails> details = [];
 
   final PassengerHomeRepository _passengerHomeRepository = MockPassengerHomeRepository();
 
   void getSearchedRides(String startingCoordinates, String endingCoordinates) async {
     //TODO: connect with repository
-    rides = await _passengerHomeRepository.searchRides(startingCoordinates, endingCoordinates);
+    details = await _passengerHomeRepository.searchRides(startingCoordinates, endingCoordinates);
     notifyListeners();
   }
 
@@ -25,11 +25,12 @@ class PassengerHomeProvider with ChangeNotifier {
       status: "Pending",
       isDelete: false,
     );
-    rides[index].ride.passengerRequests.add(req);
-    _passengerHomeRepository.updateRide(rides[index].ride);
+    details[index].ride.passengerRequests.add(req);
+    _passengerHomeRepository.updateRide(details[index].ride);
     notifyListeners();
   }
 }
+
 
 class PassengerHomeListDetails {
   PassengerHomeListDetails({

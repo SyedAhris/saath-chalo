@@ -4,15 +4,15 @@ import '../../../models/rides_json.dart';
 import '../../../models/user_json.dart';
 
 abstract class BookedRidesDetailsRepository {
-  Ride fetchRide(String rideID);
-  User fetchDriver(String driverID);
+  Future<Ride> fetchRide(String rideID);
+  Future<User> fetchDriver(String driverID);
   updateRide(Ride ride);
 }
 
 class MockBookedRideDetailsRepository implements BookedRidesDetailsRepository {
   @override
-  User fetchDriver(String driverID) {
-    return (User(
+  Future<User> fetchDriver(String driverID) async {
+    return  (User(
       firstName: "Syed Muhammad",
       lastName: "Ahris",
       email: "ahrissyed@gmail.com",
@@ -28,7 +28,7 @@ class MockBookedRideDetailsRepository implements BookedRidesDetailsRepository {
   }
 
   @override
-  Ride fetchRide(String rideID) {
+  Future<Ride> fetchRide(String rideID) async {
     return (Ride(
         driverId: "driverId",
         vehicleId: "vehicleId",
@@ -47,7 +47,8 @@ class MockBookedRideDetailsRepository implements BookedRidesDetailsRepository {
               status: '',
               isDelete: false),
         ],
-        isDelete: false));
+        isDelete: false,
+        isCompleted: false));
   }
 
   @override

@@ -43,7 +43,8 @@ class MockPassengerBookedRidesRepository
           isFemaleOnly: false,
           date: "12-12-2022",
           time: "17:00",
-          isDelete: false),
+          isDelete: false,
+          isCompleted: false),
     ];
   }
 
@@ -60,7 +61,8 @@ class MockPassengerBookedRidesRepository
           isFemaleOnly: false,
           date: "12-12-2022",
           time: "17:00",
-          isDelete: false),
+          isDelete: false,
+          isCompleted: false),
     ];
   }
 
@@ -77,7 +79,8 @@ class MockPassengerBookedRidesRepository
           isFemaleOnly: false,
           date: "12-12-2022",
           time: "17:00",
-          isDelete: false),
+          isDelete: false,
+          isCompleted: false),
     ];
   }
 }

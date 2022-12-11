@@ -56,7 +56,8 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
                 status: "Pending",
                 isDelete: false),
           ],
-          isDelete: false),
+          isDelete: false,
+          isCompleted: false),
       driver: User(
           firstName: "Syed",
           lastName: "Ahris",

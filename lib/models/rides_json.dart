@@ -24,6 +24,7 @@ class Ride {
     required this.isFemaleOnly,
     required this.date,
     required this.time,
+    required this.isCompleted,
     required this.isDelete,
   });
 
@@ -38,6 +39,7 @@ class Ride {
   bool isFemaleOnly;
   String date;
   String time;
+  bool isCompleted;
   bool isDelete;
 
   factory Ride.fromJson(Map<String, dynamic> json) => Ride(
@@ -54,6 +56,7 @@ class Ride {
         isFemaleOnly: json["isFemaleOnly"],
         date: json["date"],
         time: json["time"],
+        isCompleted: json["isCompleted"],
         isDelete: json["isDelete"],
       );
 
@@ -69,6 +72,7 @@ class Ride {
         "isFemaleOnly": isFemaleOnly,
         "date": date,
         "time": time,
+        "isCompleted" : isCompleted,
         "isDelete": isDelete,
       };
 }

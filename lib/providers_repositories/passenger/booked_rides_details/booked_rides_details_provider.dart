@@ -13,9 +13,10 @@ class BookedRidesDetailProvider with ChangeNotifier {
   final BookedRidesDetailsRepository _bookedRidesDetailsRepository = MockBookedRideDetailsRepository();
 
   fetchRide(String rideID) async{
+    ride = await _bookedRidesDetailsRepository.fetchRide(rideID);
   }
   fetchDriver(String driverID) async {
-
+    driver = await _bookedRidesDetailsRepository.fetchDriver(driverID);
   }
   updateApprovedRide(String startingCoordinates, String endingCoordinates, String passengerID){
     List<ApprovedPassenger> req =  ride.approvedPassengers;
@@ -23,8 +24,8 @@ class BookedRidesDetailProvider with ChangeNotifier {
         if (req[i].passengerId == passengerID) {
           req[i].startingCoordinates = startingCoordinates;
           req[i].endingCoordinates = endingCoordinates;
+          _bookedRidesDetailsRepository.updateRide(ride);
           break;
-          //TODO: send req to firebase to update the ride
         }
     }
     notifyListeners();
