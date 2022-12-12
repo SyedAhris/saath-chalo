@@ -34,17 +34,19 @@ class MockPassengerBookedRidesRepository
   Future<List<Ride>> getApprovedRides(String passengerID) async {
     return [
       Ride(
-          driverId: "asdw1324asd",
-          vehicleId: "ABC-123",
-          startingCoordinates: "startingCoordinatesApproved",
-          endingCoordinates: "endingCoordinatesApproved",
-          totalFare: 1234,
-          availableSeats: 4,
-          isFemaleOnly: false,
-          date: "12-12-2022",
-          time: "17:00",
-          isDelete: false,
-          isCompleted: false),
+        driverId: "asdw1324asd",
+        vehicleId: "ABC-123",
+        startingCoordinates: "startingCoordinatesApproved",
+        endingCoordinates: "endingCoordinatesApproved",
+        totalFare: 1234,
+        availableSeats: 4,
+        isFemaleOnly: false,
+        date: "12-12-2022",
+        time: "17:00",
+        isDelete: false,
+        isCompleted: false,
+        isRecurring: false,
+      ),
     ];
   }
 
@@ -52,17 +54,19 @@ class MockPassengerBookedRidesRepository
   Future<List<Ride>> getPendingRides(String passengerID) async {
     return [
       Ride(
-          driverId: "asdw1324asd",
-          vehicleId: "ABC-123",
-          startingCoordinates: "startingCoordinatesPending",
-          endingCoordinates: "endingCoordinatesPending",
-          totalFare: 1234,
-          availableSeats: 4,
-          isFemaleOnly: false,
-          date: "12-12-2022",
-          time: "17:00",
-          isDelete: false,
-          isCompleted: false),
+        driverId: "asdw1324asd",
+        vehicleId: "ABC-123",
+        startingCoordinates: "startingCoordinatesPending",
+        endingCoordinates: "endingCoordinatesPending",
+        totalFare: 1234,
+        availableSeats: 4,
+        isFemaleOnly: false,
+        date: "12-12-2022",
+        time: "17:00",
+        isDelete: false,
+        isCompleted: false,
+        isRecurring: false,
+      ),
     ];
   }
 
@@ -70,17 +74,19 @@ class MockPassengerBookedRidesRepository
   Future<List<Ride>> getRejectedRides(String passengerID) async {
     return [
       Ride(
-          driverId: "asdw1324asd",
-          vehicleId: "ABC-123",
-          startingCoordinates: "startingCoordinatesPending",
-          endingCoordinates: "endingCoordinatesPending",
-          totalFare: 1234,
-          availableSeats: 4,
-          isFemaleOnly: false,
-          date: "12-12-2022",
-          time: "17:00",
-          isDelete: false,
-          isCompleted: false),
+        driverId: "asdw1324asd",
+        vehicleId: "ABC-123",
+        startingCoordinates: "startingCoordinatesPending",
+        endingCoordinates: "endingCoordinatesPending",
+        totalFare: 1234,
+        availableSeats: 4,
+        isFemaleOnly: false,
+        date: "12-12-2022",
+        time: "17:00",
+        isDelete: false,
+        isCompleted: false,
+        isRecurring: false,
+      ),
     ];
   }
 }

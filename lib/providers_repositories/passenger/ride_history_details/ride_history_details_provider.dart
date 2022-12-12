@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/models/vehicle_json.dart';
+import 'package:flutterdemo/providers_repositories/passenger/ride_history_details/ride_history_details_repository.dart';
 
 import '../../../models/rides_json.dart';
 import '../../../models/user_json.dart';
@@ -9,13 +10,21 @@ class RideHistoryDetailsProvider with ChangeNotifier {
   late User driver;
   late Vehicle vehicle;
 
-  fetchRide(String rideID){
+  final RideHistoryDetailsRepository _rideHistoryDetailsRepository = MockRideHistoryDetailsRepository();
 
+  fetchRide(String rideId) async {
+    ride = await _rideHistoryDetailsRepository.fetchRide(rideId);
+    fetchDriver(ride.driverId);
+    fetchVehicle(ride.vehicleId);
+    notifyListeners();
   }
-  fetchUser(String passengerID){
-
+  fetchDriver(String driverId) async {
+    driver = await _rideHistoryDetailsRepository.fetchDriver(driverId);
   }
-  fetchVehicle(){
-
+  fetchVehicle(String vehicleId) async {
+    vehicle = await _rideHistoryDetailsRepository.fetchVehicle(vehicleId);
+  }
+  updateDriverRating(){
+    //Todo: implement updateDriverRating
   }
 }

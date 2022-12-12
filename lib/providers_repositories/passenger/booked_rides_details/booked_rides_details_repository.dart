@@ -12,7 +12,7 @@ abstract class BookedRidesDetailsRepository {
 class MockBookedRideDetailsRepository implements BookedRidesDetailsRepository {
   @override
   Future<User> fetchDriver(String driverID) async {
-    return  (User(
+    return (User(
       firstName: "Syed Muhammad",
       lastName: "Ahris",
       email: "ahrissyed@gmail.com",
@@ -30,25 +30,27 @@ class MockBookedRideDetailsRepository implements BookedRidesDetailsRepository {
   @override
   Future<Ride> fetchRide(String rideID) async {
     return (Ride(
-        driverId: "driverId",
-        vehicleId: "vehicleId",
-        startingCoordinates: "startingCoordinates",
-        endingCoordinates: "endingCoordinates",
-        totalFare: 2344,
-        availableSeats: 3,
-        isFemaleOnly: false,
-        date: "date",
-        time: "time",
-        passengerRequests: [
-          PassengerRequest(
-              passengerId: '',
-              startingCoordinates: '',
-              endingCoordinates: '',
-              status: '',
-              isDelete: false),
-        ],
-        isDelete: false,
-        isCompleted: false));
+      driverId: "driverId",
+      vehicleId: "vehicleId",
+      startingCoordinates: "startingCoordinates",
+      endingCoordinates: "endingCoordinates",
+      totalFare: 2344,
+      availableSeats: 3,
+      isFemaleOnly: false,
+      date: "date",
+      time: "time",
+      passengerRequests: [
+        PassengerRequest(
+            passengerId: '',
+            startingCoordinates: '',
+            endingCoordinates: '',
+            status: '',
+            isDelete: false),
+      ],
+      isDelete: false,
+      isCompleted: false,
+      isRecurring: false,
+    ));
   }
 
   @override

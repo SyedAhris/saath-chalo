@@ -25,6 +25,9 @@ class Ride {
     required this.date,
     required this.time,
     required this.isCompleted,
+    required this.isRecurring,
+    this.recurringDays = const [],
+    this.recurringEndDate = "",
     required this.isDelete,
   });
 
@@ -40,6 +43,9 @@ class Ride {
   String date;
   String time;
   bool isCompleted;
+  bool isRecurring;
+  List<String> recurringDays;
+  String recurringEndDate;
   bool isDelete;
 
   factory Ride.fromJson(Map<String, dynamic> json) => Ride(
@@ -50,13 +56,17 @@ class Ride {
         totalFare: json["totalFare"],
         availableSeats: json["availableSeats"],
         approvedPassengers: List<ApprovedPassenger>.from(
-            json["approvedPassengers"].map((x) => ApprovedPassenger.fromJson(x))),
+            json["approvedPassengers"]
+                .map((x) => ApprovedPassenger.fromJson(x))),
         passengerRequests: List<PassengerRequest>.from(
             json["passengerRequests"].map((x) => PassengerRequest.fromJson(x))),
         isFemaleOnly: json["isFemaleOnly"],
         date: json["date"],
         time: json["time"],
         isCompleted: json["isCompleted"],
+        isRecurring: json["isRecurring"],
+        recurringEndDate: json["recurringEndDate"],
+        recurringDays: List<String>.from(json["recurringDays"].map((x) => x)),
         isDelete: json["isDelete"],
       );
 
@@ -67,12 +77,16 @@ class Ride {
         "endingCoordinates": endingCoordinates,
         "totalFare": totalFare,
         "availableSeats": availableSeats,
-        "approvedPassengers": List<dynamic>.from(approvedPassengers.map((x) => x.toJson())),
-        "passengerRequests": List<dynamic>.from(passengerRequests.map((x) => x.toJson())),
+        "approvedPassengers":
+            List<dynamic>.from(approvedPassengers.map((x) => x.toJson())),
+        "passengerRequests":
+            List<dynamic>.from(passengerRequests.map((x) => x.toJson())),
         "isFemaleOnly": isFemaleOnly,
         "date": date,
         "time": time,
-        "isCompleted" : isCompleted,
+        "isCompleted": isCompleted,
+        "recurringDays": List<dynamic>.from(recurringDays.map((x) => x)),
+        "recurringEndDate": recurringEndDate,
         "isDelete": isDelete,
       };
 }
