@@ -37,8 +37,8 @@ class MockBookedRideDetailsRepository implements BookedRidesDetailsRepository {
       totalFare: 2344,
       availableSeats: 3,
       isFemaleOnly: false,
-      date: "date",
-      time: "time",
+      date: DateTime(2022,12,13).millisecondsSinceEpoch,
+      time: DateTime(0,0,0,17,30).millisecondsSinceEpoch,
       passengerRequests: [
         PassengerRequest(
             passengerId: '',

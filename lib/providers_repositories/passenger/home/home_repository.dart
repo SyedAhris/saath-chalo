@@ -38,15 +38,18 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         totalFare: 1200,
         availableSeats: 3,
         isFemaleOnly: false,
-        date: "12-09-08",
-        time: "19:00",
+        date: DateTime(2022, 12, 13).millisecondsSinceEpoch,
+        time: DateTime(0, 0, 0, 17, 30).millisecondsSinceEpoch,
         approvedPassengers: [
           ApprovedPassenger(
-              passengerId: "52345",
-              startingCoordinates: "3123123",
-              endingCoordinates: "123123",
-              rideFare: 400,
-              isDelete: false),
+            passengerId: "52345",
+            startingCoordinates: "3123123",
+            endingCoordinates: "123123",
+            rideFare: 400,
+            isDelete: false,
+            driverRating: -1,
+            passengerRating: -1,
+          ),
         ],
         passengerRequests: [
           PassengerRequest(

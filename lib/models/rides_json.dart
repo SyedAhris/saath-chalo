@@ -27,7 +27,7 @@ class Ride {
     required this.isCompleted,
     required this.isRecurring,
     this.recurringDays = const [],
-    this.recurringEndDate = "",
+    this.recurringEndDate = -1,
     required this.isDelete,
   });
 
@@ -40,12 +40,12 @@ class Ride {
   List<ApprovedPassenger> approvedPassengers;
   List<PassengerRequest> passengerRequests;
   bool isFemaleOnly;
-  String date;
-  String time;
+  int date;
+  int time;
   bool isCompleted;
   bool isRecurring;
   List<String> recurringDays;
-  String recurringEndDate;
+  int recurringEndDate;
   bool isDelete;
 
   factory Ride.fromJson(Map<String, dynamic> json) => Ride(
