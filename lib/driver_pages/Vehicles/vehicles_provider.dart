@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 
-import 'VehiclesJson.dart';
-import 'VehiclesRepository.dart';
+import 'vehicles_json.dart';
+import 'vehicles_repository.dart';
 
 class VehiclesProvider with ChangeNotifier {
   List<VehiclesJson> vehicles = [];

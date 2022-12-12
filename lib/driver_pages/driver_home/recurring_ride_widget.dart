@@ -10,9 +10,9 @@ class RecurringRideWidget extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.circular(8),
       child: ListTile(
-        leading: Text('Recurring Ride'),
+        leading: const Text('Recurring Ride'),
         trailing: Switch(
-          onChanged: (bool) => {},
+          onChanged: (boolean) => {},
           value: true,
         ),
       ),

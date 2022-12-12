@@ -5,6 +5,10 @@ class SideBar extends StatelessWidget {
       : super(key: key);
   final VoidCallback tapHome;
   final VoidCallback tapBookedRides;
+  const SideBar({Key? key, required this.listTiles, required this.onTapLogOut})
+      : super(key: key);
+  final List<ListTile> listTiles;
+  final VoidCallback onTapLogOut;
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +68,17 @@ class SideBar extends StatelessWidget {
             title: SideBarText(text: "Notification"),
           ),
           const Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: SideBarText(text: "Logout"),
-              ),
-            ),
-          )
+              Column(children: listTiles.toList()),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: ListTile(
+                    leading: const Icon(Icons.exit_to_app),
+                    title: const SideBarText(text: "Logout"),
+                    onTap: onTapLogOut,
+                  ),
+                ),
+              )),
         ],
       ),
     );

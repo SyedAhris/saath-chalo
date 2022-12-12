@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/Vehicles/AddVehicles/AddVehiclesView.dart';
+import 'package:flutterdemo/driver_pages/Vehicles/AddVehicles/add_vehicles_view.dart';
 import 'package:flutterdemo/globalComponents/main_app_bar.dart';
-
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
-import '../VehiclesJson.dart';
-import '../VehiclesProvider.dart';
-import 'VehiclesListTile.dart';
+import '../vehicles_provider.dart';
+import 'vehicles_list_tile.dart';
 
 class VehiclesListView extends StatefulWidget {
   const VehiclesListView({Key? key}) : super(key: key);
@@ -27,7 +25,7 @@ class _VehiclesListViewState extends State<VehiclesListView> {
   Widget build(BuildContext context) {
     final vehicles = context.watch<VehiclesProvider>().vehicles;
     return Scaffold(
-      appBar: MainAppBar(
+      appBar: const MainAppBar(
         title: 'Vehicles',
       ),
       body: context.watch<VehiclesProvider>().isVehiclesFetching
@@ -45,13 +43,12 @@ class _VehiclesListViewState extends State<VehiclesListView> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddVehicles()),
+            MaterialPageRoute(builder: (context) => const AddVehicles()),
           );
         },
-        child: Icon(Icons.add),
         backgroundColor: MainColors.primary,
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
-
