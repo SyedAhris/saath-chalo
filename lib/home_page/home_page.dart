@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/LoginPage/login_page_driver.dart';
-import 'package:flutterdemo/globalComponents/passenger_side_bar.dart';
-
+import 'package:flutterdemo/passenger_pages/passenger_booked_rides/passenger_booked_rides.dart';
+import 'package:flutterdemo/passenger_pages/passenger_booked_rides_status/passenger_booked_rides_accepted.dart';
+import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 import '../globalComponents/main_app_bar.dart';
 import '../passenger_pages/LoginPage/login_page_passenger.dart';
+import 'package:flutterdemo/driver_pages/LoginPage/login_page_driver.dart';
+import 'package:flutterdemo/globalComponents/passenger_side_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -18,6 +20,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: SideBar(
+          tapHome: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const PassengerHome())),
+          tapBookedRides: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => PassengerBookedRides())),
+        ),
         drawer: const PassengerSideBar(),
         appBar: const MainAppBar(
           title: "SaathChalo",

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SideBar extends StatelessWidget {
+  const SideBar({Key? key, required this.tapHome, required this.tapBookedRides})
+      : super(key: key);
+  final VoidCallback tapHome;
+  final VoidCallback tapBookedRides;
   const SideBar({Key? key, required this.listTiles, required this.onTapLogOut})
       : super(key: key);
   final List<ListTile> listTiles;
@@ -45,17 +49,36 @@ class SideBar extends StatelessWidget {
               ]),
             ),
           ),
-          Column(children: listTiles.toList()),
-          Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: ListTile(
-                leading: const Icon(Icons.exit_to_app),
-                title: const SideBarText(text: "Logout"),
-                onTap: onTapLogOut,
-              ),
-            ),
-          )
+          ListTile(
+            leading: Icon(Icons.home),
+            title: SideBarText(text: "Home"),
+            onTap: tapHome,
+          ),
+          ListTile(
+            leading: Icon(Icons.done_outline_sharp),
+            title: SideBarText(text: "Booked Rides"),
+            onTap: tapBookedRides,
+          ),
+          const ListTile(
+            leading: Icon(Icons.history),
+            title: SideBarText(text: "Ride History"),
+          ),
+          const ListTile(
+            leading: Icon(Icons.notifications),
+            title: SideBarText(text: "Notification"),
+          ),
+          const Expanded(
+              Column(children: listTiles.toList()),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: ListTile(
+                    leading: const Icon(Icons.exit_to_app),
+                    title: const SideBarText(text: "Logout"),
+                    onTap: onTapLogOut,
+                  ),
+                ),
+              )),
         ],
       ),
     );
