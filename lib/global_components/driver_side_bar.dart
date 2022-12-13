@@ -3,7 +3,9 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
 import 'package:flutterdemo/global_components/side_bar.dart';
 import 'package:flutterdemo/home_page/home_page.dart';
+import "package:google_maps_webservice/geocoding.dart";
 import 'package:google_maps_webservice/places.dart';
+
 class DriverSideBar extends StatelessWidget {
   const DriverSideBar({Key? key}) : super(key: key);
 
@@ -30,27 +32,30 @@ class DriverSideBar extends StatelessWidget {
               onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const DriverHome()))),
           ListTile(
-            leading: Icon(Icons.notifications),
+            leading: const Icon(Icons.notifications),
             title: const SideBarText(text: "Notification"),
             onTap: () async {
               print('starting prediction');
+              final geocoding = GoogleMapsGeocoding(
+                  apiKey: "AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE");
               Prediction? prediction = await PlacesAutocomplete.show(
+                offset: 0,
+                radius: 1000,
+                types: ['establishment'],
+                strictbounds: false,
+                region: "pk",
+                mode: Mode.fullscreen, // Mode.fullscreen
+                language: "en",
+                components: [Component(Component.country, "pk")],
                 context: context,
                 apiKey: 'AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE',
-                onError: (err) => print('$err error'),
-                language: "en",
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                components: [Component(Component.country, "pk")],
               );
-              print('$prediction  prediction');
+              print('${prediction?.description}  prediction');
+              GeocodingResponse response =
+                  await geocoding.searchByPlaceId(prediction?.placeId ?? "0");
+              print(response.results[0].geometry.location.lat);
+              print(response.results[0].geometry.location.lng);
+              print("responses yooo");
             },
           ),
         ]);
