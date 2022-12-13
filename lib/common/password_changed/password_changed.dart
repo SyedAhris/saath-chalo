@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/home_page/home_page.dart';
 import 'package:flutterdemo/passenger_pages/login_page/login_page_passenger.dart';
 
 import '../../global_components/main_app_bar.dart';
@@ -55,8 +56,11 @@ class PasswordChanged extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoginPagePassenger()));
+                  Navigator.of(context)
+                    ..pop()
+                    ..pop()
+                    ..pop()
+                    ..pop();
                 },
                 child: const Text(
                   "Proceed to Login",

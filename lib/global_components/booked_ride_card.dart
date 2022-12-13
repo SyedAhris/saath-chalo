@@ -47,7 +47,9 @@ class BookedRideCard extends StatelessWidget {
                     Text(name.length >= 20
                         ? "${name.substring(0, 20)}..."
                         : name),
-                    Text(car.length >= 20 ? "${car.substring(0, 20)}..." : car),
+                    Text(car.length >= 20
+                        ? "${car.substring(0, 16)}..."
+                        : car),
                     Text(numberPlate)
                   ],
                 ),

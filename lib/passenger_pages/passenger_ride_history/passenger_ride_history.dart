@@ -1,93 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/global_components/main_app_bar.dart';
+import 'package:flutterdemo/global_components/passenger_side_bar.dart';
+import 'package:flutterdemo/global_components/ride_card.dart';
+import 'package:flutterdemo/passenger_pages/passenger_ride_history/passenger_ride_demo.dart';
+import 'package:flutterdemo/passenger_pages/passenger_ride_history_details/passenger_ride_history_details.dart';
 
-import '../../global_components/main_app_bar.dart';
-import '../../global_components/ride_list_tile.dart';
+class PassengerRideHistory extends StatefulWidget {
+  const PassengerRideHistory({Key? key}) : super(key: key);
 
-class PassengerRideHistory extends StatelessWidget {
-  const PassengerRideHistory({super.key});
+  @override
+  State<PassengerRideHistory> createState() => _PassengerRideHistoryState();
+}
 
+class _PassengerRideHistoryState extends State<PassengerRideHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(title: "Ride History"),
+      drawer: const PassengerSideBar(),
+      appBar: const MainAppBar(
+        title: "Ride History",
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: const <Widget>[
-                  Text(
-                    "Approved",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Nunito'),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                  ),
-                  Icon(
-                    Icons.check_circle_outline_outlined,
-                    size: 28,
-                    color: Colors.green,
-                  ),
-                ],
-              ),
-              const RideListTile(),
-              Row(
-                children: const <Widget>[
-                  Text(
-                    "Pending",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Nunito'),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                  ),
-                  Icon(
-                    Icons.access_time_outlined,
-                    size: 28,
-                    color: Colors.grey,
-                  ),
-                ],
-              ),
-              const RideListTile(),
-              Row(
-                children: const <Widget>[
-                  Text(
-                    "Rejected",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Nunito'),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                  ),
-                  Icon(
-                    Icons.cancel_outlined,
-                    size: 28,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-              const RideListTile(),
+              ListView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  itemCount: ridehistory.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const PassengerRideHistoryDetails()
+                                )
+                            );
+                          },
+                          child: RideCard(
+                            journeyStart: ridehistory[index].journeyStart,
+                            journeyEnd: ridehistory[index].journeyEnd,
+                            journeyDate: ridehistory[index].journeyDate,
+                            journeyTime: ridehistory[index].journeyTime,
+                            estCost: ridehistory[index].estCost,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
             ],
           ),
         ),
@@ -95,3 +58,61 @@ class PassengerRideHistory extends StatelessWidget {
     );
   }
 }
+List<PassengerRideDemo> ridehistory = [
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+  PassengerRideDemo(
+      journeyStart: "Institute of Business Administration",
+      journeyEnd: "Askari 4",
+      journeyDate: "26/11/2022",
+      journeyTime: "09:15",
+      estCost: 600
+  ),
+];

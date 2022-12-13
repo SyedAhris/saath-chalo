@@ -16,9 +16,8 @@ class PassengerHome extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.none,
-                image: NetworkImage(
-                    "https://www.researchgate.net/profile/Noor-Saher/publication/320758246/figure/fig1/AS:614266084282384@1523463855302/Map-showing-the-study-site-Hawks-Bay-Karachi-Pakistan-Google-Map_Q640.jpg"))),
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/backimg.png'))),
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
