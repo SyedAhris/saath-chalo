@@ -4,7 +4,6 @@ import 'package:flutterdemo/driver_pages/login_page/login_page_driver.dart';
 import '../global_components/main_app_bar.dart';
 import '../global_components/passenger_side_bar.dart';
 import '../passenger_pages/login_page/login_page_passenger.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
