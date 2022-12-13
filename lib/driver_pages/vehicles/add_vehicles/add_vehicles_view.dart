@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
-import 'package:flutterdemo/driver_pages/Vehicles/vehicles_list/vehicle_list_view.dart';
+import 'package:flutterdemo/driver_pages/vehicles/vehicles_list/vehicle_list_view.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
 
 import '../../../globalComponents/main_app_bar.dart';
