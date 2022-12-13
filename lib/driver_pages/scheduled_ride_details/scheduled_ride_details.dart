@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
-import 'package:flutterdemo/globalComponents/driver_booked_ride_card.dart';
-import 'package:flutterdemo/globalComponents/driver_side_bar.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
-import 'package:flutterdemo/globalComponents/main_button.dart';
+
+import '../../global_components/driver_booked_ride_card.dart';
+import '../../global_components/driver_side_bar.dart';
+import '../../global_components/main_app_bar.dart';
+import '../../global_components/main_button.dart';
 
 class ScheduledRideDetails extends StatefulWidget {
   const ScheduledRideDetails({Key? key}) : super(key: key);

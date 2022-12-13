@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/globalComponents/location_text_field.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
-import 'package:flutterdemo/globalComponents/main_button.dart';
-import 'package:flutterdemo/globalComponents/passenger_side_bar.dart';
+
+import '../../global_components/location_text_field.dart';
+import '../../global_components/main_app_bar.dart';
+import '../../global_components/main_button.dart';
+import '../../global_components/passenger_side_bar.dart';
 
 class PassengerHome extends StatelessWidget {
   const PassengerHome({Key? key}) : super(key: key);
