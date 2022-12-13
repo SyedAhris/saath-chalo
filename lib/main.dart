@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
           secondary: MainColors.secondary,
         ),
       ),
-      home: const Signup(),//const HomePage(title: 'SaathChalo'),
+      home: const HomePage(title: 'SaathChalo'),
     );
   }
 }

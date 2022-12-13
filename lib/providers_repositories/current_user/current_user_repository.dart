@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import '../../models/user_json.dart';
+import '../../models/customer_json.dart';
 abstract class CurrentUserRepository {
   Future<List> signup(Customer customer);
   Future<User> signin(String email, String password);
@@ -24,18 +24,16 @@ class FirebaseCurrentUserRepository implements CurrentUserRepository{
       UserCredential result = await auth.createUserWithEmailAndPassword(
           email: customer.email, password: customer.password);
       final User user = result.user!;
+      customer.id = user.uid;
       db.collection("Customers").doc(user.uid).set(customer.toJson());
-      return [user, ""];
+      return [user, "", customer];
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        print('The account already exists');
-        return(["","An account already exists with this email try logging in instead"]);
+        return(["","An account already exists with this email try logging in instead",""]);
       } else if (e.code == 'invalid-email'){
-        print("invalid email");
-        return(["","Invalid Email"]);
+        return(["","Invalid Email",""]);
       } else {
-        print(e.code);
-        return(["",e.code]);
+        return(["",e.code,""]);
       }
     }
   }

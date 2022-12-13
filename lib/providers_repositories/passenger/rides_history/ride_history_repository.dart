@@ -12,7 +12,8 @@ class MockRideHistoryRepository implements RideHistoryRepository {
   Future<List<Ride>> fetchRides(String passengerID) async {
     return ([
       Ride(
-        driverId: "ahrissyed@gmail.com",
+        id: "${DateTime.now().microsecondsSinceEpoch}ghjkfghkjfghj546346534",
+        driverId: "ghjkfghkjfghj546346534",
         vehicleId: "ABC-123",
         startingCoordinates: "startingCoordinates",
         endingCoordinates: "endingCoordinates",
@@ -64,7 +65,8 @@ class MockRideHistoryRepository implements RideHistoryRepository {
         isRecurring: false,
       ),
       Ride(
-        driverId: "ahrissyed@gmail.com",
+        id: "${DateTime.now().microsecondsSinceEpoch}asdfadfg234523asdasd",
+        driverId: "asdfadfg234523asdasd",
         vehicleId: "ABC-123",
         startingCoordinates: "startingCoordinates",
         endingCoordinates: "endingCoordinates",

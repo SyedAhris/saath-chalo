@@ -1,6 +1,6 @@
 import 'package:flutterdemo/models/approved_passenger.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
-import 'package:flutterdemo/models/user_json.dart';
+import 'package:flutterdemo/models/customer_json.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 
 import '../../../models/rides_json.dart';
@@ -31,6 +31,7 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
   List<PassengerHomeListDetails> rides = [
     PassengerHomeListDetails(
       ride: Ride(
+        id: "${DateTime.now().microsecondsSinceEpoch}1231",
         driverId: "1231",
         vehicleId: "ABC-123",
         startingCoordinates: "123123",

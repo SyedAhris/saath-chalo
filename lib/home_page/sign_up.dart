@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/globalComponents/main_button.dart';
-import 'package:flutterdemo/models/user_json.dart';
+import 'package:flutterdemo/global_components/main_button.dart';
+import 'package:flutterdemo/home_page/home_page.dart';
+import 'package:flutterdemo/models/customer_json.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/constants.dart';
-import '../globalComponents/main_app_bar.dart';
-import '../globalComponents/main_text_form_field.dart';
+import '../global_components/main_app_bar.dart';
+import '../global_components/main_text_form_field.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -153,8 +154,6 @@ class _SignupState extends State<Signup> {
                                 hintText: "*****",
                                 controller: confirmPasswordController,
                                 validator: (value) {
-                                  print(passwordController.text);
-                                  print(value);
                                   if (value == null || value.isEmpty) {
                                     return 'Required Field';
                                   } else if (value.length < 8) {
@@ -300,22 +299,27 @@ class _SignupState extends State<Signup> {
                               gender: gender,
                               isDriver: isDriver,
                               isPassenger: isPassenger,
+                              licenseNumber: licenseNumberController.text,
                               isDelete: false,
                               id: '',
                             );
                             String error = await context
                                 .read<CurrentUserProvider>()
                                 .signup(customer);
-                            print(error);
                             if (error != "") {
                               final snackBar = SnackBar(
                                 content: Text(error),
                               );
-
-                              // Find the ScaffoldMessenger in the widget tree
-                              // and use it to show a SnackBar.
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
+                            } else {
+                              print(context.read<CurrentUserProvider>().currentCustomer.id,);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HomePage(title: "Saath Chalo"),
+                                ),
+                              );
                             }
                           }
                         },

@@ -1,7 +1,7 @@
 import '../../../models/approved_passenger.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
-import '../../../models/user_json.dart';
+import '../../../models/customer_json.dart';
 import '../../../models/vehicle_json.dart';
 
 abstract class RideHistoryDetailsRepository {
@@ -32,7 +32,8 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
   @override
   Future<Ride> fetchRide(String rideId) async {
     return (Ride(
-      driverId: "ahrissyed@gmail.com",
+      id: "${DateTime.now().microsecondsSinceEpoch}aasdasdasd213414",
+      driverId: "aasdasdasd213414",
       vehicleId: "ABC-123",
       startingCoordinates: "startingCoordinates",
       endingCoordinates: "endingCoordinates",

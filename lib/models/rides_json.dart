@@ -13,6 +13,7 @@ String rideToJson(Ride data) => json.encode(data.toJson());
 
 class Ride {
   Ride({
+    required this.id,
     required this.driverId,
     required this.vehicleId,
     required this.startingCoordinates,
@@ -31,6 +32,7 @@ class Ride {
     required this.isDelete,
   });
 
+  String id;
   String driverId;
   String vehicleId;
   String startingCoordinates;
@@ -49,6 +51,7 @@ class Ride {
   bool isDelete;
 
   factory Ride.fromJson(Map<String, dynamic> json) => Ride(
+        id: json["id"],
         driverId: json["driverID"],
         vehicleId: json["vehicleID"],
         startingCoordinates: json["startingCoordinates"],
@@ -71,6 +74,7 @@ class Ride {
       );
 
   Map<String, dynamic> toJson() => {
+        "id" :id,
         "driverID": driverId,
         "vehicleID": vehicleId,
         "startingCoordinates": startingCoordinates,

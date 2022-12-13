@@ -1,7 +1,7 @@
 import 'package:flutterdemo/models/passenger_request.dart';
 
 import '../../../models/rides_json.dart';
-import '../../../models/user_json.dart';
+import '../../../models/customer_json.dart';
 
 abstract class BookedRidesDetailsRepository {
   Future<Ride> fetchRide(String rideID);
@@ -30,6 +30,7 @@ class MockBookedRideDetailsRepository implements BookedRidesDetailsRepository {
   @override
   Future<Ride> fetchRide(String rideID) async {
     return (Ride(
+      id: "${DateTime.now().microsecondsSinceEpoch}driverId",
       driverId: "driverId",
       vehicleId: "vehicleId",
       startingCoordinates: "startingCoordinates",

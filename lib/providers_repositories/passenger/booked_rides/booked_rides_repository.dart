@@ -34,6 +34,7 @@ class MockPassengerBookedRidesRepository
   Future<List<Ride>> getApprovedRides(String passengerID) async {
     return [
       Ride(
+        id: DateTime.now().microsecondsSinceEpoch.toString() + "asdw1324asd",
         driverId: "asdw1324asd",
         vehicleId: "ABC-123",
         startingCoordinates: "startingCoordinatesApproved",
@@ -54,7 +55,8 @@ class MockPassengerBookedRidesRepository
   Future<List<Ride>> getPendingRides(String passengerID) async {
     return [
       Ride(
-        driverId: "asdw1324asd",
+        id: DateTime.now().microsecondsSinceEpoch.toString() + "salfgihasopifj3",
+        driverId: "salfgihasopifj3",
         vehicleId: "ABC-123",
         startingCoordinates: "startingCoordinatesPending",
         endingCoordinates: "endingCoordinatesPending",
@@ -74,7 +76,8 @@ class MockPassengerBookedRidesRepository
   Future<List<Ride>> getRejectedRides(String passengerID) async {
     return [
       Ride(
-        driverId: "asdw1324asd",
+        id: "${DateTime.now().microsecondsSinceEpoch}dasdq34reasd",
+        driverId: "dasdq34reasd",
         vehicleId: "ABC-123",
         startingCoordinates: "startingCoordinatesPending",
         endingCoordinates: "endingCoordinatesPending",

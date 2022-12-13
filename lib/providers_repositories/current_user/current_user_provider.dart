@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/models/user_json.dart';
+import 'package:flutterdemo/models/customer_json.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_repository.dart';
 
 class CurrentUserProvider with ChangeNotifier {
   late User firebaseUser;
-  Customer currentUser = Customer(
+  Customer currentCustomer = Customer(
     firstName: "Syed Muhammad",
     lastName: "Ahris",
     email: "ahrissyed@gmail.com",
@@ -19,7 +19,6 @@ class CurrentUserProvider with ChangeNotifier {
     isDelete: false,
     id: '',
   );
-  String currentUserId = "";
 
   final CurrentUserRepository _currentUserRepository =
       FirebaseCurrentUserRepository();
@@ -29,6 +28,7 @@ class CurrentUserProvider with ChangeNotifier {
     String error = "";
     if (res[1] == "") {
       firebaseUser = res[0];
+      currentCustomer = res[2];
     } else {
       error = res[1];
     }

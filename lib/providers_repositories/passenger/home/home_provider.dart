@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterdemo/models/user_json.dart';
+import 'package:flutterdemo/models/customer_json.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_repository.dart';
 
 import '../../../models/passenger_request.dart';

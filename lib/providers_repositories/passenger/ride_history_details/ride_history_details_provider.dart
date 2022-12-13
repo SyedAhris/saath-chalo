@@ -3,7 +3,7 @@ import 'package:flutterdemo/models/vehicle_json.dart';
 import 'package:flutterdemo/providers_repositories/passenger/ride_history_details/ride_history_details_repository.dart';
 
 import '../../../models/rides_json.dart';
-import '../../../models/user_json.dart';
+import '../../../models/customer_json.dart';
 
 class RideHistoryDetailsProvider with ChangeNotifier {
   late Ride ride;
@@ -12,6 +12,7 @@ class RideHistoryDetailsProvider with ChangeNotifier {
 
   final RideHistoryDetailsRepository _rideHistoryDetailsRepository = MockRideHistoryDetailsRepository();
 
+  //called in initState
   fetchRide(String rideId) async {
     ride = await _rideHistoryDetailsRepository.fetchRide(rideId);
     fetchDriver(ride.driverId);

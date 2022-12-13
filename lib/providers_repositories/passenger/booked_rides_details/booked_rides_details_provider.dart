@@ -3,7 +3,7 @@ import 'package:flutterdemo/models/approved_passenger.dart';
 
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
-import '../../../models/user_json.dart';
+import '../../../models/customer_json.dart';
 import 'booked_rides_details_repository.dart';
 
 class BookedRidesDetailProvider with ChangeNotifier {
