@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/driver_pages/vehicles/vehicles_list/vehicle_list_view.dart';
-import 'package:flutterdemo/globalComponents/main_button.dart';
 
-import '../../../globalComponents/main_app_bar.dart';
-import '../../../globalComponents/main_text_field.dart';
+import '../../../global_components/main_app_bar.dart';
+import '../../../global_components/main_button.dart';
+import '../../../global_components/main_text_field.dart';
 
 class AddVehicles extends StatefulWidget {
   const AddVehicles({Key? key}) : super(key: key);

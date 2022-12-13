@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/globalComponents/booked_ride_card.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
+
+import '../../global_components/booked_ride_card.dart';
+import '../../global_components/main_app_bar.dart';
 
 class PassengerBookedRidesDeclined extends StatefulWidget {
   const PassengerBookedRidesDeclined({Key? key}) : super(key: key);

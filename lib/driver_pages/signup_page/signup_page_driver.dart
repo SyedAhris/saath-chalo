@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
-import '../../globalComponents/main_app_bar.dart';
+import '../../global_components/main_app_bar.dart';
 
 class SignupDriver extends StatefulWidget {
   const SignupDriver({Key? key}) : super(key: key);

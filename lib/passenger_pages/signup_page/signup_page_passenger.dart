@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
+
+import '../../global_components/main_app_bar.dart';
 
 class SignupPassenger extends StatefulWidget {
   const SignupPassenger({Key? key}) : super(key: key);

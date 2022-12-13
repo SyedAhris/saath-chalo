@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
-import 'package:flutterdemo/globalComponents/side_bar.dart';
+import 'package:flutterdemo/global_components/side_bar.dart';
 import 'package:flutterdemo/home_page/home_page.dart';
 import 'package:google_maps_webservice/places.dart';
 
@@ -32,7 +32,7 @@ class DriverSideBar extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const DriverHome()))),
           ListTile(
             leading: Icon(Icons.notifications),
-            title: SideBarText(text: "Notification"),
+            title: const SideBarText(text: "Notification"),
             onTap: () async {
               print('starting prediction');
               Prediction? prediction = await PlacesAutocomplete.show(
@@ -44,7 +44,7 @@ class DriverSideBar extends StatelessWidget {
                   hintText: 'Search',
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.white,
                     ),
                   ),
