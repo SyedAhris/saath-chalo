@@ -69,13 +69,13 @@ class _PassengerBookedRidesAcceptedState
                       Padding(
                         padding: const EdgeInsets.only(top: 200, bottom: 20),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MainButton(
                               text: "Update Request",
-                              width: 200,
+                              width:200,
                               onTap: () {},
                             ),
-                            const SizedBox(width: 20),
                             SizedBox(
                               width: 75,
                               height: 50,
