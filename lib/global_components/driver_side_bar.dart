@@ -4,7 +4,6 @@ import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
 import 'package:flutterdemo/global_components/side_bar.dart';
 import 'package:flutterdemo/home_page/home_page.dart';
 import 'package:google_maps_webservice/places.dart';
-
 class DriverSideBar extends StatelessWidget {
   const DriverSideBar({Key? key}) : super(key: key);
 

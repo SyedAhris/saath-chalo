@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class DriverBookedRideCard extends StatelessWidget {
-  const DriverBookedRideCard(
-      {Key? key,
-      required this.car,
-      required this.numberPlate,
-      required this.journeyStart,
-      required this.journeyEnd,
-      required this.acStatus,
-      required this.journeyDate,
-      required this.journeyTime,
-      required this.estCost,
-      required this.passengers})
-      : super(key: key);
+class PassengerRideHistoryDetailsCard extends StatelessWidget {
+  const PassengerRideHistoryDetailsCard({
+    Key? key,
+    required this.car,
+    required this.name,
+    required this.rating,
+    required this.numberPlate,
+    required this.journeyStart,
+    required this.journeyEnd,
+    required this.acStatus,
+    required this.journeyDate,
+    required this.journeyTime,
+    required this.estCost,
+    required this.passengers
+  }) : super(key: key);
 
   final String car;
+  final String name;
+  final double rating;
   final String numberPlate;
   final String journeyStart;
   final String journeyEnd;
@@ -24,6 +28,7 @@ class DriverBookedRideCard extends StatelessWidget {
   final String journeyTime;
   final int estCost;
   final List<String> passengers;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,16 +38,27 @@ class DriverBookedRideCard extends StatelessWidget {
           children: [
             Row(
               children: [
+                const CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/manPic.png'),
+                  radius: 25,
+                ),
+                const SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(car.length >= 20 ? "${car.substring(0, 20)}..." : car),
+                    Text(name.length >= 20
+                        ? "${name.substring(0, 20)}..."
+                        : name),
+                    Text(car.length >= 20
+                        ? "${car.substring(0, 16)}..."
+                        : car),
                     Text(numberPlate)
                   ],
                 ),
-                const SizedBox(width: 60),
+                const SizedBox(width: 10),
                 Column(
                   children: const [
+                    Icon(Icons.star_border),
                     Icon(Icons.people_outline),
                     Text("AC", style: TextStyle(fontWeight: FontWeight.bold))
                   ],
@@ -50,14 +66,16 @@ class DriverBookedRideCard extends StatelessWidget {
                 const SizedBox(width: 10),
                 Column(
                   children: [
+                    Text(rating.toString()),
+                    const SizedBox(height: 3),
                     const Text("2/3"),
                     const SizedBox(height: 3),
                     acStatus == true
                         ? const Icon(
-                            Icons.circle,
-                            color: Colors.green,
-                            size: 18,
-                          )
+                      Icons.circle,
+                      color: Colors.green,
+                      size: 18,
+                    )
                         : const Icon(Icons.circle, color: Colors.red)
                   ],
                 ),
@@ -126,30 +144,34 @@ class DriverBookedRideCard extends StatelessWidget {
                             : passengers[index]),
                       ],
                     ),
-                    Row(
-                      children: [
-                        RatingBar(
-                          itemCount: 5,
-                          allowHalfRating: true,
-                          itemSize: 23,
-                          ratingWidget: RatingWidget(
-                              full: const Icon(Icons.star,
-                                  color: Colors.orangeAccent),
-                              half: const Icon(Icons.star_half,
-                                  color: Colors.orangeAccent),
-                              empty: const Icon(
-                                Icons.star_border,
-                                color: Colors.orangeAccent,
-                              )),
-                          onRatingUpdate: (double
-                              value) {}, //change this when implementing ratings
-                        )
-                      ],
-                    )
+
                   ],
                 );
               },
             ),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RatingBar(
+                  itemCount: 5,
+                  allowHalfRating: true,
+                  itemSize: 40,
+                  ratingWidget: RatingWidget(
+                      full: const Icon(Icons.star,
+                          color: Colors.orangeAccent),
+                      half: const Icon(Icons.star_half,
+                          color: Colors.orangeAccent),
+                      empty: const Icon(
+                        Icons.star_border,
+                        color: Colors.orangeAccent,
+                      )),
+                  onRatingUpdate: (double
+                  value) {}, //change this when implementing ratings
+                )
+              ],
+            ),
+            Text("Rate your driver")
           ],
         ),
       ),
