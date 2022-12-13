@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           secondary: MainColors.secondary,
         ),
       ),
-      home: const HomePage(title: 'SaathChalo'),
+      home: const Signup(),//const HomePage(title: 'SaathChalo'),
     );
   }
 }
