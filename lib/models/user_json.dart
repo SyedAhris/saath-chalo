@@ -7,12 +7,13 @@ import 'dart:convert';
 import 'favorite_json.dart';
 import 'vehicle_json.dart';
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+Customer customerFromJson(String str) => Customer.fromJson(json.decode(str));
 
-String userToJson(User data) => json.encode(data.toJson());
+String customerToJson(Customer data) => json.encode(data.toJson());
 
-class User {
-  User({
+class Customer {
+  Customer({
+    required this.id,
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -29,6 +30,7 @@ class User {
     required this.isDelete,
   });
 
+  String id;
   String firstName;
   String lastName;
   String email;
@@ -44,7 +46,8 @@ class User {
   bool isPassenger;
   bool isDelete;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory Customer.fromJson(Map<String, dynamic> json) => Customer(
+        id: json["id"],
         firstName: json["firstName"],
         lastName: json["lastName"],
         email: json["email"],
@@ -64,6 +67,7 @@ class User {
       );
 
   Map<String, dynamic> toJson() => {
+        "id" : id,
         "firstName": firstName,
         "lastName": lastName,
         "email": email,

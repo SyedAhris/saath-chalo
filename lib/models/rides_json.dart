@@ -27,7 +27,7 @@ class Ride {
     required this.isCompleted,
     required this.isRecurring,
     this.recurringDays = const [],
-    this.recurringEndDate = -1,
+    this.recurringEndDate = -1, //TODO shift to datetime
     required this.isDelete,
   });
 

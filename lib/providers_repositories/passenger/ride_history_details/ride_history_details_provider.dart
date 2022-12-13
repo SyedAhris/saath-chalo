@@ -7,7 +7,7 @@ import '../../../models/user_json.dart';
 
 class RideHistoryDetailsProvider with ChangeNotifier {
   late Ride ride;
-  late User driver;
+  late Customer driver;
   late Vehicle vehicle;
 
   final RideHistoryDetailsRepository _rideHistoryDetailsRepository = MockRideHistoryDetailsRepository();

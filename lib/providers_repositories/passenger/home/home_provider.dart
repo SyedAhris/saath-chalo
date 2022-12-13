@@ -39,5 +39,5 @@ class PassengerHomeListDetails {
   });
 
   Ride ride;
-  User driver;
+  Customer driver;
 }

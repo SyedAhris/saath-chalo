@@ -8,7 +8,7 @@ import 'booked_rides_details_repository.dart';
 
 class BookedRidesDetailProvider with ChangeNotifier {
   late Ride ride;
-  late User driver;
+  late Customer driver;
 
   final BookedRidesDetailsRepository _bookedRidesDetailsRepository = MockBookedRideDetailsRepository();
 

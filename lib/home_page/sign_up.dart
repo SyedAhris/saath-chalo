@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/globalComponents/main_button.dart';
 import 'package:flutterdemo/models/user_json.dart';
+import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/constants.dart';
 import '../globalComponents/main_app_bar.dart';
@@ -283,22 +285,38 @@ class _SignupState extends State<Signup> {
                       height: 50,
                       child: MainButton(
                         text: 'Create User',
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
-                            User user = User(
-                                firstName: firstNameController.text,
-                                lastName: lastNameController.text,
-                                email: emailController.text,
-                                phone: phoneNumberController.text,
-                                password: passwordController.text,
-                                rating: 0,
-                                profilePictureLink: "",
-                                gender: gender,
-                                isDriver: isDriver,
-                                isPassenger: isPassenger,
-                                isDelete: false);
+                            Customer customer = Customer(
+                              firstName: firstNameController.text,
+                              lastName: lastNameController.text,
+                              email: emailController.text,
+                              phone: phoneNumberController.text,
+                              password: passwordController.text,
+                              rating: 0,
+                              profilePictureLink: "",
+                              gender: gender,
+                              isDriver: isDriver,
+                              isPassenger: isPassenger,
+                              isDelete: false,
+                              id: '',
+                            );
+                            String error = await context
+                                .read<CurrentUserProvider>()
+                                .signup(customer);
+                            print(error);
+                            if (error != "") {
+                              final snackBar = SnackBar(
+                                content: Text(error),
+                              );
+
+                              // Find the ScaffoldMessenger in the widget tree
+                              // and use it to show a SnackBar.
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
                           }
                         },
                       ),

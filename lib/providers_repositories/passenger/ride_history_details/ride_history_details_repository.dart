@@ -6,15 +6,15 @@ import '../../../models/vehicle_json.dart';
 
 abstract class RideHistoryDetailsRepository {
   Future<Ride> fetchRide(String rideId);
-  Future<User> fetchDriver(String driverId);
+  Future<Customer> fetchDriver(String driverId);
   Future<Vehicle> fetchVehicle(String vehicleId);
-  void updateDriverRating(User user);
+  void updateDriverRating(Customer user);
 }
 
 class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
   @override
-  Future<User> fetchDriver(String driverId) async {
-    return (User(
+  Future<Customer> fetchDriver(String driverId) async {
+    return (Customer(
       firstName: "Syed Muhammad",
       lastName: "Ahris",
       email: "ahrissyed@gmail.com",
@@ -25,7 +25,7 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
       gender: "M",
       isDriver: true,
       isPassenger: false,
-      isDelete: false,
+      isDelete: false, id: '',
     ));
   }
 
@@ -101,7 +101,7 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
   }
 
   @override
-  void updateDriverRating(User user) {
+  void updateDriverRating(Customer user) {
     // TODO: implement updateDriverRating
   }
 }

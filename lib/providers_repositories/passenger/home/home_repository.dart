@@ -63,7 +63,7 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         isCompleted: false,
         isRecurring: false,
       ),
-      driver: User(
+      driver: Customer(
           firstName: "Syed",
           lastName: "Ahris",
           email: "ahrissyed@gmail.com",
@@ -74,7 +74,7 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
           gender: "M",
           isDriver: true,
           isPassenger: false,
-          isDelete: false),
+          isDelete: false, id: ''),
     )
   ];
   @override
