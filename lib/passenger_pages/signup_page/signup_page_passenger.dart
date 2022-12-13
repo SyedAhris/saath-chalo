@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/constants/constants.dart';
 
-import '../../constants/constants.dart';
-import '../../globalComponents/main_app_bar.dart';
+import '../../global_components/main_app_bar.dart';
 
-class SignupDriver extends StatefulWidget {
-  const SignupDriver({Key? key}) : super(key: key);
+class SignupPassenger extends StatefulWidget {
+  const SignupPassenger({Key? key}) : super(key: key);
 
   @override
-  State<SignupDriver> createState() => _SignupDriverState();
+  State<SignupPassenger> createState() => _SignupPassengerState();
 }
 
-class _SignupDriverState extends State<SignupDriver> {
+class _SignupPassengerState extends State<SignupPassenger> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +22,7 @@ class _SignupDriverState extends State<SignupDriver> {
               child: Column(
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 0, right: 145, left: 20),
+                    padding: const EdgeInsets.only(top: 0, right: 86, left: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
@@ -32,7 +31,7 @@ class _SignupDriverState extends State<SignupDriver> {
                               fontWeight: FontWeight.bold,
                               fontSize: 30,
                             )),
-                        Text(" as Driver", style: TextStyle(fontSize: 28)),
+                        Text(" as Passenger", style: TextStyle(fontSize: 28)),
                       ],
                     ),
                   ),

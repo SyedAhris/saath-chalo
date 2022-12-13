@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/globalComponents/driver_booked_ride_card.dart';
-import 'package:flutterdemo/globalComponents/driver_side_bar.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
+
+import '../../global_components/driver_booked_ride_card.dart';
+import '../../global_components/driver_side_bar.dart';
+import '../../global_components/main_app_bar.dart';
 
 class ScheduledRideLiveBooking extends StatefulWidget {
   const ScheduledRideLiveBooking({Key? key}) : super(key: key);

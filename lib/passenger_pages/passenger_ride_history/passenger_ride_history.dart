@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
-import 'package:flutterdemo/globalComponents/ride_list_tile.dart';
+
+import '../../global_components/main_app_bar.dart';
+import '../../global_components/ride_list_tile.dart';
 
 class PassengerRideHistory extends StatelessWidget {
   const PassengerRideHistory({super.key});

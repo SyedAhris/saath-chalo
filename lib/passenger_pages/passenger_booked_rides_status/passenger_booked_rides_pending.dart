@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/globalComponents/booked_ride_card.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
 
-import '../../globalComponents/location_text_field.dart';
-import '../../globalComponents/main_button.dart';
+import '../../global_components/booked_ride_card.dart';
+import '../../global_components/location_text_field.dart';
+import '../../global_components/main_app_bar.dart';
+import '../../global_components/main_button.dart';
 
 class PassengerBookedRidesPending extends StatefulWidget {
   const PassengerBookedRidesPending({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _PassengerBookedRidesPendingState
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      BookedRideCard(
+                      const BookedRideCard(
                           name: "Syed Abdul Shakoor",
                           car: "Black Suzuki WagonR",
                           numberPlate: "ABC-123",

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/passenger_request/passenger_request.dart';
-import 'package:flutterdemo/globalComponents/driver_side_bar.dart';
-import 'package:flutterdemo/globalComponents/main_app_bar.dart';
-import 'package:flutterdemo/globalComponents/passenger_card.dart';
+import 'package:flutterdemo/global_components/driver_side_bar.dart';
+import 'package:flutterdemo/global_components/main_app_bar.dart';
+import 'package:flutterdemo/global_components/passenger_card.dart';
 
 import 'passenger_demo.dart';
 

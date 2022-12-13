@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/constants.dart';
-import 'driver_pages/Vehicles/vehicles_provider.dart';
+import 'driver_pages/vehicles/vehicles_provider.dart';
 import 'home_page/home_page.dart';
 
 void main() {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
-import 'package:flutterdemo/globalComponents/side_bar.dart';
+import 'package:flutterdemo/global_components/side_bar.dart';
 import 'package:flutterdemo/home_page/home_page.dart';
+import 'package:google_maps_webservice/places.dart';
 
 class DriverSideBar extends StatelessWidget {
   const DriverSideBar({Key? key}) : super(key: key);
@@ -28,9 +30,29 @@ class DriverSideBar extends StatelessWidget {
               title: const SideBarText(text: "Ride History"),
               onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const DriverHome()))),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.notifications),
-            title: SideBarText(text: "Notification"),
+            title: const SideBarText(text: "Notification"),
+            onTap: () async {
+              print('starting prediction');
+              Prediction? prediction = await PlacesAutocomplete.show(
+                context: context,
+                apiKey: 'AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE',
+                onError: (err) => print('$err error'),
+                language: "en",
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                components: [Component(Component.country, "pk")],
+              );
+              print('$prediction  prediction');
+            },
           ),
         ]);
   }

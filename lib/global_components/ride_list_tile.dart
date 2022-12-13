@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class RideListTile extends StatelessWidget {
   const RideListTile({super.key});
@@ -19,6 +18,7 @@ class RideListTile extends StatelessWidget {
                 Row(
                   children: [
                     const Expanded(
+                      flex: 4,
                       child: Text(
                         'Hamza',
                         style: TextStyle(
@@ -27,16 +27,15 @@ class RideListTile extends StatelessWidget {
                           fontFamily: 'Nunito',
                         ),
                       ),
-                      flex: 4,
                     ),
                     Expanded(
+                      flex: 1,
                       child: Row(
-                        children: [
+                        children: const [
                           Icon(Icons.star),
                           Text(' 5'),
                         ],
                       ),
-                      flex: 1,
                     ),
                   ],
                 ),
@@ -167,7 +166,7 @@ class RideListTile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(20, 5, 0, 10),
+                padding: const EdgeInsets.fromLTRB(20, 5, 0, 10),
                 child: Expanded(
                   flex: 3,
                   child: Row(
@@ -186,7 +185,7 @@ class RideListTile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 5, 0, 10),
+                padding: const EdgeInsets.fromLTRB(30, 5, 0, 10),
                 child: Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

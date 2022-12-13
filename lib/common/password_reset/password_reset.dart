@@ -2,9 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/common/EnterResetCode/enter_reset_code.dart';
-
-import '../../globalComponents/main_app_bar.dart';
+import 'package:flutterdemo/common/enter_reset_code/enter_reset_code.dart';
+import 'package:flutterdemo/global_components/main_app_bar.dart';
 
 class PasswordReset extends StatefulWidget {
   const PasswordReset({super.key});
