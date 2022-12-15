@@ -19,7 +19,7 @@ class _ScheduledRidesState extends State<ScheduledRides> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DriverSideBar(),
-      appBar: const MainAppBar(title: "Booked Rides"),
+      appBar: const MainAppBar(title: "Scheduled Rides"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
@@ -77,7 +77,7 @@ class _ScheduledRidesState extends State<ScheduledRides> {
                   Padding(
                     padding: EdgeInsets.only(top:10,bottom: 10),
                     child: Text(
-                      "Pending",
+                      "Upcoming Rides",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold
