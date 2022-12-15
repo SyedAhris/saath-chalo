@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:google_directions_api/google_directions_api.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +11,7 @@ import 'firebase_options.dart';
 import 'home_page/home_page.dart';
 
 void main() async {
+  DirectionsService.init('AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

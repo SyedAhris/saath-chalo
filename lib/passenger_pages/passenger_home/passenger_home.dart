@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/global_components/ride_list_tile.dart';
 
 import '../../global_components/location_text_field.dart';
 import '../../global_components/main_app_bar.dart';
@@ -41,7 +42,15 @@ class PassengerHome extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: MainButton(
                           text: "Search",
-                          onTap: () {},
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) => Wrap(
+                                      children: [1, 2, 3]
+                                          .map((e) => RideListTile())
+                                          .toList(),
+                                    ));
+                          },
                         )),
                   )
                 ],

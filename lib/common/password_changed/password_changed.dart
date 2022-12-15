@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/home_page/home_page.dart';
-import 'package:flutterdemo/passenger_pages/login_page/login_page_passenger.dart';
 
 import '../../global_components/main_app_bar.dart';
 
