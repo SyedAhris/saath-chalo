@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/passenger_card.dart';
-import 'package:flutterdemo/global_components/passenger_side_bar.dart';
 
 class PassengerRequest extends StatefulWidget {
   const PassengerRequest({
@@ -26,7 +26,7 @@ class _PassengerRequestState extends State<PassengerRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const PassengerSideBar(),
+      drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
       body: Container(
         decoration: const BoxDecoration(

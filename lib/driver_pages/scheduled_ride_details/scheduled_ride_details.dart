@@ -46,7 +46,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                     width: 300,
                     height: 50,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const PassengerRequests()));
