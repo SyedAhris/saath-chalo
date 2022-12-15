@@ -24,7 +24,7 @@ class DriverSideBar extends StatelessWidget {
               leading: const Icon(Icons.done_outline_sharp),
               title: const SideBarText(text: "Scheduled Rides"),
               onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const DriverHome()))),
+                  MaterialPageRoute(builder: (context) => const DriverRideHistory()))),
           ListTile(
               leading: const Icon(Icons.history),
               title: const SideBarText(text: "Ride History"),
