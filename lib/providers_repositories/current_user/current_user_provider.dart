@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/models/customer_json.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutterdemo/models/vehicle_json.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_repository.dart';
 
 class CurrentUserProvider with ChangeNotifier {
@@ -13,11 +14,24 @@ class CurrentUserProvider with ChangeNotifier {
     password: "hello1234",
     rating: 5,
     profilePictureLink: "",
-    gender: "m",
-    isDriver: false,
-    isPassenger: true,
+    gender: "M",
+    isDriver: true,
+    isPassenger: false,
     isDelete: false,
-    id: '',
+    vehicles: [
+      Vehicle(
+          color: "Silver",
+          make: "Toyota",
+          model: "Corolla",
+          year: "2018",
+          ac: true,
+          carType: "sedan",
+          seatingCapacity: 4,
+          imageLink: "",
+          plateNumber: "BHB-674",
+          isDelete: false),
+    ],
+    id: "oAcEIMncYEh8VtbggBAgPY8gRVg1",
   );
 
   final CurrentUserRepository _currentUserRepository =
