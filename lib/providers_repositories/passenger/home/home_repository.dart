@@ -3,6 +3,7 @@ import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/models/customer_json.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 
+import '../../../models/coordinates.dart';
 import '../../../models/rides_json.dart';
 
 abstract class PassengerHomeRepository {
@@ -34,8 +35,16 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         id: "${DateTime.now().microsecondsSinceEpoch}1231",
         driverId: "1231",
         vehicleId: "ABC-123",
-        startingCoordinates: "123123",
-        endingCoordinates: "123",
+        startingDestination: "startingCoordinatesApproved",
+        endingDestination: "endingCoordinatesApproved",
+        startingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        endingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
         totalFare: 1200,
         availableSeats: 3,
         isFemaleOnly: false,
@@ -65,17 +74,19 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         isRecurring: false,
       ),
       driver: Customer(
-          firstName: "Syed",
-          lastName: "Ahris",
-          email: "ahrissyed@gmail.com",
-          phone: "03343829388",
-          password: "asdasdasdasd",
-          rating: 4.5,
-          profilePictureLink: "ASdasdasdasd",
-          gender: "M",
-          isDriver: true,
-          isPassenger: false,
-          isDelete: false, id: ''),
+        firstName: "Syed",
+        lastName: "Ahris",
+        email: "ahrissyed@gmail.com",
+        phone: "03343829388",
+        password: "asdasdasdasd",
+        rating: 4.5,
+        profilePictureLink: "ASdasdasdasd",
+        gender: "M",
+        isDriver: true,
+        isPassenger: false,
+        isDelete: false,
+        id: '',
+      ),
     )
   ];
   @override

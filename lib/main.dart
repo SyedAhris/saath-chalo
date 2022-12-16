@@ -2,6 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked_rides_provider.dart';
+import 'package:flutterdemo/providers_repositories/passenger/booked_rides_details/booked_rides_details_provider.dart';
+import 'package:flutterdemo/providers_repositories/passenger/ride_history_details/ride_history_details_provider.dart';
+import 'package:flutterdemo/providers_repositories/passenger/rides_history/ride_history_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +24,10 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => VehiclesProvider()),
         ChangeNotifierProvider(create: (context) => CurrentUserProvider()),
+        ChangeNotifierProvider(create: (context) => RideHistoryProvider()),
+        ChangeNotifierProvider(create: (context) => RideHistoryDetailsProvider()),
+        ChangeNotifierProvider(create: (context) => BookedRidesProvider()),
+        ChangeNotifierProvider(create: (context) => BookedRidesDetailProvider()),
       ],
       child: const MyApp(),
     ),

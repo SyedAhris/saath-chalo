@@ -1,5 +1,6 @@
 import 'package:flutterdemo/models/approved_passenger.dart';
 
+import '../../../models/coordinates.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
 
@@ -15,8 +16,16 @@ class MockRideHistoryRepository implements RideHistoryRepository {
         id: "${DateTime.now().microsecondsSinceEpoch}ghjkfghkjfghj546346534",
         driverId: "ghjkfghkjfghj546346534",
         vehicleId: "ABC-123",
-        startingCoordinates: "startingCoordinates",
-        endingCoordinates: "endingCoordinates",
+        startingDestination: "startingCoordinates",
+        endingDestination: "endingCoordinates",
+        startingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        endingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
         totalFare: 123,
         availableSeats: 0,
         isFemaleOnly: false,
@@ -68,8 +77,16 @@ class MockRideHistoryRepository implements RideHistoryRepository {
         id: "${DateTime.now().microsecondsSinceEpoch}asdfadfg234523asdasd",
         driverId: "asdfadfg234523asdasd",
         vehicleId: "ABC-123",
-        startingCoordinates: "startingCoordinates",
-        endingCoordinates: "endingCoordinates",
+        startingDestination: "startingCoordinates",
+        endingDestination: "endingCoordinates",
+        startingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        endingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
         totalFare: 123,
         availableSeats: 0,
         isFemaleOnly: false,

@@ -4,7 +4,9 @@ import '../../global_components/booked_ride_card.dart';
 import '../../global_components/main_app_bar.dart';
 
 class PassengerBookedRidesDeclined extends StatefulWidget {
-  const PassengerBookedRidesDeclined({Key? key}) : super(key: key);
+  const PassengerBookedRidesDeclined({Key? key, required this.rideId}) : super(key: key);
+
+  final String rideId;
 
   @override
   State<PassengerBookedRidesDeclined> createState() =>

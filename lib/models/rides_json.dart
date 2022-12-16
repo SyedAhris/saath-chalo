@@ -2,6 +2,9 @@
 //
 //     final ride = rideFromJson(jsonString);
 
+import 'dart:html';
+
+import 'package:flutterdemo/models/coordinates.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
 import 'dart:convert';
 
@@ -16,6 +19,8 @@ class Ride {
     required this.id,
     required this.driverId,
     required this.vehicleId,
+    required this.startingDestination,
+    required this.endingDestination,
     required this.startingCoordinates,
     required this.endingCoordinates,
     required this.totalFare,
@@ -28,15 +33,17 @@ class Ride {
     required this.isCompleted,
     required this.isRecurring,
     this.recurringDays = const [],
-    this.recurringEndDate = -1, //TODO shift to datetime
+    this.recurringEndDate = -1,
     required this.isDelete,
   });
 
   String id;
   String driverId;
   String vehicleId;
-  String startingCoordinates;
-  String endingCoordinates;
+  String startingDestination;
+  String endingDestination;
+  Coordinates startingCoordinates;
+  Coordinates endingCoordinates;
   int totalFare;
   int availableSeats;
   List<ApprovedPassenger> approvedPassengers;
@@ -54,8 +61,10 @@ class Ride {
         id: json["id"],
         driverId: json["driverID"],
         vehicleId: json["vehicleID"],
-        startingCoordinates: json["startingCoordinates"],
-        endingCoordinates: json["endingCoordinates"],
+        startingDestination: json["startingDestination"],
+        endingDestination: json["endingDestination"],
+        startingCoordinates: Coordinates.fromJson(json["startingCoordinates"]),
+        endingCoordinates: Coordinates.fromJson(json["endingCoordinates"]),
         totalFare: json["totalFare"],
         availableSeats: json["availableSeats"],
         approvedPassengers: List<ApprovedPassenger>.from(
@@ -77,8 +86,10 @@ class Ride {
         "id" :id,
         "driverID": driverId,
         "vehicleID": vehicleId,
-        "startingCoordinates": startingCoordinates,
-        "endingCoordinates": endingCoordinates,
+        "startingDestination" : startingDestination,
+        "endingDestination" : endingDestination,
+        "startingCoordinates": startingCoordinates.toJson(),
+        "endingCoordinates": endingCoordinates.toJson(),
         "totalFare": totalFare,
         "availableSeats": availableSeats,
         "approvedPassengers":

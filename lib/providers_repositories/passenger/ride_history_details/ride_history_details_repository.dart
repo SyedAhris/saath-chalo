@@ -1,4 +1,5 @@
 import '../../../models/approved_passenger.dart';
+import '../../../models/coordinates.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
 import '../../../models/customer_json.dart';
@@ -8,6 +9,7 @@ abstract class RideHistoryDetailsRepository {
   Future<Ride> fetchRide(String rideId);
   Future<Customer> fetchDriver(String driverId);
   Future<Vehicle> fetchVehicle(String vehicleId);
+  Future<String> fetchPassengerName(String passengerId);
   void updateDriverRating(Customer user);
 }
 
@@ -25,7 +27,8 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
       gender: "M",
       isDriver: true,
       isPassenger: false,
-      isDelete: false, id: '',
+      isDelete: false,
+      id: '',
     ));
   }
 
@@ -35,8 +38,16 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
       id: "${DateTime.now().microsecondsSinceEpoch}aasdasdasd213414",
       driverId: "aasdasdasd213414",
       vehicleId: "ABC-123",
-      startingCoordinates: "startingCoordinates",
-      endingCoordinates: "endingCoordinates",
+      startingDestination: "startingCoordinatesApproved",
+      endingDestination: "endingCoordinatesApproved",
+      startingCoordinates: Coordinates(
+        lat: "123",
+        long: "123",
+      ),
+      endingCoordinates: Coordinates(
+        lat: "123",
+        long: "123",
+      ),
       totalFare: 123,
       availableSeats: 0,
       isFemaleOnly: false,
@@ -104,5 +115,10 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
   @override
   void updateDriverRating(Customer user) {
     // TODO: implement updateDriverRating
+  }
+
+  @override
+  Future<String> fetchPassengerName(String passengerId) async {
+    return ("Passenger $passengerId");
   }
 }
