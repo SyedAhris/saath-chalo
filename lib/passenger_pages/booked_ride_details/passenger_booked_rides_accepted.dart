@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/constants/convert_time.dart';
+import 'package:provider/provider.dart';
 
 import '../../global_components/booked_ride_card.dart';
 import '../../global_components/location_text_field.dart';
 import '../../global_components/main_app_bar.dart';
 import '../../global_components/main_button.dart';
+import '../../providers_repositories/passenger/booked_rides_details/booked_rides_details_provider.dart';
 
 class PassengerBookedRidesAccepted extends StatefulWidget {
-  const PassengerBookedRidesAccepted({Key? key}) : super(key: key);
+  const PassengerBookedRidesAccepted(
+      {Key? key, required this.rideId, required this.status})
+      : super(key: key);
+
+  final String rideId;
+  final String status;
 
   @override
   State<PassengerBookedRidesAccepted> createState() =>
@@ -16,7 +24,17 @@ class PassengerBookedRidesAccepted extends StatefulWidget {
 class _PassengerBookedRidesAcceptedState
     extends State<PassengerBookedRidesAccepted> {
   @override
+  void initState() {
+    super.initState();
+    context.read<BookedRidesDetailProvider>().fetchRide(widget.rideId);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final ride = context.watch<BookedRidesDetailProvider>().ride;
+    final driver = context.watch<BookedRidesDetailProvider>().driver;
+    final vehicle = context.watch<BookedRidesDetailProvider>().vehicle;
+
     return Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const MainAppBar(title: "SaathChalo"),
@@ -35,18 +53,18 @@ class _PassengerBookedRidesAcceptedState
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      const BookedRideCard(
-                          name: "Syed Abdul Shakoor",
-                          car: "Black Suzuki WagonR",
-                          numberPlate: "ABC-123",
-                          journeyStart: "Institute of Business Administration",
-                          journeyEnd: "Askari 4",
-                          rating: 4.5,
-                          acStatus: true,
-                          journeyDate: "26/11/2022",
-                          journeyTime: "09:15",
-                          estCost: 600,
-                          status: "Accepted"),
+                      BookedRideCard(
+                          name: "${driver.firstName} ${driver.lastName}",
+                          car: "${vehicle.color} ${vehicle.make} ${vehicle.model}",
+                          numberPlate: vehicle.plateNumber,
+                          journeyStart: ride.startingDestination,
+                          journeyEnd: ride.endingDestination,
+                          rating: driver.rating,
+                          acStatus: vehicle.ac,
+                          journeyDate: ConvertTime.millisecondsToDate(ride.date),
+                          journeyTime: ConvertTime.millisecondsToTime(ride.time),
+                          estCost: ride.totalFare,
+                          status: widget.status),
                       const Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: LocationTextField(
@@ -73,7 +91,7 @@ class _PassengerBookedRidesAcceptedState
                           children: [
                             MainButton(
                               text: "Update Request",
-                              width:200,
+                              width: 200,
                               onTap: () {},
                             ),
                             SizedBox(

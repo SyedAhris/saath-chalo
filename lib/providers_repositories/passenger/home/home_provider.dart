@@ -1,7 +1,10 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutterdemo/models/customer_json.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_repository.dart';
 
+import '../../../models/coordinates.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
 
@@ -17,11 +20,20 @@ class PassengerHomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  sendRequest(int index, String startingCoordinates, String endingCoordinates, String currentUserID) async {
+  sendRequest(int index, Coordinates startingCoordinates, Coordinates endingCoordinates, String currentUserID) async {
     PassengerRequest req = PassengerRequest(
       passengerId: currentUserID,
       startingCoordinates: startingCoordinates,
       endingCoordinates: endingCoordinates,
+      startingDestination: "startingDestination",
+      endingDestination: "endingDestination",
+      waypoints: [
+        Coordinates(lat: "12.345678", long: "98.765432"),
+        Coordinates(lat: "21.345678", long: "87.765432"),
+        Coordinates(lat: "34.345678", long: "76.765432"),
+        Coordinates(lat: "45.345678", long: "65.765432"),
+        Coordinates(lat: "56.345678", long: "54.765432"),
+      ],
       status: "Pending",
       isDelete: false,
     );

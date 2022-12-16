@@ -1,13 +1,14 @@
+import 'package:flutterdemo/models/coordinates.dart';
+
 import '../../../models/rides_json.dart';
 
-abstract class PassengerBookedRidesRepository {
+abstract class BookedRidesRepository {
   Future<List<Ride>> getApprovedRides(String passengerID);
   Future<List<Ride>> getPendingRides(String passengerID);
   Future<List<Ride>> getRejectedRides(String passengerID);
 }
 
-class FirebasePassengerBookedRidesRepository
-    implements PassengerBookedRidesRepository {
+class FirebasePassengerBookedRidesRepository implements BookedRidesRepository {
   @override
   Future<List<Ride>> getApprovedRides(String passengerID) {
     // TODO: implement getApprovedRides
@@ -28,8 +29,7 @@ class FirebasePassengerBookedRidesRepository
   }
 }
 
-class MockPassengerBookedRidesRepository
-    implements PassengerBookedRidesRepository {
+class MockPassengerBookedRidesRepository implements BookedRidesRepository {
   @override
   Future<List<Ride>> getApprovedRides(String passengerID) async {
     return [
@@ -37,13 +37,28 @@ class MockPassengerBookedRidesRepository
         id: DateTime.now().microsecondsSinceEpoch.toString() + "asdw1324asd",
         driverId: "asdw1324asd",
         vehicleId: "ABC-123",
-        startingCoordinates: "startingCoordinatesApproved",
-        endingCoordinates: "endingCoordinatesApproved",
+        startingDestination: "startingCoordinatesApproved",
+        endingDestination: "endingCoordinatesApproved",
+        startingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        endingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        waypoints: [
+          Coordinates(lat: "12.345678", long: "98.765432"),
+          Coordinates(lat: "21.345678", long: "87.765432"),
+          Coordinates(lat: "34.345678", long: "76.765432"),
+          Coordinates(lat: "45.345678", long: "65.765432"),
+          Coordinates(lat: "56.345678", long: "54.765432"),
+        ],
         totalFare: 1234,
         availableSeats: 4,
         isFemaleOnly: false,
-        date: DateTime(2022,12,13).millisecondsSinceEpoch,
-        time: DateTime(0,0,0,17,30).millisecondsSinceEpoch,
+        date: DateTime(2022, 12, 13).millisecondsSinceEpoch,
+        time: DateTime(0, 0, 0, 17, 30).millisecondsSinceEpoch,
         isDelete: false,
         isCompleted: false,
         isRecurring: false,
@@ -55,16 +70,32 @@ class MockPassengerBookedRidesRepository
   Future<List<Ride>> getPendingRides(String passengerID) async {
     return [
       Ride(
-        id: DateTime.now().microsecondsSinceEpoch.toString() + "salfgihasopifj3",
+        id: DateTime.now().microsecondsSinceEpoch.toString() +
+            "salfgihasopifj3",
         driverId: "salfgihasopifj3",
         vehicleId: "ABC-123",
-        startingCoordinates: "startingCoordinatesPending",
-        endingCoordinates: "endingCoordinatesPending",
+        startingDestination: "startingCoordinatesPending",
+        endingDestination: "endingCoordinatesPending",
+        startingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        endingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        waypoints: [
+          Coordinates(lat: "12.345678", long: "98.765432"),
+          Coordinates(lat: "21.345678", long: "87.765432"),
+          Coordinates(lat: "34.345678", long: "76.765432"),
+          Coordinates(lat: "45.345678", long: "65.765432"),
+          Coordinates(lat: "56.345678", long: "54.765432"),
+        ],
         totalFare: 1234,
         availableSeats: 4,
         isFemaleOnly: false,
-        date: DateTime(2022,12,13).millisecondsSinceEpoch,
-        time: DateTime(0,0,0,17,30).millisecondsSinceEpoch,
+        date: DateTime(2022, 12, 13).millisecondsSinceEpoch,
+        time: DateTime(0, 0, 0, 17, 30).millisecondsSinceEpoch,
         isDelete: false,
         isCompleted: false,
         isRecurring: false,
@@ -79,13 +110,28 @@ class MockPassengerBookedRidesRepository
         id: "${DateTime.now().microsecondsSinceEpoch}dasdq34reasd",
         driverId: "dasdq34reasd",
         vehicleId: "ABC-123",
-        startingCoordinates: "startingCoordinatesPending",
-        endingCoordinates: "endingCoordinatesPending",
+        startingDestination: "startingCoordinatesRejected",
+        endingDestination: "endingCoordinatesRejected",
+        startingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        endingCoordinates: Coordinates(
+          lat: "123",
+          long: "123",
+        ),
+        waypoints: [
+          Coordinates(lat: "12.345678", long: "98.765432"),
+          Coordinates(lat: "21.345678", long: "87.765432"),
+          Coordinates(lat: "34.345678", long: "76.765432"),
+          Coordinates(lat: "45.345678", long: "65.765432"),
+          Coordinates(lat: "56.345678", long: "54.765432"),
+        ],
         totalFare: 1234,
         availableSeats: 4,
         isFemaleOnly: false,
-        date: DateTime(2022,12,13).millisecondsSinceEpoch,
-        time: DateTime(0,0,0,17,30).millisecondsSinceEpoch,
+        date: DateTime(2022, 12, 13).millisecondsSinceEpoch,
+        time: DateTime(0, 0, 0, 17, 30).millisecondsSinceEpoch,
         isDelete: false,
         isCompleted: false,
         isRecurring: false,

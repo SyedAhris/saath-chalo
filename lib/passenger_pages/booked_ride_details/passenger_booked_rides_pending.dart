@@ -6,7 +6,9 @@ import '../../global_components/main_app_bar.dart';
 import '../../global_components/main_button.dart';
 
 class PassengerBookedRidesPending extends StatefulWidget {
-  const PassengerBookedRidesPending({Key? key}) : super(key: key);
+  const PassengerBookedRidesPending({Key? key, required this.rideId}) : super(key: key);
+
+  final String rideId;
 
   @override
   State<PassengerBookedRidesPending> createState() =>

@@ -3,12 +3,12 @@ import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked
 
 import '../../../models/rides_json.dart';
 
-class PassengerBookedRidesProvider with ChangeNotifier {
+class BookedRidesProvider with ChangeNotifier {
   List<Ride> approvedRides = [];
   List<Ride> pendingRides = [];
   List<Ride> rejectedRides = [];
 
-  final PassengerBookedRidesRepository _passengerBookedRidesRepository = MockPassengerBookedRidesRepository();
+  final BookedRidesRepository _passengerBookedRidesRepository = MockPassengerBookedRidesRepository();
 
   //this function will be called in the initState of the screen then all the functions will be accessible through the created variables.
   fetchRides (String passengerID) async {
