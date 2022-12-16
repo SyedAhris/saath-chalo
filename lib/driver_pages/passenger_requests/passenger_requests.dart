@@ -3,11 +3,14 @@ import 'package:flutterdemo/driver_pages/passenger_request/passenger_request.dar
 import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/passenger_card.dart';
+import 'package:flutterdemo/models/passenger_request.dart';
 
 import 'passenger_demo.dart';
 
 class PassengerRequests extends StatefulWidget {
-  const PassengerRequests({Key? key}) : super(key: key);
+  const PassengerRequests({Key? key, required this.passengerRequests}) : super(key: key);
+
+  final List<PassengerRequest> passengerRequests;
 
   @override
   State<PassengerRequests> createState() => _PassengerRequestsState();
@@ -59,7 +62,7 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  PassengerRequest(
+                                                  PassengerRequestWidget(
                                                     status: false,
                                                     name: pass[index].name,
                                                     rating: pass[index].rating,

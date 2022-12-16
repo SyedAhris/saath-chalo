@@ -1,6 +1,6 @@
-
-
+import '../../../models/approved_passenger.dart';
 import '../../../models/coordinates.dart';
+import '../../../models/customer_json.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
 import '../../../models/vehicle_json.dart';
@@ -8,9 +8,29 @@ import '../../../models/vehicle_json.dart';
 abstract class DriverScheduledRidesDetailedRepository {
   Future<Ride> fetchRide(String rideID);
   Future<Vehicle> fetchVehicle(String vehicleID);
+  Future<Customer> fetchDriver(String driverID);
+  Future<Customer> fetchPassenger(passengerId);
 }
 
-class DriverMockScheduledRidesDetailedRepository implements DriverScheduledRidesDetailedRepository {
+class DriverMockScheduledRidesDetailedRepository
+    implements DriverScheduledRidesDetailedRepository {
+  @override
+  Future<Customer> fetchDriver(String driverID) async {
+    return (Customer(
+      firstName: "Syed Muhammad",
+      lastName: "Ahris",
+      email: "ahrissyed@gmail.com",
+      phone: "phone",
+      password: "password",
+      rating: 4.5,
+      profilePictureLink: "profilePictureLink",
+      gender: "M",
+      isDriver: true,
+      isPassenger: false,
+      isDelete: false,
+      id: '',
+    ));
+  }
 
   @override
   Future<Ride> fetchRide(String rideID) async {
@@ -40,11 +60,68 @@ class DriverMockScheduledRidesDetailedRepository implements DriverScheduledRides
       isFemaleOnly: false,
       date: DateTime(2022, 12, 13).millisecondsSinceEpoch,
       time: DateTime(0, 0, 0, 17, 30).millisecondsSinceEpoch,
+      approvedPassengers: [
+        ApprovedPassenger(
+          passengerId: "huzaifa@gmail.com",
+          startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
+          endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+          startingDestination: "startingDestinationHuzaifa",
+          endingDestination: "endingDestinationHuzaifa",
+          waypoints: [
+            Coordinates(lat: "12.345678", long: "98.765432"),
+            Coordinates(lat: "21.345678", long: "87.765432"),
+            Coordinates(lat: "34.345678", long: "76.765432"),
+            Coordinates(lat: "45.345678", long: "65.765432"),
+            Coordinates(lat: "56.345678", long: "54.765432"),
+          ],
+          rideFare: 200,
+          isDelete: false,
+          driverRating: -1,
+          passengerRating: -1,
+        ),
+        ApprovedPassenger(
+          passengerId: "irtiza@gmail.com",
+          startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
+          endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+          startingDestination: "startingDestinationIrtiza",
+          endingDestination: "endingDestinationIrtiza",
+          waypoints: [
+            Coordinates(lat: "12.345678", long: "98.765432"),
+            Coordinates(lat: "21.345678", long: "87.765432"),
+            Coordinates(lat: "34.345678", long: "76.765432"),
+            Coordinates(lat: "45.345678", long: "65.765432"),
+            Coordinates(lat: "56.345678", long: "54.765432"),
+          ],
+          rideFare: 200,
+          isDelete: false,
+          driverRating: -1,
+          passengerRating: -1,
+        ),
+        ApprovedPassenger(
+          passengerId: "ibrahim@gmail.com",
+          startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
+          endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+          startingDestination: "startingDestinationIbrahim",
+          endingDestination: "endingDestinationIbrahim",
+          waypoints: [
+            Coordinates(lat: "12.345678", long: "98.765432"),
+            Coordinates(lat: "21.345678", long: "87.765432"),
+            Coordinates(lat: "34.345678", long: "76.765432"),
+            Coordinates(lat: "45.345678", long: "65.765432"),
+            Coordinates(lat: "56.345678", long: "54.765432"),
+          ],
+          rideFare: 200,
+          isDelete: false,
+          driverRating: -1,
+          passengerRating: -1,
+        ),
+      ],
       passengerRequests: [
         PassengerRequest(
             passengerId: '',
-            startingCoordinates: Coordinates(lat: "12.345678", long: "98.765432"),
-            endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+            startingCoordinates:
+                Coordinates(lat: "12.345678", long: "98.765432"),
+            endingCoordinates: Coordinates(lat: "56.345678", long: "54.765432"),
             startingDestination: "startingDestination",
             endingDestination: "endingDestination",
             waypoints: [
@@ -82,5 +159,22 @@ class DriverMockScheduledRidesDetailedRepository implements DriverScheduledRides
       plateNumber: "ABC-123",
       isDelete: false,
     ));
+  }
+
+  @override
+  Future<Customer> fetchPassenger(passengerId) async {
+    return Customer(
+        id: passengerId,
+        firstName: passengerId,
+        lastName: "Ahris",
+        email: "ahrissyed@gmail.com",
+        phone: "03343829388",
+        password: "password",
+        rating: 4.5,
+        profilePictureLink: "profilePictureLink",
+        gender: "M",
+        isDriver: false,
+        isPassenger: true,
+        isDelete: false);
   }
 }

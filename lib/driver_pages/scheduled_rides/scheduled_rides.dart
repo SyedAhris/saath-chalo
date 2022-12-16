@@ -72,7 +72,7 @@ class _ScheduledRidesState extends State<ScheduledRides> {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
-                                        const ScheduledRideBooking()));
+                                         ScheduledRideBooking(rideId: rideNow[index].id,)));
                               },
                               child: RideCard(
                                 journeyStart: rideNow[index].startingDestination,
@@ -115,7 +115,7 @@ class _ScheduledRidesState extends State<ScheduledRides> {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-                                    const ScheduledRideDetails()));
+                                     ScheduledRideDetails(rideId: upcomingRides[index].id,)));
                           },
                           child: RideCard(
                             journeyStart: upcomingRides[index].startingDestination,
