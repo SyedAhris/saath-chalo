@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
-import 'package:flutterdemo/global_components/passenger_ride_history_details_card.dart';
+import '../../global_components/driver_booked_ride_card.dart';
 
 class DriverRideHistoryDetails extends StatefulWidget {
   const DriverRideHistoryDetails({Key? key}) : super(key: key);
@@ -25,9 +25,7 @@ class _DriverRideHistoryDetailsState extends State<DriverRideHistoryDetails> {
             padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
             child: Column(
               children: [
-                PassengerRideHistoryDetailsCard(
-                  name: "Syed Ahris",
-                  rating: 4.5,
+                DriverBookedRideCard(
                   car: "Black Suzuki WagonR",
                   numberPlate: "ABC-123",
                   journeyStart: "Institute of Business Administration",

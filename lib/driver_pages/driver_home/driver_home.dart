@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/driver_home/choose_date_button.dart';
 import 'package:flutterdemo/driver_pages/driver_home/chose_time_button.dart';
-import 'package:flutterdemo/driver_pages/driver_home/recurring_ride_widget.dart';
 import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/location_text_field.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
@@ -18,9 +17,8 @@ class DriverHome extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.none,
-                image: NetworkImage(
-                    "https://www.researchgate.net/profile/Noor-Saher/publication/320758246/figure/fig1/AS:614266084282384@1523463855302/Map-showing-the-study-site-Hawks-Bay-Karachi-Pakistan-Google-Map_Q640.jpg"))),
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/backimg.png'))),
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
@@ -44,18 +42,45 @@ class DriverHome extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [ChooseDateButton(), ChoseTimeButton()],
+                      children: const [
+                        ChooseDateButton(),
+                        ChoseTimeButton()
+                      ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: RecurringRideWidget(),
+                  //  Padding(
+                  //   padding: const EdgeInsets.only(top: 10),
+                  //   child: RecurringRideWidget(
+                  //   ),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: SizedBox(
+
+                      height: 40,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black
+                        ),
+                          onPressed: (){},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(Icons.directions_car_sharp),
+                              SizedBox(width: 5,),
+                              Text("Choose Vehicle")
+                            ],
+                          )
+                      ),
+                    ),
                   ),
+
                   Expanded(
                     child: Align(
                         alignment: Alignment.bottomCenter,
                         child: MainButton(
-                          text: "Black Wagon R",
+                          text: "Confirm Ride",
                           onTap: () {},
                         )),
                   )
