@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:google_directions_api/google_directions_api.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked_rides_provider.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides_details/booked_rides_details_provider.dart';
 import 'package:flutterdemo/providers_repositories/passenger/ride_history_details/ride_history_details_provider.dart';
@@ -15,6 +16,7 @@ import 'firebase_options.dart';
 import 'home_page/home_page.dart';
 
 void main() async {
+  DirectionsService.init('AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
