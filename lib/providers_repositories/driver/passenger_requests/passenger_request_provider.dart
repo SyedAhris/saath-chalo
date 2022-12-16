@@ -4,15 +4,22 @@ import 'package:flutterdemo/providers_repositories/driver/passenger_requests/pas
 import '../../../models/customer_json.dart';
 
 class PassengerRequestProvider with ChangeNotifier{
-  List<Customer> passenger = [];
+  List<Customer> passengers = [];
+
+  bool isFetching = false;
 
   PassengerRequestRepository _passengerRequestRepository = MockPassengerRequestRepository();
 
   fetchPassengers(List<String> passengers)async {
+    isFetching = true;
+    notifyListeners();
     List<Customer> passengerCopy = [];
     for (int i = 0; i<passengers.length;i++) {
       passengerCopy.add(await _passengerRequestRepository.fetchDriver(passengers[i]));
+      print(passengerCopy[i]);
     }
-    passenger = passengerCopy;
+    this.passengers = passengerCopy;
+    isFetching = false;
+    notifyListeners();
   }
 }

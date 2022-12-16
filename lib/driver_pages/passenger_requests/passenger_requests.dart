@@ -4,11 +4,14 @@ import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/passenger_card.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
+import 'package:flutterdemo/providers_repositories/driver/passenger_requests/passenger_request_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'passenger_demo.dart';
 
 class PassengerRequests extends StatefulWidget {
-  const PassengerRequests({Key? key, required this.passengerRequests}) : super(key: key);
+  const PassengerRequests({Key? key, required this.passengerRequests})
+      : super(key: key);
 
   final List<PassengerRequest> passengerRequests;
 
@@ -18,7 +21,15 @@ class PassengerRequests extends StatefulWidget {
 
 class _PassengerRequestsState extends State<PassengerRequests> {
   @override
+  void initState() {
+    super.initState();
+    context.read<PassengerRequestProvider>().fetchPassengers(
+        widget.passengerRequests.map((e) => e.passengerId).toList());
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final passengers = context.watch<PassengerRequestProvider>().passengers;
     return Scaffold(
       drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
@@ -43,34 +54,45 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                             "    Passengers Requests",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )),
+                      context.read<PassengerRequestProvider>().isFetching ?
+                          const CircularProgressIndicator() :
                       ListView.builder(
                           shrinkWrap: true,
-                          itemCount: pass.length,
+                          itemCount: widget.passengerRequests.length,
                           itemBuilder: (BuildContext context, int index) {
                             return SingleChildScrollView(
                               child: Column(
                                 children: [
                                   PassengerCard(
                                     status: true,
-                                    name: pass[index].name,
-                                    rating: pass[index].rating,
-                                    journeyStart: pass[index].journeyStart,
-                                    journeyEnd: pass[index].journeyEnd,
+                                    name:
+                                        "${passengers[index].firstName} ${passengers[index].lastName}",
+                                    rating: passengers[index].rating,
+                                    journeyStart: widget
+                                        .passengerRequests[index]
+                                        .startingDestination,
+                                    journeyEnd: widget.passengerRequests[index]
+                                        .endingDestination,
                                     onTap1: () {},
                                     onTap2: () {},
                                     onTap: () {
                                       Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PassengerRequestWidget(
-                                                    status: false,
-                                                    name: pass[index].name,
-                                                    rating: pass[index].rating,
-                                                    journeyStart: pass[index]
-                                                        .journeyStart,
-                                                    journeyEnd:
-                                                        pass[index].journeyEnd,
-                                                  )));
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              PassengerRequestWidget(
+                                            status: false,
+                                            name:
+                                                "${passengers[index].firstName} ${passengers[index].lastName}",
+                                            rating: passengers[index].rating,
+                                            journeyStart: widget
+                                                .passengerRequests[index]
+                                                .startingDestination,
+                                            journeyEnd: widget
+                                                .passengerRequests[index]
+                                                .endingDestination,
+                                          ),
+                                        ),
+                                      );
                                     },
                                   ),
                                   Center(
