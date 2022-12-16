@@ -14,6 +14,23 @@ class AddVehicles extends StatefulWidget {
 }
 
 class _AddVehiclesState extends State<AddVehicles> {
+  bool acStatus=true;
+
+  void toggleSwitch(bool value) {
+
+    if(acStatus == false)
+    {
+      setState(() {
+        acStatus = true;
+      });
+    }
+    else
+    {
+      setState(() {
+        acStatus = false;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     TextEditingController makeController = TextEditingController();
@@ -21,6 +38,8 @@ class _AddVehiclesState extends State<AddVehicles> {
     TextEditingController yearController = TextEditingController();
     TextEditingController plateNumberController = TextEditingController();
     TextEditingController colorController = TextEditingController();
+    TextEditingController noOfpassController = TextEditingController();
+
 
     return Scaffold(
       appBar: const MainAppBar(title: 'Add Vehicles'),
@@ -72,6 +91,14 @@ class _AddVehiclesState extends State<AddVehicles> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
+                  child: MainTextField(
+                    labelText: 'Number of Passengers',
+                    hintText: '4',
+                    controller: noOfpassController,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -81,8 +108,8 @@ class _AddVehiclesState extends State<AddVehicles> {
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       Switch(
-                        value: true,
-                        onChanged: onChanged,
+                        value: acStatus,
+                        onChanged: toggleSwitch,
                         activeColor: MainColors.primary,
                       ),
                     ],
@@ -105,6 +132,4 @@ class _AddVehiclesState extends State<AddVehicles> {
       ),
     );
   }
-
-  void onChanged(bool value) {}
 }

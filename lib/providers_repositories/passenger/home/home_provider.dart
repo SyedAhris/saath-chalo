@@ -7,6 +7,7 @@ import 'package:flutterdemo/providers_repositories/passenger/home/home_repositor
 import '../../../models/coordinates.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
+import '../../../models/vehicle_json.dart';
 
 
 class PassengerHomeProvider with ChangeNotifier {
@@ -14,7 +15,7 @@ class PassengerHomeProvider with ChangeNotifier {
 
   final PassengerHomeRepository _passengerHomeRepository = MockPassengerHomeRepository();
 
-  void getSearchedRides(String startingCoordinates, String endingCoordinates) async {
+  void getSearchedRides(Coordinates startingCoordinates, Coordinates endingCoordinates) async {
     //TODO: connect with repository
     details = await _passengerHomeRepository.searchRides(startingCoordinates, endingCoordinates);
     notifyListeners();
@@ -48,8 +49,11 @@ class PassengerHomeListDetails {
   PassengerHomeListDetails({
     required this.ride,
     required this.driver,
+    required this.vehicle,
+
   });
 
   Ride ride;
   Customer driver;
+  Vehicle vehicle;
 }

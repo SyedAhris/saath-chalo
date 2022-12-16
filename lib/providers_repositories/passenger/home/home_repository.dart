@@ -5,17 +5,19 @@ import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.
 
 import '../../../models/coordinates.dart';
 import '../../../models/rides_json.dart';
+import '../../../models/vehicle_json.dart';
 
 abstract class PassengerHomeRepository {
   Future<List<PassengerHomeListDetails>> searchRides(
-      String startingCoordinates, String endingCoordinates);
+      Coordinates startingCoordinates, Coordinates endingCoordinates);
   updateRide(Ride ride);
+
 }
 
 class FirebasePassengerHomeRepository implements PassengerHomeRepository {
   @override
   Future<List<PassengerHomeListDetails>> searchRides(
-      String startingCoordinates, String endingCoordinates) {
+      Coordinates startingCoordinates, Coordinates endingCoordinates) {
     // TODO: implement searchRides
     // TODO: using google maps
     throw UnimplementedError();
@@ -111,12 +113,22 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         isPassenger: false,
         isDelete: false,
         id: '',
-      ),
+      ), vehicle: Vehicle(
+        color: "Red",
+        make: "Suzuki",
+        model: "WagonR",
+        year: "2020",
+        ac: true,
+        carType: "hatchback",
+        seatingCapacity: 4,
+        imageLink: "imageLink",
+        plateNumber: "ABC-123",
+        isDelete: false),
     )
   ];
   @override
   Future<List<PassengerHomeListDetails>> searchRides(
-      String startingCoordinates, String endingCoordinates) async {
+      Coordinates startingCoordinates, Coordinates endingCoordinates) async {
     return rides;
   }
 
