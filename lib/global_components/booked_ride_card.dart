@@ -33,50 +33,60 @@ class BookedRideCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/manPic.png'),
-                  radius: 25,
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Text(name.length >= 20
-                        ? "${name.substring(0, 20)}..."
-                        : name),
-                    Text(car.length >= 20
-                        ? "${car.substring(0, 16)}..."
-                        : car),
-                    Text(numberPlate)
+                    const CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/manPic.png'),
+                      radius: 25,
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(name.length >= 20
+                            ? "${name.substring(0, 20)}..."
+                            : name),
+                        Text(car.length >= 20
+                            ? "${car.substring(0, 16)}..."
+                            : car),
+                        Text(numberPlate)
+                      ],
+                    ),
                   ],
                 ),
                 const SizedBox(width: 10),
-                Column(
-                  children: const [
-                    Icon(Icons.star_border),
-                    Icon(Icons.people_outline),
-                    Text("AC", style: TextStyle(fontWeight: FontWeight.bold))
-                  ],
-                ),
-                const SizedBox(width: 10),
-                Column(
+                Row(
                   children: [
-                    Text(rating.toString()),
-                    const SizedBox(height: 3),
-                    const Text("2/3"),
-                    const SizedBox(height: 3),
-                    acStatus == true
-                        ? const Icon(
-                            Icons.circle,
-                            color: Colors.green,
-                            size: 18,
-                          )
-                        : const Icon(Icons.circle, color: Colors.red)
+                    Column(
+                      children: const [
+                        Icon(Icons.star_border),
+                        Icon(Icons.people_outline),
+                        Text("AC", style: TextStyle(fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      children: [
+                        Text(rating.toString()),
+                        const SizedBox(height: 3),
+                        const Text("2/3"),
+                        const SizedBox(height: 3),
+                        acStatus == true
+                            ? const Icon(
+                          Icons.circle,
+                          color: Colors.green,
+                          size: 18,
+                        )
+                            : const Icon(Icons.circle, color: Colors.red)
+                      ],
+                    ),
                   ],
-                ),
+                )
               ],
             ),
             const SizedBox(height: 15),
@@ -110,19 +120,32 @@ class BookedRideCard extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.calendar_month),
-                const Text(" "),
-                Text(journeyDate.toString()),
-                const SizedBox(width: 20),
-                const Icon(Icons.access_time_rounded),
-                const Text(" "),
-                Text(journeyTime),
-                const SizedBox(width: 26),
-                const Text("RS ",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(estCost.toString()),
-              ],
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_month),
+                    const Text(" "),
+                    Text(journeyDate.toString()),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.access_time_rounded),
+                    const Text(" "),
+                    Text(journeyTime),
+
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text("RS ",
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(estCost.toString()),
+
+                  ],
+                )
+                ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

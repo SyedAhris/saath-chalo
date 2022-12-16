@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 import 'package:google_directions_api/google_directions_api.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked_rides_provider.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides_details/booked_rides_details_provider.dart';
@@ -25,6 +25,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => VehiclesProvider()),
+        ChangeNotifierProvider(create: (context) => PassengerHomeProvider()),
         ChangeNotifierProvider(create: (context) => CurrentUserProvider()),
         ChangeNotifierProvider(create: (context) => RideHistoryProvider()),
         ChangeNotifierProvider(create: (context) => RideHistoryDetailsProvider()),
