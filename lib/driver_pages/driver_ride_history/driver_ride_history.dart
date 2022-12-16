@@ -18,11 +18,12 @@ class DriverRideHistory extends StatefulWidget {
 }
 
 class _DriverRideHistoryState extends State<DriverRideHistory> {
-
   @override
   void initState() {
     super.initState();
-    context.read<DriverRideHistoryProvider>().fetchRide(context.read<CurrentUserProvider>().currentCustomer.id);
+    context
+        .read<DriverRideHistoryProvider>()
+        .fetchRide(context.read<CurrentUserProvider>().currentCustomer.id);
   }
 
   @override
@@ -38,34 +39,34 @@ class _DriverRideHistoryState extends State<DriverRideHistory> {
           padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
           child: Column(
             children: [
-              context.watch<DriverRideHistoryProvider>().isFetching ?
-                  const CircularProgressIndicator() :
-              ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: rides.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        InkWell(
-                          onTap: (){
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const DriverRideHistoryDetails()
-                                )
-                            );
-                          },
-                          child: RideCard(
-                            journeyStart: rides[index].startingDestination,
-                            journeyEnd: rides[index].endingDestination,
-                            journeyDate: ConvertTime.millisecondsToDate(rides[index].date),
-                            journeyTime: ConvertTime.millisecondsToTime(rides[index].time),
-                            estCost: rides[index].totalFare.toDouble(),
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+              context.watch<DriverRideHistoryProvider>().isFetching
+                  ? const CircularProgressIndicator()
+                  : ListView.builder(
+                      primary: false,
+                      shrinkWrap: true,
+                      itemCount: rides.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DriverRideHistoryDetails()));
+                              },
+                              child: RideCard(
+                                journeyStart: rides[index].startingDestination,
+                                journeyEnd: rides[index].endingDestination,
+                                journeyDate: ConvertTime.millisecondsToDate(
+                                    rides[index].date),
+                                journeyTime: ConvertTime.millisecondsToTime(
+                                    rides[index].time),
+                                estCost: rides[index].totalFare.toDouble(),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
             ],
           ),
         ),
@@ -80,55 +81,47 @@ List<PassengerRideDemo> ridehistory = [
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
   PassengerRideDemo(
       journeyStart: "Institute of Business Administration",
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
   PassengerRideDemo(
       journeyStart: "Institute of Business Administration",
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
   PassengerRideDemo(
       journeyStart: "Institute of Business Administration",
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
   PassengerRideDemo(
       journeyStart: "Institute of Business Administration",
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
   PassengerRideDemo(
       journeyStart: "Institute of Business Administration",
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
   PassengerRideDemo(
       journeyStart: "Institute of Business Administration",
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
   PassengerRideDemo(
       journeyStart: "Institute of Business Administration",
       journeyEnd: "Askari 4",
       journeyDate: "26/11/2022",
       journeyTime: "09:15",
-      estCost: 600
-  ),
+      estCost: 600),
 ];
