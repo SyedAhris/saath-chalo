@@ -2,8 +2,6 @@
 //
 //     final ride = rideFromJson(jsonString);
 
-import 'dart:html';
-
 import 'package:flutterdemo/models/coordinates.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
 import 'dart:convert';
@@ -23,6 +21,7 @@ class Ride {
     required this.endingDestination,
     required this.startingCoordinates,
     required this.endingCoordinates,
+    required this.waypoints,
     required this.totalFare,
     required this.availableSeats,
     this.approvedPassengers = const [],
@@ -44,6 +43,7 @@ class Ride {
   String endingDestination;
   Coordinates startingCoordinates;
   Coordinates endingCoordinates;
+  List<Coordinates> waypoints;
   int totalFare;
   int availableSeats;
   List<ApprovedPassenger> approvedPassengers;
@@ -65,6 +65,8 @@ class Ride {
         endingDestination: json["endingDestination"],
         startingCoordinates: Coordinates.fromJson(json["startingCoordinates"]),
         endingCoordinates: Coordinates.fromJson(json["endingCoordinates"]),
+        waypoints: List<Coordinates>.from(
+            json["waypoints"].map((x) => Coordinates.fromJson(x))),
         totalFare: json["totalFare"],
         availableSeats: json["availableSeats"],
         approvedPassengers: List<ApprovedPassenger>.from(
@@ -83,13 +85,14 @@ class Ride {
       );
 
   Map<String, dynamic> toJson() => {
-        "id" :id,
+        "id": id,
         "driverID": driverId,
         "vehicleID": vehicleId,
-        "startingDestination" : startingDestination,
-        "endingDestination" : endingDestination,
+        "startingDestination": startingDestination,
+        "endingDestination": endingDestination,
         "startingCoordinates": startingCoordinates.toJson(),
         "endingCoordinates": endingCoordinates.toJson(),
+        "waypoints": List<dynamic>.from(waypoints.map((x) => x.toJson())),
         "totalFare": totalFare,
         "availableSeats": availableSeats,
         "approvedPassengers":

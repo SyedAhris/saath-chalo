@@ -45,6 +45,13 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
           lat: "123",
           long: "123",
         ),
+        waypoints: [
+          Coordinates(lat: "12.345678", long: "98.765432"),
+          Coordinates(lat: "21.345678", long: "87.765432"),
+          Coordinates(lat: "34.345678", long: "76.765432"),
+          Coordinates(lat: "45.345678", long: "65.765432"),
+          Coordinates(lat: "56.345678", long: "54.765432"),
+        ],
         totalFare: 1200,
         availableSeats: 3,
         isFemaleOnly: false,
@@ -53,8 +60,17 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         approvedPassengers: [
           ApprovedPassenger(
             passengerId: "52345",
-            startingCoordinates: "3123123",
-            endingCoordinates: "123123",
+            startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
+            endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+            startingDestination: "startingDestination",
+            endingDestination: "endingDestination",
+            waypoints: [
+              Coordinates(lat: "12.345678", long: "98.765432"),
+              Coordinates(lat: "21.345678", long: "87.765432"),
+              Coordinates(lat: "34.345678", long: "76.765432"),
+              Coordinates(lat: "45.345678", long: "65.765432"),
+              Coordinates(lat: "56.345678", long: "54.765432"),
+            ],
             rideFare: 400,
             isDelete: false,
             driverRating: -1,
@@ -64,8 +80,17 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         passengerRequests: [
           PassengerRequest(
               passengerId: "1245",
-              startingCoordinates: "123123",
-              endingCoordinates: "123312",
+              startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
+              endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+              startingDestination: "startingDestination",
+              endingDestination: "endingDestination",
+              waypoints: [
+                Coordinates(lat: "12.345678", long: "98.765432"),
+                Coordinates(lat: "21.345678", long: "87.765432"),
+                Coordinates(lat: "34.345678", long: "76.765432"),
+                Coordinates(lat: "45.345678", long: "65.765432"),
+                Coordinates(lat: "56.345678", long: "54.765432"),
+              ],
               status: "Pending",
               isDelete: false),
         ],
