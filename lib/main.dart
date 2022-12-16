@@ -1,6 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/passenger_requests/passenger_request_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/ride_history/driver_ride_history_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/scheduled_rides/driver_scheduled_rides_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/scheduled_rides_detailed/driver_scheduled_rides_detailed_provider.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 import 'package:google_directions_api/google_directions_api.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked_rides_provider.dart';
@@ -31,6 +36,10 @@ void main() async {
         ChangeNotifierProvider(create: (context) => RideHistoryDetailsProvider()),
         ChangeNotifierProvider(create: (context) => BookedRidesProvider()),
         ChangeNotifierProvider(create: (context) => BookedRidesDetailProvider()),
+        ChangeNotifierProvider(create: (context) => DriverRideHistoryProvider()),
+        ChangeNotifierProvider(create: (context) => DriverScheduledRidesProvider()),
+        ChangeNotifierProvider(create: (context) => DriverScheduledRidesDetailedProvider()),
+        ChangeNotifierProvider(create: (context) => PassengerRequestProvider()),
       ],
       child: const MyApp(),
     ),

@@ -3,8 +3,8 @@ import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/passenger_card.dart';
 
-class PassengerRequest extends StatefulWidget {
-  const PassengerRequest({
+class PassengerRequestWidget extends StatefulWidget {
+  const PassengerRequestWidget({
     Key? key,
     required this.status,
     required this.name,
@@ -19,10 +19,10 @@ class PassengerRequest extends StatefulWidget {
   final String journeyEnd;
   final double rating;
   @override
-  State<PassengerRequest> createState() => _PassengerRequestState();
+  State<PassengerRequestWidget> createState() => _PassengerRequestWidgetState();
 }
 
-class _PassengerRequestState extends State<PassengerRequest> {
+class _PassengerRequestWidgetState extends State<PassengerRequestWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
