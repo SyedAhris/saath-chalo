@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/ride_history/driver_ride_history_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/scheduled_rides/driver_scheduled_rides_provider.dart';
 import 'package:google_directions_api/google_directions_api.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked_rides_provider.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides_details/booked_rides_details_provider.dart';
@@ -32,6 +33,8 @@ void main() async {
         ChangeNotifierProvider(create: (context) => BookedRidesProvider()),
         ChangeNotifierProvider(create: (context) => BookedRidesDetailProvider()),
         ChangeNotifierProvider(create: (context) => DriverRideHistoryProvider()),
+        ChangeNotifierProvider(create: (context) => DriverScheduledRidesProvider()),
+
       ],
       child: const MyApp(),
     ),
