@@ -48,7 +48,7 @@ class _PassengerBookedRidesAcceptedState
             height: double.infinity,
             // height: 631,
             child: Padding(
-                padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
+                padding: const EdgeInsets.only(left: 40, top: 40,right: 40),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
