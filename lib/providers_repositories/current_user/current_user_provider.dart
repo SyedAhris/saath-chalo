@@ -41,6 +41,7 @@ class CurrentUserProvider with ChangeNotifier {
 
   updateCustomer() async {
     currentCustomer = await _currentUserRepository.updateCustomer(currentCustomer.id);
+    notifyListeners();
   }
 
   changePassword(String emailId) {
