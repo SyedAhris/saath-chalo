@@ -21,6 +21,7 @@ class FirebaseVehiclesRepository implements VehiclesRepository {
   @override
   void addVehicle(Vehicle vehicle, Customer currentCustomer) {
     currentCustomer.vehicles.add(vehicle);
+    print(currentCustomer.vehicles[0].model);
     db.collection("Customers").doc(currentCustomer.id).set(currentCustomer.toJson());
     // TODO: implement addVehicle
   }

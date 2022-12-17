@@ -18,19 +18,6 @@ class CurrentUserProvider with ChangeNotifier {
     isDriver: true,
     isPassenger: false,
     isDelete: false,
-    vehicles: [
-      Vehicle(
-          color: "Silver",
-          make: "Toyota",
-          model: "Corolla",
-          year: "2018",
-          ac: true,
-          carType: "sedan",
-          seatingCapacity: 4,
-          imageLink: "",
-          plateNumber: "BHB-674",
-          isDelete: false),
-    ],
     id: "oAcEIMncYEh8VtbggBAgPY8gRVg1",
   );
 
@@ -51,4 +38,8 @@ class CurrentUserProvider with ChangeNotifier {
   }
 
   signin(String email, String password) {}
+
+  updateCustomer() {
+    _currentUserRepository.updateCustomer(currentCustomer.id);
+  }
 }

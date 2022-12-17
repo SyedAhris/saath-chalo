@@ -17,6 +17,11 @@ class VehiclesListView extends StatefulWidget {
 
 class _VehiclesListViewState extends State<VehiclesListView> {
   @override
+  void initState() {
+    // TODO: implement initState
+    context.read<CurrentUserProvider>().updateCustomer();
+  }
+  @override
   Widget build(BuildContext context) {
     final vehicles = context.watch<CurrentUserProvider>().currentCustomer.vehicles;
     return Scaffold(

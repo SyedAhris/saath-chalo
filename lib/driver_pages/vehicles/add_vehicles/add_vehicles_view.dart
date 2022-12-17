@@ -133,6 +133,7 @@ class _AddVehiclesState extends State<AddVehicles> {
                         plateNumber: plateNumberController.text,
                         isDelete: false);
                     context.read<VehiclesProvider>().addVehicles(veh, currentCustomer);
+                    context.read<CurrentUserProvider>().updateCustomer();
                     Navigator.push(
                       context,
                       MaterialPageRoute(

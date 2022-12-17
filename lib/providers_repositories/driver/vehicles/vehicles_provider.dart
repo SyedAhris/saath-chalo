@@ -10,7 +10,7 @@ class VehiclesProvider with ChangeNotifier {
   List<Vehicle> vehicles = [];
 
   //create firebase vehicle repository's instance
-  final VehiclesRepository _vehiclesRepository = MockVehiclesRepository();
+  final VehiclesRepository _vehiclesRepository = FirebaseVehiclesRepository();
 
   bool isVehiclesFetching = false;
 
