@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/driver_pages/vehicles/vehicles_list/vehicle_list_view.dart';
+import 'package:flutterdemo/models/vehicle_json.dart';
+import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../global_components/main_app_bar.dart';
 import '../../../global_components/main_button.dart';
 import '../../../global_components/main_text_field.dart';
+import '../../../providers_repositories/driver/vehicles/vehicles_provider.dart';
 
 class AddVehicles extends StatefulWidget {
   const AddVehicles({Key? key}) : super(key: key);
@@ -14,6 +18,20 @@ class AddVehicles extends StatefulWidget {
 }
 
 class _AddVehiclesState extends State<AddVehicles> {
+  bool acStatus = true;
+
+  void toggleSwitch(bool value) {
+    if (acStatus == false) {
+      setState(() {
+        acStatus = true;
+      });
+    } else {
+      setState(() {
+        acStatus = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController makeController = TextEditingController();
@@ -21,6 +39,9 @@ class _AddVehiclesState extends State<AddVehicles> {
     TextEditingController yearController = TextEditingController();
     TextEditingController plateNumberController = TextEditingController();
     TextEditingController colorController = TextEditingController();
+    TextEditingController seatingCapacityController = TextEditingController();
+
+    final currentCustomer = context.watch<CurrentUserProvider>().currentCustomer;
 
     return Scaffold(
       appBar: const MainAppBar(title: 'Add Vehicles'),
@@ -72,6 +93,14 @@ class _AddVehiclesState extends State<AddVehicles> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
+                  child: MainTextField(
+                    labelText: 'Seating Capacity',
+                    hintText: '4',
+                    controller: seatingCapacityController,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -81,8 +110,8 @@ class _AddVehiclesState extends State<AddVehicles> {
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       Switch(
-                        value: true,
-                        onChanged: onChanged,
+                        value: acStatus,
+                        onChanged: toggleSwitch,
                         activeColor: MainColors.primary,
                       ),
                     ],
@@ -91,6 +120,20 @@ class _AddVehiclesState extends State<AddVehicles> {
                 MainButton(
                   text: "Add Vehicle",
                   onTap: () {
+                    Vehicle veh = Vehicle(
+                        color: colorController.text,
+                        make: makeController.text,
+                        model: modelController.text,
+                        year: yearController.text,
+                        ac: acStatus,
+                        carType: "carType",
+                        seatingCapacity:
+                            int.parse(seatingCapacityController.text),
+                        imageLink: "",
+                        plateNumber: plateNumberController.text,
+                        isDelete: false);
+                    context.read<VehiclesProvider>().addVehicles(veh, currentCustomer);
+                    context.read<CurrentUserProvider>().updateCustomer();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -105,6 +148,4 @@ class _AddVehiclesState extends State<AddVehicles> {
       ),
     );
   }
-
-  void onChanged(bool value) {}
 }

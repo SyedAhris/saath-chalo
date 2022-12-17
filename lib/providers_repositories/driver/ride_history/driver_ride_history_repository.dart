@@ -4,13 +4,13 @@ import '../../../models/coordinates.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
 
-abstract class RideHistoryRepository {
-  Future<List<Ride>> fetchRides(String passengerID);
+abstract class DriverRideHistoryRepository {
+  Future<List<Ride>> fetchRides(String driverId);
 }
 
-class MockRideHistoryRepository implements RideHistoryRepository {
+class DriverMockRideHistoryRepository implements DriverRideHistoryRepository {
   @override
-  Future<List<Ride>> fetchRides(String passengerID) async {
+  Future<List<Ride>> fetchRides(String driverId) async {
     return ([
       Ride(
         id: "${DateTime.now().microsecondsSinceEpoch}ghjkfghkjfghj546346534",

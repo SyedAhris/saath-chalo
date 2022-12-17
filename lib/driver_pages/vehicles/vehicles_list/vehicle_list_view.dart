@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/vehicles/add_vehicles/add_vehicles_view.dart';
+import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/vehicles/vehicles_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../global_components/main_app_bar.dart';
-import '../vehicles_provider.dart';
 import 'vehicles_list_tile.dart';
 
 class VehiclesListView extends StatefulWidget {
@@ -17,22 +18,17 @@ class VehiclesListView extends StatefulWidget {
 class _VehiclesListViewState extends State<VehiclesListView> {
   @override
   void initState() {
-    super.initState();
-    context.read<VehiclesProvider>().fetchVehicles();
+    // TODO: implement initState
+    context.read<CurrentUserProvider>().updateCustomer();
   }
-
   @override
   Widget build(BuildContext context) {
-    final vehicles = context.watch<VehiclesProvider>().vehicles;
+    final vehicles = context.watch<CurrentUserProvider>().currentCustomer.vehicles;
     return Scaffold(
       appBar: const MainAppBar(
         title: 'Vehicles',
       ),
-      body: context.watch<VehiclesProvider>().isVehiclesFetching
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
+      body: ListView.builder(
               itemCount: vehicles.length,
               itemBuilder: (context, index) {
                 return VehiclesListTile(

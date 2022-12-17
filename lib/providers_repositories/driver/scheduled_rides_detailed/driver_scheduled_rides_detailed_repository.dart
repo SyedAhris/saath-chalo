@@ -1,27 +1,27 @@
 import '../../../models/approved_passenger.dart';
 import '../../../models/coordinates.dart';
+import '../../../models/customer_json.dart';
 import '../../../models/passenger_request.dart';
 import '../../../models/rides_json.dart';
-import '../../../models/customer_json.dart';
 import '../../../models/vehicle_json.dart';
 
-abstract class RideHistoryDetailsRepository {
-  Future<Ride> fetchRide(String rideId);
-  Future<Customer> fetchDriver(String driverId);
-  Future<Vehicle> fetchVehicle(String vehicleId);
-  Future<String> fetchPassengerName(String passengerId);
-  void updateDriverRating(Customer user);
+abstract class DriverScheduledRidesDetailedRepository {
+  Future<Ride> fetchRide(String rideID);
+  Future<Vehicle> fetchVehicle(String vehicleID);
+  Future<Customer> fetchDriver(String driverID);
+  Future<Customer> fetchPassenger(passengerId);
 }
 
-class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
+class DriverMockScheduledRidesDetailedRepository
+    implements DriverScheduledRidesDetailedRepository {
   @override
-  Future<Customer> fetchDriver(String driverId) async {
+  Future<Customer> fetchDriver(String driverID) async {
     return (Customer(
       firstName: "Syed Muhammad",
       lastName: "Ahris",
       email: "ahrissyed@gmail.com",
-      phone: "03343829388",
-      password: "hello1234",
+      phone: "phone",
+      password: "password",
       rating: 4.5,
       profilePictureLink: "profilePictureLink",
       gender: "M",
@@ -33,13 +33,13 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
   }
 
   @override
-  Future<Ride> fetchRide(String rideId) async {
+  Future<Ride> fetchRide(String rideID) async {
     return (Ride(
-      id: "${DateTime.now().microsecondsSinceEpoch}aasdasdasd213414",
-      driverId: "aasdasdasd213414",
-      vehicleId: "ABC-123",
-      startingDestination: "startingCoordinatesApproved",
-      endingDestination: "endingCoordinatesApproved",
+      id: "${DateTime.now().microsecondsSinceEpoch}driverId",
+      driverId: "driverId",
+      vehicleId: "vehicleId",
+      startingDestination: "startingCoordinates",
+      endingDestination: "endingCoordinates",
       startingCoordinates: Coordinates(
         lat: "123",
         long: "123",
@@ -55,12 +55,11 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
         Coordinates(lat: "45.345678", long: "65.765432"),
         Coordinates(lat: "56.345678", long: "54.765432"),
       ],
-      totalFare: 123,
-      availableSeats: 0,
+      totalFare: 2344,
+      availableSeats: 3,
       isFemaleOnly: false,
       date: DateTime(2022, 12, 13).millisecondsSinceEpoch,
       time: DateTime(0, 0, 0, 17, 30).millisecondsSinceEpoch,
-      isCompleted: true,
       approvedPassengers: [
         ApprovedPassenger(
           passengerId: "huzaifa@gmail.com",
@@ -119,49 +118,63 @@ class MockRideHistoryDetailsRepository implements RideHistoryDetailsRepository {
       ],
       passengerRequests: [
         PassengerRequest(
-          passengerId: "asdasdasda",
-          startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
-          endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
-          startingDestination: "startingDestinationHamza",
-          endingDestination: "endingDestinationHamza",
-          waypoints: [
-            Coordinates(lat: "12.345678", long: "98.765432"),
-            Coordinates(lat: "21.345678", long: "87.765432"),
-            Coordinates(lat: "34.345678", long: "76.765432"),
-            Coordinates(lat: "45.345678", long: "65.765432"),
-            Coordinates(lat: "56.345678", long: "54.765432"),
-          ],
-          status: 'Rejected',
-          isDelete: false,
-        ),
+            passengerId: '',
+            startingCoordinates:
+                Coordinates(lat: "12.345678", long: "98.765432"),
+            endingCoordinates: Coordinates(lat: "56.345678", long: "54.765432"),
+            startingDestination: "startingDestination",
+            endingDestination: "endingDestination",
+            waypoints: [
+              Coordinates(lat: "12.345678", long: "98.765432"),
+              Coordinates(lat: "21.345678", long: "87.765432"),
+              Coordinates(lat: "34.345678", long: "76.765432"),
+              Coordinates(lat: "45.345678", long: "65.765432"),
+              Coordinates(lat: "56.345678", long: "54.765432"),
+            ],
+            status: '',
+            isDelete: false),
       ],
       isDelete: false,
+      isCompleted: false,
       isRecurring: false,
     ));
   }
 
   @override
-  Future<Vehicle> fetchVehicle(String vehicleId) async {
+  updateRide(Ride ride) {
+    //TODO: Send Req to firebase to upd
+  }
+
+  @override
+  Future<Vehicle> fetchVehicle(String vehicleID) async {
     return (Vehicle(
-        color: "Red",
-        make: "Suzuki",
-        model: "WagonR",
-        year: "2020",
-        ac: true,
-        carType: "hatchback",
-        seatingCapacity: 4,
-        imageLink: "imageLink",
-        plateNumber: "ABC-123",
-        isDelete: false));
+      color: "Black",
+      make: "Suzuki",
+      model: "WagonR",
+      year: "2020",
+      ac: false,
+      carType: "hatchback",
+      seatingCapacity: 4,
+      imageLink: "",
+      plateNumber: "ABC-123",
+      isDelete: false,
+    ));
   }
 
   @override
-  void updateDriverRating(Customer user) {
-    // TODO: implement updateDriverRating
-  }
-
-  @override
-  Future<String> fetchPassengerName(String passengerId) async {
-    return ("Passenger $passengerId");
+  Future<Customer> fetchPassenger(passengerId) async {
+    return Customer(
+        id: passengerId,
+        firstName: passengerId,
+        lastName: "Ahris",
+        email: "ahrissyed@gmail.com",
+        phone: "03343829388",
+        password: "password",
+        rating: 4.5,
+        profilePictureLink: "profilePictureLink",
+        gender: "M",
+        isDriver: false,
+        isPassenger: true,
+        isDelete: false);
   }
 }

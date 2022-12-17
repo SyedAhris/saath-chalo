@@ -95,7 +95,7 @@ class PassengerCard extends StatelessWidget {
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: onTap1,
                         child: const Text(
                           "Deny",
@@ -106,7 +106,7 @@ class PassengerCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: onTap2,
                         child: const Text(
                           "Approve",
