@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/driver_pages/vehicles/vehicles_list/vehicle_list_view.dart';
 import 'package:flutterdemo/models/vehicle_json.dart';
+import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../global_components/main_app_bar.dart';
@@ -39,6 +40,8 @@ class _AddVehiclesState extends State<AddVehicles> {
     TextEditingController plateNumberController = TextEditingController();
     TextEditingController colorController = TextEditingController();
     TextEditingController seatingCapacityController = TextEditingController();
+
+    final currentCustomer = context.watch<CurrentUserProvider>().currentCustomer;
 
     return Scaffold(
       appBar: const MainAppBar(title: 'Add Vehicles'),
@@ -129,7 +132,7 @@ class _AddVehiclesState extends State<AddVehicles> {
                         imageLink: "",
                         plateNumber: plateNumberController.text,
                         isDelete: false);
-                    context.read<VehiclesProvider>().addVehicles(veh);
+                    context.read<VehiclesProvider>().addVehicles(veh, currentCustomer);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

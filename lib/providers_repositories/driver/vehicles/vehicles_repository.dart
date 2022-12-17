@@ -1,8 +1,10 @@
 import 'package:flutterdemo/models/vehicle_json.dart';
 
+import '../../../models/customer_json.dart';
+
 abstract class VehiclesRepository {
   Future<List<Vehicle>> fetchUsersList();
-  void addVehicle(Vehicle vehicle);
+  void addVehicle(Vehicle vehicle, Customer currentCustomer);
 }
 
 class FirebaseVehiclesRepository implements VehiclesRepository {
@@ -13,7 +15,7 @@ class FirebaseVehiclesRepository implements VehiclesRepository {
   }
 
   @override
-  void addVehicle(Vehicle vehicle) {
+  void addVehicle(Vehicle vehicle, Customer currentCustomer) {
     // TODO: implement addVehicle
   }
 }
@@ -51,7 +53,7 @@ class MockVehiclesRepository implements VehiclesRepository {
   }
 
   @override
-  void addVehicle(Vehicle vehicle) {
+  void addVehicle(Vehicle vehicle, Customer currentCustomer) {
     // TODO: implement addVehicle
     print(vehicle.model);
   }
