@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/models/vehicle_json.dart';
 
-import '../vehicles_json.dart';
 
 class VehiclesListTile extends StatelessWidget {
   const VehiclesListTile({
@@ -8,7 +8,7 @@ class VehiclesListTile extends StatelessWidget {
     required this.vehicles,
   }) : super(key: key);
 
-  final VehiclesJson vehicles;
+  final Vehicle vehicles;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +39,7 @@ class VehiclesListTile extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 12.0),
                           child: Text(
-                            vehicles.numberOfPassengers.toString(),
+                            vehicles.seatingCapacity.toString(),
                           ),
                         ),
                       ],
@@ -63,7 +63,7 @@ class VehiclesListTile extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 8,
                             backgroundColor:
-                                vehicles.isAc ? Colors.green : Colors.grey,
+                                vehicles.ac ? Colors.green : Colors.grey,
                           ),
                         )
                       ],

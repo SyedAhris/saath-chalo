@@ -6,6 +6,7 @@ import 'package:flutterdemo/providers_repositories/driver/passenger_requests/pas
 import 'package:flutterdemo/providers_repositories/driver/ride_history/driver_ride_history_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/scheduled_rides/driver_scheduled_rides_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/scheduled_rides_detailed/driver_scheduled_rides_detailed_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/vehicles/vehicles_provider.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 import 'package:google_directions_api/google_directions_api.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked_rides_provider.dart';
@@ -16,7 +17,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/constants.dart';
-import 'driver_pages/vehicles/vehicles_provider.dart';
 import 'firebase_options.dart';
 import 'home_page/home_page.dart';
 
