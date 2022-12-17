@@ -21,17 +21,11 @@ class _MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Maps Sample App'),
-        backgroundColor: Colors.green[700],
-      ),
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: const CameraPosition(
-          target: _center,
-          zoom: 11.0,
-        ),
+    return GoogleMap(
+      onMapCreated: _onMapCreated,
+      initialCameraPosition: const CameraPosition(
+        target: _center,
+        zoom: 11.0,
       ),
     );
   }
