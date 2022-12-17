@@ -65,9 +65,11 @@ class FirebaseCurrentUserRepository implements CurrentUserRepository {
         isDriver: false,
         isPassenger: false,
         isDelete: false);
+    print(customerId);
     await db.collection("Customers").doc(customerId).get().then((event) {
       customer = Customer.fromJson(event.data() ?? {});
     });
+    print(customer.vehicles[0].make);
     return customer;
   }
 
