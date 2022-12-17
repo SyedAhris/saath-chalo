@@ -42,4 +42,8 @@ class CurrentUserProvider with ChangeNotifier {
   updateCustomer() {
     _currentUserRepository.updateCustomer(currentCustomer.id);
   }
+
+  changePassword(String emailId) {
+    _currentUserRepository.sendPasswordChangeReq(emailId);
+  }
 }

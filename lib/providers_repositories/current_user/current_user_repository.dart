@@ -8,6 +8,7 @@ abstract class CurrentUserRepository {
   Future<List> signup(Customer customer);
   Future<User> signin(String email, String password);
   Future<Customer> updateCustomer(String customerId);
+  void sendPasswordChangeReq(String emailId);
 }
 
 class FirebaseCurrentUserRepository implements CurrentUserRepository {
@@ -68,5 +69,20 @@ class FirebaseCurrentUserRepository implements CurrentUserRepository {
       customer = Customer.fromJson(event.data() ?? {});
     });
     return customer;
+  }
+
+  @override
+  String sendPasswordChangeReq(String emailId) {
+    try {
+      auth.sendPasswordResetEmail(email: emailId);
+      return "";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        print("user not found");
+        return "User does not exist with the following email";
+      } else {
+        return "";
+      }
+    }
   }
 }
