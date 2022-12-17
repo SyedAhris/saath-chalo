@@ -24,7 +24,6 @@ class MapSample extends StatefulWidget {
 class _MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
   late final Set<Marker> markers;
-  static const LatLng _center = LatLng(45.521563, -122.677433);
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
@@ -32,7 +31,6 @@ class _MapSampleState extends State<MapSample> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     markers = {
