@@ -15,43 +15,37 @@ class _ChoseTimeButtonState extends State<ChoseTimeButton> {
   late int timeHour;
   late int timeMinute;
   late DateTime timeChosen;
-  bool timeSelected=false;
+  bool timeSelected = false;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        style: timeSelected==false?
-        TextButton.styleFrom(
-            foregroundColor: Colors.black, backgroundColor: Colors.white)
-            :
-        TextButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: MainColors.primary)
-        ,
+        style: timeSelected == false
+            ? TextButton.styleFrom(
+                foregroundColor: Colors.black, backgroundColor: Colors.white)
+            : TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: MainColors.primary),
         onPressed: () {
-          DatePicker.showTime12hPicker(context, showTitleActions: true,
-              onChanged: (date) {
-              },
-              onConfirm: (date) {
-                timeHour=date.hour;
-                timeMinute=date.minute;
-                timeSelected=true;
-                timeChosen=date;
-                setState(() {
-                });
-              },
-              currentTime: DateTime.now());
+          DatePicker.showTime12hPicker(context,
+              showTitleActions: true, onChanged: (date) {}, onConfirm: (date) {
+            timeHour = date.hour;
+            timeMinute = date.minute;
+            timeSelected = true;
+            timeChosen = date;
+            setState(() {});
+          }, currentTime: DateTime.now());
         },
         child: Row(
-          children:  [
+          children: [
             const Icon(
               Icons.access_time_outlined,
               size: 20,
             ),
             Container(
-              child: timeSelected==false?
-              const Text("Choose Date")
-                  :
-              Text(" $timeHour:$timeMinute"),
+              child: timeSelected == false
+                  ? const Text("Choose Time")
+                  : Text(" $timeHour:$timeMinute"),
             )
           ],
         ));
