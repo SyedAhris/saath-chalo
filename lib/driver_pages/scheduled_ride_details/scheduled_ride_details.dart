@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/convert_time.dart';
 import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
 import 'package:flutterdemo/providers_repositories/driver/scheduled_rides_detailed/driver_scheduled_rides_detailed_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../global_components/driver_booked_ride_card.dart';
 import '../../global_components/driver_side_bar.dart';
 import '../../global_components/main_app_bar.dart';
 import '../../global_components/main_button.dart';
-import 'package:provider/provider.dart';
 
 class ScheduledRideDetails extends StatefulWidget {
   const ScheduledRideDetails({Key? key, required this.rideId})
@@ -33,7 +33,8 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
     final ride = context.watch<DriverScheduledRidesDetailedProvider>().ride;
     final vehicle =
         context.watch<DriverScheduledRidesDetailedProvider>().vehicle;
-    final passengers = context.watch<DriverScheduledRidesDetailedProvider>().passengers;
+    final passengers =
+        context.watch<DriverScheduledRidesDetailedProvider>().passengers;
     return Scaffold(
       drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
@@ -56,7 +57,9 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                   journeyDate: ConvertTime.millisecondsToDate(ride.date),
                   journeyTime: ConvertTime.millisecondsToTime(ride.time),
                   estCost: ride.totalFare,
-                  passengers: passengers.map((e) => "${e.firstName} ${e.lastName}").toList(),
+                  passengers: passengers
+                      .map((e) => "${e.firstName} ${e.lastName}")
+                      .toList(),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
@@ -64,10 +67,13 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                     width: 300,
                     height: 50,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PassengerRequests(passengerRequests: ride.passengerRequests,)));
+                              builder: (context) => PassengerRequests(
+                                    passengerRequests: ride.passengerRequests,
+                                  )));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

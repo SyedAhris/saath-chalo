@@ -5,6 +5,7 @@ import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/location_text_field.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/main_button.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 
 class DriverHome extends StatelessWidget {
   const DriverHome({Key? key}) : super(key: key);
@@ -14,11 +15,7 @@ class DriverHome extends StatelessWidget {
     return Scaffold(
       appBar: const MainAppBar(title: "Create Ride"),
       drawer: const DriverSideBar(),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/backimg.png'))),
+      body: MapWrapper(
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
@@ -42,10 +39,7 @@ class DriverHome extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        ChooseDateButton(),
-                        ChoseTimeButton()
-                      ],
+                      children: const [ChooseDateButton(), ChoseTimeButton()],
                     ),
                   ),
                   //  Padding(
@@ -56,23 +50,22 @@ class DriverHome extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: SizedBox(
-
                       height: 40,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black
-                        ),
-                          onPressed: (){},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black),
+                          onPressed: () {},
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
                               Icon(Icons.directions_car_sharp),
-                              SizedBox(width: 5,),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text("Choose Vehicle")
                             ],
-                          )
-                      ),
+                          )),
                     ),
                   ),
 

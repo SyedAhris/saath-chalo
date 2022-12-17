@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/global_components/passenger_ride_history_details_card.dart';
 import 'package:flutterdemo/global_components/passenger_side_bar.dart';
 import 'package:flutterdemo/providers_repositories/passenger/ride_history_details/ride_history_details_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/convert_time.dart';
-import '../../providers_repositories/current_user/current_user_provider.dart';
 
 class PassengerRideHistoryDetails extends StatefulWidget {
   const PassengerRideHistoryDetails({
@@ -37,12 +37,8 @@ class _PassengerRideHistoryDetailsState
     final passengers = context.watch<RideHistoryDetailsProvider>().passengers;
     return Scaffold(
         drawer: const PassengerSideBar(),
-        appBar: const MainAppBar(title: "Booked Rides"),
-        body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/backimg.png'))),
+        appBar: const MainAppBar(title: "Ride Details"),
+        body: MapWrapper(
           child: Column(
             children: [
               Padding(

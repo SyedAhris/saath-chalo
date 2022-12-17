@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/booked_ride_card.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/passenger_pages/send_request_to_driver/send_request_to_driver.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 import 'package:provider/provider.dart';
+
 import '../../constants/convert_time.dart';
 import '../../global_components/location_text_field.dart';
 import '../../global_components/main_app_bar.dart';
@@ -28,11 +30,7 @@ class _PassengerHomeState extends State<PassengerHome> {
     return Scaffold(
       drawer: const PassengerSideBar(),
       appBar: const MainAppBar(title: "Home"),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/backimg.png'))),
+      body: MapWrapper(
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
@@ -70,11 +68,10 @@ class _PassengerHomeState extends State<PassengerHome> {
                               final rideDetails =
                                   context.read<PassengerHomeProvider>().details;
                               showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20))
-                                ),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))),
                                   context: context,
                                   builder: (context) => ListView.builder(
                                       primary: false,
@@ -96,8 +93,9 @@ class _PassengerHomeState extends State<PassengerHome> {
                                                 rating: rideDetails[index]
                                                     .driver
                                                     .rating,
-                                                acStatus:
-                                                    rideDetails[index].vehicle.ac,
+                                                acStatus: rideDetails[index]
+                                                    .vehicle
+                                                    .ac,
                                                 journeyStart: rideDetails[index]
                                                     .ride
                                                     .startingDestination,
@@ -119,27 +117,28 @@ class _PassengerHomeState extends State<PassengerHome> {
                                                     .totalFare,
                                                 status: 'None',
                                               ),
-                                            MainButton(
-                                                text: "Send Request",
-                                                onTap: (){
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          SendRequestToDriver(
-                                                            rideDetails: rideDetails[index],
-                                                          ),
-                                                    ),
-                                                  );
-                                                }),
+                                              MainButton(
+                                                  text: "Send Request",
+                                                  onTap: () {
+                                                    Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SendRequestToDriver(
+                                                          rideDetails:
+                                                              rideDetails[
+                                                                  index],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }),
                                               Container(
-                                                child: index!=rideDetails.length-1?
-                                                const Divider(
-                                                  thickness: 3,
-                                                  color: Colors.black,
-                                                )
-                                                    :
-                                                    null
-                                              )
+                                                  child: index !=
+                                                          rideDetails.length - 1
+                                                      ? const Divider(
+                                                          thickness: 3,
+                                                          color: Colors.black,
+                                                        )
+                                                      : null)
                                             ],
                                           ),
                                         );

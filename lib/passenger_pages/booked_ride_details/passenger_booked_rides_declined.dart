@@ -4,7 +4,8 @@ import '../../global_components/booked_ride_card.dart';
 import '../../global_components/main_app_bar.dart';
 
 class PassengerBookedRidesDeclined extends StatefulWidget {
-  const PassengerBookedRidesDeclined({Key? key, required this.rideId}) : super(key: key);
+  const PassengerBookedRidesDeclined({Key? key, required this.rideId})
+      : super(key: key);
 
   final String rideId;
 
@@ -21,10 +22,6 @@ class _PassengerBookedRidesDeclinedState
         backgroundColor: Colors.transparent,
         appBar: const MainAppBar(title: "SaathChalo"),
         body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/backimg.png'))),
           child: SizedBox(
             //needs to be changed so automatically fits whole screen
             height: double.infinity,
