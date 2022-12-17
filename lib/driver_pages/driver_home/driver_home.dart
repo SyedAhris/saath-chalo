@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/driver_home/choose_date_button.dart';
 import 'package:flutterdemo/driver_pages/driver_home/chose_time_button.dart';
@@ -8,6 +6,7 @@ import 'package:flutterdemo/global_components/location_text_field.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/main_button.dart';
 import 'package:flutterdemo/global_components/map_wrapper.dart';
+import 'package:flutterdemo/models/coordinates.dart';
 import 'package:google_directions_api/google_directions_api.dart';
 
 class DriverHome extends StatefulWidget {
@@ -20,6 +19,9 @@ class DriverHome extends StatefulWidget {
 class _DriverHomeState extends State<DriverHome> {
   late final TextEditingController pickUpLocationController;
   late final TextEditingController dropOffLocationController;
+  late final DirectionsService directionsService;
+  String startLoc = '';
+  String endLoc = '';
 
   @override
   void initState() {
@@ -27,6 +29,7 @@ class _DriverHomeState extends State<DriverHome> {
     super.initState();
     pickUpLocationController = TextEditingController();
     dropOffLocationController = TextEditingController();
+    directionsService = DirectionsService();
   }
 
   @override
@@ -45,15 +48,14 @@ class _DriverHomeState extends State<DriverHome> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // LocationTextField(
-                  //   controller: PickUpLocationController,
-                  //   labelText: "PickUp",
-                  //   hintText: "e.g IBA - Karachi University",
-                  // ),
-                  TextField(
-                    controller: pickUpLocationController,
-                    decoration: const InputDecoration(
-                        labelText: "Pickup", hintText: "Iba"),
+                  LocationTextField(
+                    labelText: "PickUp",
+                    hintText: "e.g IBA - Karachi University",
+                    onSubmitted: (text) async {
+                      print(getRoute(
+                          startingCoordinate: text,
+                          endingCoordinate: "Nixor College"));
+                    },
                   ),
                   const Padding(
                     padding: EdgeInsets.only(top: 10),
@@ -95,27 +97,7 @@ class _DriverHomeState extends State<DriverHome> {
                         alignment: Alignment.bottomCenter,
                         child: MainButton(
                           text: "Confirm Ride",
-                          onTap: () async {
-                            print("starting request");
-                            final request = DirectionsRequest(
-                                region: "pk",
-                                language: "en",
-                                origin: pickUpLocationController.text,
-                                destination:
-                                    "Nixor College, Khayaban-e-Shaheen, D.H.A Phase 6 Phase 6 Defence Housing Authority, Karachi");
-                            print("constructed request");
-                            final directionsService = DirectionsService();
-                            directionsService.route(request,
-                                (DirectionsResult response,
-                                    DirectionsStatus? status) {
-                              print('aaaa');
-                              print(response.routes?[0].overviewPath
-                                  ?.map((e) => jsonDecode(
-                                      '{"lat": ${e.latitude}, "lng": ${e.longitude} }'))
-                                  .toList()
-                                  .toString());
-                            });
-                          },
+                          onTap: () {},
                         )),
                   )
                 ],
@@ -123,5 +105,28 @@ class _DriverHomeState extends State<DriverHome> {
         ),
       ),
     );
+  }
+
+  Future<List<Coordinates>>? getRoute(
+      {required String startingCoordinate,
+      required String endingCoordinate}) async {
+    print("starting request");
+    List<Coordinates> route = [];
+    final request = DirectionsRequest(
+        region: "pk",
+        language: "en",
+        origin: startingCoordinate,
+        destination: endingCoordinate);
+    print("constructed request");
+    await directionsService.route(request,
+        (DirectionsResult response, DirectionsStatus? status) {
+      print('aaaa');
+      route = response.routes?[0].overviewPath
+              ?.map((e) => Coordinates(
+                  lat: e.latitude.toString(), long: e.longitude.toString()))
+              .toList() ??
+          [const Coordinates(lat: "-1", long: "-1")];
+    });
+    return route;
   }
 }
