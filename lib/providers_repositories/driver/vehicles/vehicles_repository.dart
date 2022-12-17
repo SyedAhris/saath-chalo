@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterdemo/models/vehicle_json.dart';
 
 import '../../../models/customer_json.dart';
@@ -8,6 +9,9 @@ abstract class VehiclesRepository {
 }
 
 class FirebaseVehiclesRepository implements VehiclesRepository {
+
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
   @override
   Future<List<Vehicle>> fetchUsersList() {
     // TODO: implement fetchUsersList after connecting firebase
@@ -16,6 +20,8 @@ class FirebaseVehiclesRepository implements VehiclesRepository {
 
   @override
   void addVehicle(Vehicle vehicle, Customer currentCustomer) {
+    currentCustomer.vehicles.add(vehicle);
+    db.collection("Customers").doc(currentCustomer.id).set(currentCustomer.toJson());
     // TODO: implement addVehicle
   }
 }
