@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterdemo/models/coordinates.dart';
 
 import '../../../models/rides_json.dart';
@@ -8,17 +9,26 @@ abstract class DriverScheduledRideRepository {
 }
 
 class DriverFirebaseScheduledRideRepository implements DriverScheduledRideRepository {
+  FirebaseFirestore db = FirebaseFirestore.instance;
   @override
-  Future<List<Ride>> getRideNow(String driverId) {
-    // TODO: implement getApprovedRides
-    // get approved rides from rides.approvedpassenger.where(passengerID=passebngerID)
-    throw UnimplementedError();
+  Future<List<Ride>> getRideNow(String driverId) async {
+    List<Ride> rides = [];
+    await db.collection("Ride").where("driverID", isEqualTo: driverId).get().then((value) {
+      rides = value.docs.map((e) => Ride.fromJson(e.data())).toList();
+      print(value.docs[0].data().toString());
+    });
+
+    return rides;
   }
 
   @override
-  Future<List<Ride>> getUpcomingRide(String driverId) {
-    // TODO: implement getBookedRides
-    throw UnimplementedError();
+  Future<List<Ride>> getUpcomingRide(String driverId) async {
+    List<Ride> rides = [];
+    await db.collection("Ride").where("driverId", isEqualTo: driverId).where("isCompleted", isEqualTo: false).where("isDeleted", isEqualTo: false).get().then((value) {
+      rides = value.docs.map((e) => Ride.fromJson(e.data())).toList();
+    });
+
+    return rides;
   }
 
 }
