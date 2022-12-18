@@ -51,8 +51,16 @@ class _LoginState extends State<Login> {
                   padding: const EdgeInsets.only(right: 32),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text(" Please login to proceed", style: TextStyle(fontSize: 28)),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 22.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(" Please login to proceed", style: TextStyle(fontSize: 28)),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
