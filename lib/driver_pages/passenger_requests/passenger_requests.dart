@@ -23,7 +23,7 @@ class _PassengerRequestsState extends State<PassengerRequests> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<PassengerRequestProvider>().fetchPassengers(
           widget.passengerRequests.where((e) => e.status == "Pending").map((e) => e.passengerId).toList());
     });

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_directions_api/google_directions_api.dart';
@@ -45,9 +47,18 @@ class _MapAutoCompleteState extends State<MapAutoComplete> {
     directionsService.route(request,
         (DirectionsResult response, DirectionsStatus? status) {
       if (status == DirectionsStatus.ok) {
-        print(response.routes?[0].overviewPath.toString());
+        print(response.routes?[0].toString());
+        print(response.routes?[0].overviewPath
+            ?.map((e) =>
+                jsonDecode('{"lat": ${e.latitude}, "lng": ${e.longitude} }'))
+            .toList()
+            .toString());
+        print(response.routes?.toString());
+
         waypoints = response.routes?[0].overviewPath;
         print(response.geocodedWaypoints.toString());
+        print(response.geocodedWaypoints?.toList().toString());
+        print("waypoints");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => Scaffold(
                   floatingActionButton: FloatingActionButton(
@@ -56,14 +67,22 @@ class _MapAutoCompleteState extends State<MapAutoComplete> {
                           ? Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => GoogleMap(
-                                  // polygons: ,
-                                  // polylines: Set<Polyline>.of(
-                                  //     response.routes?[0].overviewPolyline),
                                   initialCameraPosition: CameraPosition(
                                     target: LatLng(waypoints![0].latitude,
                                         waypoints![0].longitude),
                                     zoom: 11.0,
                                   ),
+                                  polylines: {
+                                    Polyline(
+                                      polylineId: const PolylineId('1'),
+                                      width: 4,
+                                      points: response.routes?[0].overviewPath
+                                              ?.map((e) => const LatLng(1, 2))
+                                              .toList() ??
+                                          [const LatLng(1, 1)],
+                                      color: Colors.red,
+                                    )
+                                  },
                                 ),
                               ),
                             )
@@ -84,7 +103,7 @@ class _MapAutoCompleteState extends State<MapAutoComplete> {
     });
   }
 
-  late final List<GeoCoord>? waypoints;
+  late List<GeoCoord>? waypoints;
   @override
   void initState() {
     // TODO: implement initState

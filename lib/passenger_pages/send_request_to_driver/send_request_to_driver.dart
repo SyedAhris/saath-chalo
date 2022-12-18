@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/global_components/passenger_side_bar.dart';
 import 'package:flutterdemo/models/coordinates.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
@@ -13,8 +14,10 @@ import '../../global_components/main_button.dart';
 import '../../providers_repositories/passenger/home/home_provider.dart';
 
 class SendRequestToDriver extends StatefulWidget {
-  const SendRequestToDriver({Key? key, required this.rideDetails})
-      : super(key: key);
+  const SendRequestToDriver({
+    Key? key,
+    required this.rideDetails
+  }) : super(key: key);
 
   final PassengerHomeListDetails rideDetails;
   @override
@@ -27,12 +30,8 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
     return Scaffold(
         backgroundColor: Colors.transparent,
         drawer: const PassengerSideBar(),
-        appBar: const MainAppBar(title: "SaathChalo"),
-        body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/backimg.png'))),
+        appBar: const MainAppBar(title: "Request Driver"),
+        body: MapWrapper(
           child: SizedBox(
             //needs to be changed so automatically fits whole screen
             height: double.infinity,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/convert_time.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:provider/provider.dart';
 
 import '../../global_components/booked_ride_card.dart';
@@ -37,32 +38,31 @@ class _PassengerBookedRidesAcceptedState
 
     return Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: const MainAppBar(title: "SaathChalo"),
-        body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/backimg.png'))),
+        appBar: const MainAppBar(title: "Accepted Rides"),
+        body: MapWrapper(
           child: SizedBox(
             //needs to be changed so automatically fits whole screen
             height: double.infinity,
             // height: 631,
             child: Padding(
-                padding: const EdgeInsets.only(left: 40, top: 40,right: 40),
+                padding: const EdgeInsets.only(left: 40, top: 40, right: 40),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       BookedRideCard(
                           name: "${driver.firstName} ${driver.lastName}",
-                          car: "${vehicle.color} ${vehicle.make} ${vehicle.model}",
+                          car:
+                              "${vehicle.color} ${vehicle.make} ${vehicle.model}",
                           numberPlate: vehicle.plateNumber,
                           journeyStart: ride.startingDestination,
                           journeyEnd: ride.endingDestination,
                           rating: driver.rating,
                           acStatus: vehicle.ac,
-                          journeyDate: ConvertTime.millisecondsToDate(ride.date),
-                          journeyTime: ConvertTime.millisecondsToTime(ride.time),
+                          journeyDate:
+                              ConvertTime.millisecondsToDate(ride.date),
+                          journeyTime:
+                              ConvertTime.millisecondsToTime(ride.time),
                           estCost: ride.totalFare,
                           status: widget.status),
                       const Padding(

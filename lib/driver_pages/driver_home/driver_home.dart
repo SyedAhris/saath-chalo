@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutterdemo/constants/constants.dart';
-import 'package:flutterdemo/driver_pages/driver_home/choose_date_button.dart';
-import 'package:flutterdemo/driver_pages/driver_home/chose_time_button.dart';
 import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/location_text_field.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/main_button.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
+import 'package:flutterdemo/models/coordinates.dart';
 import 'package:flutterdemo/models/rides_json.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/create_ride/create_ride_provider.dart';
+import 'package:google_directions_api/google_directions_api.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/coordinates.dart';
-import '../../models/vehicle_json.dart';
+import '../../models/vehicle_json.dart' as vehicle_model;
 import '../vehicles/vehicles_list/vehicles_list_tile.dart';
 
 class DriverHome extends StatefulWidget {
@@ -24,16 +24,17 @@ class DriverHome extends StatefulWidget {
 }
 
 class _DriverHomeState extends State<DriverHome> {
-  @override
-  void initState() {
-    super.initState();
-    context
-        .read<CurrentUserProvider>()
-        .updateCustomer(); // TODO: remove this after signin flow is created
-  }
+  late final TextEditingController pickUpLocationController;
+  late final TextEditingController dropOffLocationController;
+  late final DirectionsService directionsService;
+  String startLoc = '';
+  String endLoc = '';
+  List<Coordinates> waypoints = [];
 
   bool isVehicle = false;
-  Vehicle chosenVehicle = Vehicle(
+
+  //added prefix vehicle_model as its conflicting with Vehicle class in Google maps
+  vehicle_model.Vehicle chosenVehicle = vehicle_model.Vehicle(
       color: "",
       make: "",
       model: "",
@@ -55,6 +56,20 @@ class _DriverHomeState extends State<DriverHome> {
   late int timeMinute;
   late DateTime timeChosen;
   bool timeSelected = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    context
+        .read<CurrentUserProvider>()
+        .updateCustomer(); // TODO: remove this after signin flow is created
+    pickUpLocationController = TextEditingController();
+    dropOffLocationController = TextEditingController();
+    directionsService = DirectionsService();
+  }
+
   @override
   Widget build(BuildContext context) {
     final vehicles =
@@ -62,11 +77,7 @@ class _DriverHomeState extends State<DriverHome> {
     return Scaffold(
       appBar: const MainAppBar(title: "Create Ride"),
       drawer: const DriverSideBar(),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/backimg.png'))),
+      body: MapWrapper(
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
@@ -77,14 +88,24 @@ class _DriverHomeState extends State<DriverHome> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const LocationTextField(
+                  LocationTextField(
+                    controller: pickUpLocationController,
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
+                    onSubmitted: (text) async {
+                      waypoints = await getRoute(
+                              startingCoordinate: text,
+                              endingCoordinate: "Nixor College") ??
+                          [];
+                      print('${waypoints.length} waypoints length');
+                    },
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
                     child: LocationTextField(
-                        labelText: "DropOff", hintText: "e.g Chaar Meenar"),
+                        controller: dropOffLocationController,
+                        labelText: "DropOff",
+                        hintText: "e.g Chaar Meenar"),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
@@ -168,11 +189,6 @@ class _DriverHomeState extends State<DriverHome> {
                       ],
                     ),
                   ),
-                  //  Padding(
-                  //   padding: const EdgeInsets.only(top: 10),
-                  //   child: RecurringRideWidget(
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: SizedBox(
@@ -245,7 +261,6 @@ class _DriverHomeState extends State<DriverHome> {
                                 )),
                     ),
                   ),
-
                   Expanded(
                     child: Align(
                         alignment: Alignment.bottomCenter,
@@ -253,7 +268,15 @@ class _DriverHomeState extends State<DriverHome> {
                           padding: const EdgeInsets.only(bottom: 40),
                           child: MainButton(
                             text: "Confirm Ride",
-                            onTap: () {
+                            onTap: () async {
+                              waypoints = await getRoute(
+                                      startingCoordinate:
+                                          pickUpLocationController.value.text,
+                                      endingCoordinate:
+                                          dropOffLocationController
+                                              .value.text) ??
+                                  [];
+                              print('${waypoints.length} waypoints length');
                               if (!dateSelected) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -273,57 +296,39 @@ class _DriverHomeState extends State<DriverHome> {
                                   ),
                                 );
                               } else {
-                                String driverId = context.read<CurrentUserProvider>().currentCustomer.id;
-                                List<Coordinates> sampleCoordinates = [
-                                  Coordinates(lat: "24.91792", long: "67.03194000000002"),
-                                  Coordinates(lat: "24.9172", long: "67.03192000000001"),
-                                  Coordinates(lat: "24.91722", long: "67.03144"),
-                                  Coordinates(lat: "24.91704", long: "67.03143"),
-                                  Coordinates(lat: "24.91596", long: "67.03138999999999"),
-                                  Coordinates(lat: "24.91566", long: "67.03138000000001"),
-                                  Coordinates(lat: "24.91429", long: "67.03133"),
-                                  Coordinates(lat: "24.91377", long: "67.03131000000002"),
-                                  Coordinates(lat: "24.91372", long: "67.03136999999998"),
-                                  Coordinates(lat: "24.91366", long: "67.03141"),
-                                  Coordinates(lat: "24.91356", long: "67.03144"),
-                                  Coordinates(lat: "24.91306", long: "67.03141"),
-                                  Coordinates(lat: "24.91142", long: "67.03134"),
-                                  Coordinates(lat: "24.91091", long: "67.03161"),
-                                  Coordinates(lat: "24.91084", long: "67.03165999999999"),
-                                  Coordinates(lat: "24.91078", long: "67.03172"),
-                                  Coordinates(lat: "24.91075", long: "67.03228000000001"),
-                                  Coordinates(lat: "24.91065", long: "67.03291999999999"),
-                                  Coordinates(lat: "24.91058", long: "67.03401"),
-                                  Coordinates(lat: "24.91054", long: "67.03451000000001"),
-                                  Coordinates(lat: "24.91062", long: "67.03462999999999"),
-                                  Coordinates(lat: "24.9106", long: "67.03487999999999"),
-                                  Coordinates(lat: "24.91053", long: "67.03548"),
-                                  Coordinates(lat: "24.91046", long: "67.03629000000001"),
-                                  Coordinates(lat: "24.91035", long: "67.03626"),
-                                  Coordinates(lat: "24.91022", long: "67.03718"),
-                                  Coordinates(lat: "24.91017", long: "67.03816999999998"),
-                                  Coordinates(lat: "24.91012", long: "67.03890999999999"),
-                                ];
+                                String driverId = context
+                                    .read<CurrentUserProvider>()
+                                    .currentCustomer
+                                    .id;
+
                                 Ride ride = Ride(
-                                    id: "${DateTime.now().microsecondsSinceEpoch}$driverId",
-                                    driverId: driverId,
-                                    vehicleId: chosenVehicle.plateNumber,
-                                    startingDestination: "startingDestination",
-                                    endingDestination: "endingDestination",
-                                    startingCoordinates: Coordinates(lat: "24.91792", long: "67.03194000000002"),
-                                    endingCoordinates: Coordinates(lat: "24.91012", long: "67.03890999999999"),
-                                    waypoints: sampleCoordinates,
-                                    totalFare: 1000,
-                                    availableSeats: chosenVehicle.seatingCapacity-1,
-                                    isFemaleOnly: false,
-                                    date: dateChosen.millisecondsSinceEpoch,
-                                    time: DateTime(0,0,0,timeChosen.hour,timeChosen.minute).millisecondsSinceEpoch,
-                                    isCompleted: false,
-                                    isRecurring: false,
-                                    isDelete: false,
+                                  id: "${DateTime.now().microsecondsSinceEpoch}$driverId",
+                                  driverId: driverId,
+                                  vehicleId: chosenVehicle.plateNumber,
+                                  startingDestination:
+                                      pickUpLocationController.value.text,
+                                  endingDestination:
+                                      dropOffLocationController.value.text,
+                                  startingCoordinates: waypoints[0],
+                                  endingCoordinates:
+                                      waypoints[waypoints.length - 1],
+                                  waypoints: waypoints,
+                                  totalFare: 1000,
+                                  availableSeats:
+                                      chosenVehicle.seatingCapacity - 1,
+                                  isFemaleOnly: false,
+                                  date: dateChosen.millisecondsSinceEpoch,
+                                  time: DateTime(0, 0, 0, timeChosen.hour,
+                                          timeChosen.minute)
+                                      .millisecondsSinceEpoch,
+                                  isCompleted: false,
+                                  isRecurring: false,
+                                  isDelete: false,
                                 );
                                 //print(DateTime(0,0,0,17,30).toString());
-                                context.read<CreateRideProvider>().createRide(ride);
+                                context
+                                    .read<CreateRideProvider>()
+                                    .createRide(ride);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text("Ride is created."),
@@ -342,5 +347,26 @@ class _DriverHomeState extends State<DriverHome> {
         ),
       ),
     );
+  }
+
+  Future<List<Coordinates>>? getRoute(
+      {required String startingCoordinate,
+      required String endingCoordinate}) async {
+    print("starting request");
+    List<Coordinates> route = [];
+    final request = DirectionsRequest(
+        region: "pk",
+        language: "en",
+        origin: startingCoordinate,
+        destination: endingCoordinate);
+    await directionsService.route(request,
+        (DirectionsResult response, DirectionsStatus? status) {
+      route = response.routes?[0].overviewPath
+              ?.map((e) => Coordinates(
+                  lat: e.latitude.toString(), long: e.longitude.toString()))
+              .toList() ??
+          [const Coordinates(lat: "-1", long: "-1")];
+    });
+    return route;
   }
 }
