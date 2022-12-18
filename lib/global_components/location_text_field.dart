@@ -6,8 +6,10 @@ class LocationTextField extends StatefulWidget {
       {Key? key,
       required this.labelText,
       required this.hintText,
+      this.controller,
       this.onSubmitted})
       : super(key: key);
+  final TextEditingController? controller;
   final String labelText;
   final String hintText;
   final void Function(String)? onSubmitted;
@@ -17,19 +19,19 @@ class LocationTextField extends StatefulWidget {
 }
 
 class _LocationTextFieldState extends State<LocationTextField> {
-  late TextEditingController controller;
+  // late TextEditingController controller;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = TextEditingController();
+    // controller = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       onSubmitted: widget.onSubmitted,
-      controller: controller,
+      controller: widget.controller,
       decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,

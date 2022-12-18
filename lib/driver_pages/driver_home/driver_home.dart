@@ -49,6 +49,7 @@ class _DriverHomeState extends State<DriverHome> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   LocationTextField(
+                    controller: pickUpLocationController,
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
                     onSubmitted: (text) async {
@@ -57,10 +58,10 @@ class _DriverHomeState extends State<DriverHome> {
                           endingCoordinate: "Nixor College"));
                     },
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: LocationTextField(
-                        // controller: DropOffLocationController,
+                        controller: dropOffLocationController,
                         labelText: "DropOff",
                         hintText: "e.g Chaar Meenar"),
                   ),

@@ -17,8 +17,8 @@ class PassengerSideBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home),
             title: const SideBarText(text: "Home"),
-            onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const PassengerHome())),
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => PassengerHome())),
           ),
           ListTile(
               leading: const Icon(Icons.done_outline_sharp),
