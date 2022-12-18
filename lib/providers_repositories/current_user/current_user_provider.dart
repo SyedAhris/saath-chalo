@@ -37,14 +37,26 @@ class CurrentUserProvider with ChangeNotifier {
     return error;
   }
 
-  signin(String email, String password) {}
+  signin(String email, String password) async {
+    List res =await _currentUserRepository.signin(email, password);
+    String error = "";
+    if (res[1] == "") {
+      firebaseUser = res[0];
+      currentCustomer = res[2];
+    } else {
+      error = res[1];
+    }
+    notifyListeners();
+    return error;
+  }
 
   updateCustomer() async {
     currentCustomer = await _currentUserRepository.updateCustomer(currentCustomer.id);
     notifyListeners();
   }
 
-  changePassword(String emailId) {
-    _currentUserRepository.sendPasswordChangeReq(emailId);
+  Future<String> changePassword(String emailId) async {
+     String changePass= await _currentUserRepository.sendPasswordChangeReq(emailId);
+     return changePass;
   }
 }

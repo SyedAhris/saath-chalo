@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/driver_pages/login_page/login_page_driver.dart';
-
+import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
+import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
+import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:provider/provider.dart';
 import '../global_components/main_app_bar.dart';
 import '../global_components/passenger_side_bar.dart';
-import '../passenger_pages/login_page/login_page_passenger.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
@@ -16,6 +17,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final isDriver=context.watch<CurrentUserProvider>().currentCustomer.isDriver;
+    final isPass=context.watch<CurrentUserProvider>().currentCustomer.isPassenger;
+
     return Scaffold(
         drawer: const PassengerSideBar(),
         appBar: const MainAppBar(
@@ -35,15 +39,17 @@ class _HomePageState extends State<HomePage> {
                     child: SizedBox(
                       width: 220,
                       height: 70,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const LoginPagePassenger()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 25)),
-                          child: const Text("Passenger")),
+                      child: Container(
+                        child: isPass==false?null: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PassengerHome()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(fontSize: 25)),
+                            child: const Text("Passenger")),
+                      ),
                     ),
                   ),
                   Padding(
@@ -51,14 +57,16 @@ class _HomePageState extends State<HomePage> {
                     child: SizedBox(
                       width: 220,
                       height: 70,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const LoginPageDriver()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 25)),
-                          child: const Text("Driver")),
+                      child: Container(
+                        child: isDriver==false?null:ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const DriverHome()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(fontSize: 25)),
+                            child: const Text("Driver")),
+                      ),
                     ),
                   ),
                 ],

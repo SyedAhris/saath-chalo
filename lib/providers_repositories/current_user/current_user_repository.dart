@@ -6,9 +6,9 @@ import '../../models/customer_json.dart';
 
 abstract class CurrentUserRepository {
   Future<List> signup(Customer customer);
-  Future<User> signin(String email, String password);
+  Future<List> signin(String email, String password);
   Future<Customer> updateCustomer(String customerId);
-  void sendPasswordChangeReq(String emailId);
+  Future<String> sendPasswordChangeReq(String emailId);
 }
 
 class FirebaseCurrentUserRepository implements CurrentUserRepository {
@@ -45,10 +45,34 @@ class FirebaseCurrentUserRepository implements CurrentUserRepository {
   }
 
   @override
-  Future<User> signin(String email, String password) {
-    // TODO: implement signin
-    throw UnimplementedError();
+  Future<List> signin(String email, String password) async {
+    try {
+      Customer? customer;
+      UserCredential result = await auth.signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+      final User user = result.user!;
+      String uid=user.uid;
+      await db.collection("Customers").doc(uid).get().then((value) {
+        customer = Customer.fromJson(value.data() ?? {});
+      });
+      return [user, "", customer as Customer];
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        return (["", e.code, ""]);
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+        return (["", e.code, ""]);
+      }
+      else {
+        return (["", e.code, ""]);
+      }
+    }
   }
+
+
 
   @override
   Future<Customer> updateCustomer(String customerId) async {
@@ -74,9 +98,11 @@ class FirebaseCurrentUserRepository implements CurrentUserRepository {
   }
 
   @override
-  String sendPasswordChangeReq(String emailId) {
+  Future<String> sendPasswordChangeReq(String emailId) async {
     try {
-      auth.sendPasswordResetEmail(email: emailId);
+      print(emailId);
+      await auth.sendPasswordResetEmail(email: emailId);
+      print("hello1");
       return "";
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
