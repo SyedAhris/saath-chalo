@@ -6,19 +6,33 @@ import 'package:flutterdemo/providers_repositories/current_user/current_user_rep
 
 class CurrentUserProvider with ChangeNotifier {
   late User firebaseUser;
+  // Customer currentCustomer = Customer(
+  //   firstName: "Syed Muhammad",
+  //   lastName: "Ahris",
+  //   email: "ahrissyed@gmail.com",
+  //   phone: "03343829388",
+  //   password: "hello1234",
+  //   rating: 5,
+  //   profilePictureLink: "",
+  //   gender: "M",
+  //   isDriver: true,
+  //   isPassenger: false,
+  //   isDelete: false,
+  //   id: "oAcEIMncYEh8VtbggBAgPY8gRVg1",
+  // );
   Customer currentCustomer = Customer(
-    firstName: "Syed Muhammad",
-    lastName: "Ahris",
-    email: "ahrissyed@gmail.com",
-    phone: "03343829388",
+    firstName: "Irtiza",
+    lastName: "Raza",
+    email: "irtizaraza09@gmail.com",
+    phone: "090078601",
     password: "hello1234",
-    rating: 5,
+    rating: 0,
     profilePictureLink: "",
     gender: "M",
-    isDriver: true,
-    isPassenger: false,
+    isDriver: false,
+    isPassenger: true,
     isDelete: false,
-    id: "oAcEIMncYEh8VtbggBAgPY8gRVg1",
+    id: "Am9PZgPsHCWDOEkquMTk2KQfYXu1",
   );
 
   final CurrentUserRepository _currentUserRepository =
