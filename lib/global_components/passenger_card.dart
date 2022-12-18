@@ -40,8 +40,8 @@ class PassengerCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(name.length >= 20
-                            ? "${name.substring(0, 20)}..."
+                        Text(name.length >= 15
+                            ? "${name.substring(0, 15)}..."
                             : name),
                       ],
                     ),

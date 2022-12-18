@@ -38,8 +38,8 @@ class DriverScheduledRidesDetailedProvider with ChangeNotifier {
     passengers = [];
     notifyListeners();
     ride = await _driverScheduledRidesDetailedRepository.fetchRide(rideID);
-    fetchVehicle(ride.vehicleId, ride.driverId);
-    fetchDriver(ride.driverId);
+    await fetchVehicle(ride.vehicleId, ride.driverId);
+    await fetchDriver(ride.driverId);
     print(ride.approvedPassengers.length);
     for (int i = 0; i < ride.approvedPassengers.length; i++) {
       fetchPassenger(ride.approvedPassengers[i].passengerId);

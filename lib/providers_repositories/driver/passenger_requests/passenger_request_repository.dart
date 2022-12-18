@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
+
 import '../../../models/customer_json.dart';
 
 abstract class PassengerRequestRepository {
@@ -21,5 +24,18 @@ class MockPassengerRequestRepository implements PassengerRequestRepository {
       isPassenger: true,
       isDelete: false,
     ));
+  }
+}
+
+class FirebasePassengerRequestRepository implements PassengerRequestRepository{
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  @override
+  Future<Customer> fetchDriver(String driverId) async {
+    print("Asdasdasd");
+    Customer? driver;
+    await db.collection("Customers").doc(driverId).get().then((value) {
+      driver = Customer.fromJson(value.data() ?? {});
+    });
+    return driver as Customer;
   }
 }

@@ -25,13 +25,14 @@ class _PassengerRequestsState extends State<PassengerRequests> {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read<PassengerRequestProvider>().fetchPassengers(
-          widget.passengerRequests.map((e) => e.passengerId).toList());
+          widget.passengerRequests.where((e) => e.status == "Pending").map((e) => e.passengerId).toList());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final passengers = context.watch<PassengerRequestProvider>().passengers;
+    final isFetching = context.watch<PassengerRequestProvider>().isFetching;
     return Scaffold(
       drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
@@ -60,9 +61,9 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                           ? const CircularProgressIndicator()
                           : passengers.isEmpty
                               ? const Padding(
-                                padding: EdgeInsets.only(top: 20, bottom: 20),
-                                child: Text("No Requests"),
-                              )
+                                  padding: EdgeInsets.only(top: 20, bottom: 20),
+                                  child: Text("No Requests"),
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: widget.passengerRequests.length,
@@ -71,42 +72,53 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                                     return SingleChildScrollView(
                                       child: Column(
                                         children: [
-                                          PassengerCard(
-                                            status: true,
-                                            name:
-                                                "${passengers[index].firstName} ${passengers[index].lastName}",
-                                            rating: passengers[index].rating,
-                                            journeyStart: widget
-                                                .passengerRequests[index]
-                                                .startingDestination,
-                                            journeyEnd: widget
-                                                .passengerRequests[index]
-                                                .endingDestination,
-                                            onTap1: () {},
-                                            onTap2: () {},
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PassengerRequestWidget(
-                                                    status: false,
-                                                    name:
-                                                        "${passengers[index].firstName} ${passengers[index].lastName}",
-                                                    rating: passengers[index]
-                                                        .rating,
-                                                    journeyStart: widget
-                                                        .passengerRequests[
-                                                            index]
-                                                        .startingDestination,
-                                                    journeyEnd: widget
-                                                        .passengerRequests[
-                                                            index]
-                                                        .endingDestination,
-                                                  ),
+                                          (isFetching)
+                                              ? const CircularProgressIndicator()
+                                              : PassengerCard(
+                                                  status: true,
+                                                  name:
+                                                      "${passengers[index].firstName} ${passengers[index].lastName}",
+                                                  rating:
+                                                      passengers[index].rating,
+                                                  journeyStart: widget
+                                                      .passengerRequests[index]
+                                                      .startingDestination,
+                                                  journeyEnd: widget
+                                                      .passengerRequests[index]
+                                                      .endingDestination,
+                                                  onTap1: () {
+                                                    for (PassengerRequest pr in widget.passengerRequests){
+                                                      if (pr.passengerId == passengers[index].id){
+                                                        pr.status = "Rejected";
+
+                                                      }
+                                                    }
+                                                  },
+                                                  onTap2: () {},
+                                                  onTap: () {
+                                                    Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PassengerRequestWidget(
+                                                          status: false,
+                                                          name:
+                                                              "${passengers[index].firstName} ${passengers[index].lastName}",
+                                                          rating:
+                                                              passengers[index]
+                                                                  .rating,
+                                                          journeyStart: widget
+                                                              .passengerRequests[
+                                                                  index]
+                                                              .startingDestination,
+                                                          journeyEnd: widget
+                                                              .passengerRequests[
+                                                                  index]
+                                                              .endingDestination,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
-                                              );
-                                            },
-                                          ),
                                           Center(
                                             child: index != pass.length - 1
                                                 ? const Divider(

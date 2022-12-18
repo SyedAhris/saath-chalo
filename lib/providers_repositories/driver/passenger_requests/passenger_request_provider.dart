@@ -8,7 +8,7 @@ class PassengerRequestProvider with ChangeNotifier{
 
   bool isFetching = false;
 
-  PassengerRequestRepository _passengerRequestRepository = MockPassengerRequestRepository();
+  PassengerRequestRepository _passengerRequestRepository = FirebasePassengerRequestRepository();
 
   fetchPassengers(List<String> passengers)async {
     isFetching = true;
