@@ -39,7 +39,12 @@ class CurrentUserProvider with ChangeNotifier {
 
   signin(String email, String password) {}
 
-  updateCustomer() {
-    _currentUserRepository.updateCustomer(currentCustomer.id);
+  updateCustomer() async {
+    currentCustomer = await _currentUserRepository.updateCustomer(currentCustomer.id);
+    notifyListeners();
+  }
+
+  changePassword(String emailId) {
+    _currentUserRepository.sendPasswordChangeReq(emailId);
   }
 }
