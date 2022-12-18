@@ -35,50 +35,32 @@ class _MapSampleState extends State<MapSample> {
   @override
   void initState() {
     super.initState();
-    print("making");
-    Marker startPos = Marker(
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-      markerId: MarkerId('place_name'),
-      position: LatLng(double.parse(widget.startingPosition.lat),
-          double.parse(widget.startingPosition.long)),
-      infoWindow: InfoWindow(
-        title: 'Starting Location',
-        snippet: 'address',
-      ),
-    );
-    Marker waypointStart = Marker(
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      markerId: MarkerId('place_name'),
-      position: LatLng(double.parse(widget.waypoints![0].lat),
-          double.parse(widget.waypoints![0].long)),
-      infoWindow: InfoWindow(
-        title: 'title',
-        snippet: 'address',
-      ),
-    );
+    if (widget.waypoints != null && widget.waypoints!.length > 0) {
+      widget.markers = widget.markers ?? {};
+      print("workingg");
+      Marker waypointStart = Marker(
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        markerId: MarkerId('start'),
+        position: LatLng(double.parse(widget.waypoints![0].lat),
+            double.parse(widget.waypoints![0].long)),
+      );
 
-    Marker waypointEnd = Marker(
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      markerId: MarkerId('place_name'),
-      position: LatLng(
-          double.parse(widget.waypoints![widget.waypoints!.length - 1].lat),
-          double.parse(widget.waypoints![widget.waypoints!.length - 1].long)),
-      infoWindow: InfoWindow(
-        title: 'title',
-        snippet: 'address',
-      ),
-    );
-    // widget.markers?.add(startPos);
-    // widget.markers?.add(waypointEnd);
-    // widget.markers?.add(waypointStart);
-    // widget.markers = {startPos, waypointEnd, waypointStart};
+      Marker waypointEnd = Marker(
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        markerId: MarkerId('end'),
+        position: LatLng(
+            double.parse(widget.waypoints![widget.waypoints!.length - 1].lat),
+            double.parse(widget.waypoints![widget.waypoints!.length - 1].long)),
+      );
+
+      widget.markers?.add(waypointEnd);
+      widget.markers?.add(waypointStart);
+    }
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    print('map sample was updated');
-    print(widget.center.lat.toString());
     return GoogleMap(
         markers: widget.markers ?? {},
         onMapCreated: _onMapCreated,
@@ -89,10 +71,11 @@ class _MapSampleState extends State<MapSample> {
         polylines: widget.waypoints != null
             ? {
                 Polyline(
+                  jointType: JointType.round,
                   polylineId: const PolylineId('1'),
                   width: 4,
                   points: widget.waypoints!.map((e) => e.toLatLng()).toList(),
-                  color: Colors.red,
+                  color: Colors.orange,
                 )
               }
             : const {});
