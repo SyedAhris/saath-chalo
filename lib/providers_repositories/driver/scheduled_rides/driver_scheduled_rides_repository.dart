@@ -13,9 +13,17 @@ class DriverFirebaseScheduledRideRepository implements DriverScheduledRideReposi
   @override
   Future<List<Ride>> getRideNow(String driverId) async {
     List<Ride> rides = [];
-    await db.collection("Ride").where("driverID", isEqualTo: driverId).get().then((value) {
-      rides = value.docs.map((e) => Ride.fromJson(e.data())).toList();
-      print(value.docs[0].data().toString());
+    await db.collection("Ride").where("driverID", isEqualTo: driverId).where("isCompleted", isEqualTo: false).where("isDelete", isEqualTo: false).get().then((event) {
+      for (var doc in event.docs) {
+        DateTime date = DateTime.fromMillisecondsSinceEpoch(doc["date"]);
+        DateTime time = DateTime.fromMillisecondsSinceEpoch(doc["time"]);
+        DateTime dateTime = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+        Duration difference = dateTime.difference(DateTime.now());
+        if (difference.inHours <= 24) {
+          rides.add(Ride.fromJson(doc.data()));
+        }
+      }
+      //rides = value.docs.map((e) => Ride.fromJson(e.data())).toList();
     });
 
     return rides;
@@ -24,10 +32,19 @@ class DriverFirebaseScheduledRideRepository implements DriverScheduledRideReposi
   @override
   Future<List<Ride>> getUpcomingRide(String driverId) async {
     List<Ride> rides = [];
-    await db.collection("Ride").where("driverId", isEqualTo: driverId).where("isCompleted", isEqualTo: false).where("isDeleted", isEqualTo: false).get().then((value) {
-      rides = value.docs.map((e) => Ride.fromJson(e.data())).toList();
+    await db.collection("Ride").where("driverID", isEqualTo: driverId).where("isCompleted", isEqualTo: false).where("isDelete", isEqualTo: false).get().then((event) {
+      for (var doc in event.docs) {
+        DateTime date = DateTime.fromMillisecondsSinceEpoch(doc["date"]);
+        DateTime time = DateTime.fromMillisecondsSinceEpoch(doc["time"]);
+        DateTime dateTime = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+        Duration difference = dateTime.difference(DateTime.now());
+        if (difference.inHours > 24) {
+          rides.add(Ride.fromJson(doc.data()));
+        }
+      }
     });
 
+    print("upcoming rides");
     return rides;
   }
 
