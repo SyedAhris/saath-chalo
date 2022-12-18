@@ -4,6 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/common/enter_reset_code/enter_reset_code.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
+import 'package:provider/provider.dart';
+
+import '../../global_components/main_text_form_field.dart';
+import '../../providers_repositories/current_user/current_user_provider.dart';
 
 class PasswordReset extends StatefulWidget {
   const PasswordReset({super.key});
@@ -13,6 +17,9 @@ class PasswordReset extends StatefulWidget {
 }
 
 class _PasswordResetState extends State<PasswordReset> {
+  final _formKey = GlobalKey<FormState>();
+  bool isEmpty=false;
+  TextEditingController emailController= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,25 +92,20 @@ class _PasswordResetState extends State<PasswordReset> {
             ),
             Padding(
               padding: const EdgeInsets.all(20),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: Color(0xffDCDEDF),
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: Color(0xffDCDEDF),
-                    ),
-                  ),
-                  labelText: 'E-mail',
-                  hintText: 'example@gmail.com',
-                  errorText:
-                      'Oops! The following email address is not linked with any account',
-                  errorMaxLines: 2,
+              child: Form(
+                key: _formKey,
+                child: MainTextFormField(
+                  labelText: "Email",
+                  hintText: "someone@someone.com",
+                  controller: emailController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Required Field';
+                    }
+                    return null;
+                  },
+                  obscureText: false,
+                  enableSuggestions: true,
                 ),
               ),
             ),
@@ -118,12 +120,26 @@ class _PasswordResetState extends State<PasswordReset> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const EnterResetCode()));
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      String email=emailController.text;
+                      email=email.replaceAll(' ', '');
+                      String error = await context
+                          .read<CurrentUserProvider>()
+                          .changePassword(email);
+                      if (error != "") {
+                        final snackBar = SnackBar(
+                          content: Text(error),
+                        );
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
+                      } else {
+                        Navigator.of(context).pop();
+                      }
+                    }
                   },
                   child: const Text(
-                    "Send Reset Code",
+                    "Send Reset Code to Email",
                     style: TextStyle(fontSize: 18),
                   ),
                 ),

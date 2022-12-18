@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/home_page/sign_up.dart';
+import 'package:flutterdemo/home_page/login.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/create_ride/create_ride_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/passenger_requests/passenger_request_provider.dart';
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
           secondary: MainColors.secondary,
         ),
       ),
-      home: const HomePage(title: 'SaathChalo'),
+      home: const Login(),
     );
   }
 }
