@@ -49,8 +49,7 @@ class FirebasePassengerHomeRepository implements PassengerHomeRepository {
 
   @override
   updateRide(Ride ride) {
-    // TODO: implement updateRide
-    throw UnimplementedError();
+    db.collection("Ride").doc(ride.id).set(ride.toJson());
   }
 }
 
