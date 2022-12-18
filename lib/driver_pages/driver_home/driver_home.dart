@@ -359,10 +359,8 @@ class _DriverHomeState extends State<DriverHome> {
         language: "en",
         origin: startingCoordinate,
         destination: endingCoordinate);
-    print("constructed request");
     await directionsService.route(request,
         (DirectionsResult response, DirectionsStatus? status) {
-      print('aaaa');
       route = response.routes?[0].overviewPath
               ?.map((e) => Coordinates(
                   lat: e.latitude.toString(), long: e.longitude.toString()))

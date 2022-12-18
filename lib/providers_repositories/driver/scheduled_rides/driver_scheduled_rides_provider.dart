@@ -10,12 +10,15 @@ class DriverScheduledRidesProvider with ChangeNotifier {
 
   bool isFetching = false;
 
-  final DriverScheduledRideRepository _driverScheduledRideRepository = DriverMockScheduledRidesRepository();
+  final DriverScheduledRideRepository _driverScheduledRideRepository = DriverFirebaseScheduledRideRepository();
 
   //this function will be called in the initState of the screen then all the functions will be accessible through the created variables.
   fetchRides (String driverId) async {
+    isFetching = true;
+    notifyListeners();
     rideNow = await _driverScheduledRideRepository.getRideNow(driverId);
     upcomingRide = await _driverScheduledRideRepository.getUpcomingRide(driverId);
+    isFetching = false;
     notifyListeners();
   }
 }

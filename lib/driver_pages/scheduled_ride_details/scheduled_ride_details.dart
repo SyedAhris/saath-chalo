@@ -23,9 +23,11 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<DriverScheduledRidesDetailedProvider>()
-        .fetchRide(widget.rideId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<DriverScheduledRidesDetailedProvider>()
+          .fetchRide(widget.rideId);
+    });
   }
 
   @override
@@ -35,73 +37,85 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
         context.watch<DriverScheduledRidesDetailedProvider>().vehicle;
     final passengers =
         context.watch<DriverScheduledRidesDetailedProvider>().passengers;
+    final isFetching =
+        context.watch<DriverScheduledRidesDetailedProvider>().isFetching;
     return Scaffold(
       drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/backimg.png'))),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
-          child: SafeArea(
-            child: Column(
-              children: [
-                DriverBookedRideCard(
-                  car: "${vehicle.color} ${vehicle.make} ${vehicle.model}",
-                  numberPlate: vehicle.plateNumber,
-                  journeyStart: ride.startingDestination,
-                  journeyEnd: ride.endingDestination,
-                  acStatus: vehicle.ac,
-                  journeyDate: ConvertTime.millisecondsToDate(ride.date),
-                  journeyTime: ConvertTime.millisecondsToTime(ride.time),
-                  estCost: ride.totalFare,
-                  passengers: passengers
-                      .map((e) => "${e.firstName} ${e.lastName}")
-                      .toList(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: SizedBox(
-                    width: 300,
-                    height: 50,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PassengerRequests(
-                                    passengerRequests: ride.passengerRequests,
-                                  )));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
-                              "Passenger Requests",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: Colors.black,
-                            )
-                          ],
-                        )),
+      body: (isFetching)
+          ? const Padding(
+              padding: EdgeInsets.only(top: 80.0),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/images/backimg.png'))),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      DriverBookedRideCard(
+                        car:
+                            "${vehicle.color} ${vehicle.make} ${vehicle.model}",
+                        numberPlate: vehicle.plateNumber,
+                        journeyStart: ride.startingDestination,
+                        journeyEnd: ride.endingDestination,
+                        acStatus: vehicle.ac,
+                        journeyDate: ConvertTime.millisecondsToDate(ride.date),
+                        journeyTime: ConvertTime.millisecondsToTime(ride.time),
+                        estCost: ride.totalFare,
+                        passengers: passengers
+                            .map((e) => "${e.firstName} ${e.lastName}")
+                            .toList(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: SizedBox(
+                          width: 300,
+                          height: 50,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.white),
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => PassengerRequests(
+                                          passengerRequests:
+                                              ride.passengerRequests,
+                                        )));
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    "Passenger Requests",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.black,
+                                  )
+                                ],
+                              )),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 310, bottom: 20),
+                        child: MainButton(
+                            width: 250, text: "Cancel Ride", onTap: () {}),
+                      )
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 310, bottom: 20),
-                  child:
-                      MainButton(width: 250, text: "Cancel Ride", onTap: () {}),
-                )
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

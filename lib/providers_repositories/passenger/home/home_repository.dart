@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterdemo/models/approved_passenger.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/models/customer_json.dart';
@@ -11,16 +12,39 @@ abstract class PassengerHomeRepository {
   Future<List<PassengerHomeListDetails>> searchRides(
       Coordinates startingCoordinates, Coordinates endingCoordinates);
   updateRide(Ride ride);
-
 }
 
 class FirebasePassengerHomeRepository implements PassengerHomeRepository {
+  FirebaseFirestore db = FirebaseFirestore.instance;
   @override
-  Future<List<PassengerHomeListDetails>> searchRides(
-      Coordinates startingCoordinates, Coordinates endingCoordinates) {
-    // TODO: implement searchRides
-    // TODO: using google maps
-    throw UnimplementedError();
+  Future<List<PassengerHomeListDetails>> searchRides (
+      Coordinates startingCoordinates, Coordinates endingCoordinates) async {
+    Ride? ride;
+    Customer? driver;
+    Vehicle? vehicle;
+    List<PassengerHomeListDetails> details = [];
+    await db
+        .collection("Ride")
+        .orderBy("date", descending: true)
+        .get()
+        .then((value) async {
+      for (var element in value.docs) {
+        ride = Ride.fromJson(element.data());
+        print(ride?.driverId);
+        await db.collection("Customers").doc(ride!.driverId).get().then((value) {
+          driver = Customer.fromJson(value.data()!);
+          print(driver?.vehicles.length);
+          for (Vehicle veh in driver!.vehicles) {
+            if (veh.plateNumber == ride!.vehicleId) {
+              vehicle = veh;
+              details.add(PassengerHomeListDetails(ride: ride!, driver: driver!, vehicle: vehicle!));
+            }
+          }
+        });
+      }
+    });
+    print(details[0].vehicle.plateNumber);
+    return details;
   }
 
   @override
@@ -62,8 +86,9 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         approvedPassengers: [
           ApprovedPassenger(
             passengerId: "52345",
-            startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
-            endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+            startingCoordinates:
+                Coordinates(lat: "12.345678", long: "98.765432"),
+            endingCoordinates: Coordinates(lat: "56.345678", long: "54.765432"),
             startingDestination: "startingDestination",
             endingDestination: "endingDestination",
             waypoints: [
@@ -82,8 +107,10 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         passengerRequests: [
           PassengerRequest(
               passengerId: "1245",
-              startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
-              endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+              startingCoordinates:
+                  Coordinates(lat: "12.345678", long: "98.765432"),
+              endingCoordinates:
+                  Coordinates(lat: "56.345678", long: "54.765432"),
               startingDestination: "startingDestination",
               endingDestination: "endingDestination",
               waypoints: [
@@ -113,17 +140,18 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         isPassenger: false,
         isDelete: false,
         id: '',
-      ), vehicle: Vehicle(
-        color: "Red",
-        make: "Suzuki",
-        model: "WagonR",
-        year: "2020",
-        ac: true,
-        carType: "hatchback",
-        seatingCapacity: 4,
-        imageLink: "imageLink",
-        plateNumber: "ABC-123",
-        isDelete: false),
+      ),
+      vehicle: Vehicle(
+          color: "Red",
+          make: "Suzuki",
+          model: "WagonR",
+          year: "2020",
+          ac: true,
+          carType: "hatchback",
+          seatingCapacity: 4,
+          imageLink: "imageLink",
+          plateNumber: "ABC-123",
+          isDelete: false),
     )
   ];
   @override
