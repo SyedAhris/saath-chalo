@@ -43,8 +43,6 @@ class DriverFirebaseScheduledRideRepository implements DriverScheduledRideReposi
         }
       }
     });
-
-    print("upcoming rides");
     return rides;
   }
 
