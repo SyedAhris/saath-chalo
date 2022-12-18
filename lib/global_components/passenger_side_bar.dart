@@ -31,10 +31,6 @@ class PassengerSideBar extends StatelessWidget {
               title: const SideBarText(text: "Ride History"),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const PassengerRideHistory()))),
-          ListTile(
-              leading: const Icon(Icons.notifications),
-              title: const SideBarText(text: "Notification"),
-              onTap: () {}),
         ]);
   }
 }

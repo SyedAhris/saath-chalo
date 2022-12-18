@@ -3,7 +3,6 @@ import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
 import 'package:flutterdemo/driver_pages/driver_ride_history/driver_ride_history.dart';
 import 'package:flutterdemo/driver_pages/scheduled_rides/scheduled_rides.dart';
 import 'package:flutterdemo/driver_pages/vehicles/vehicles_list/vehicle_list_view.dart';
-import 'package:flutterdemo/global_components/map_auto_complete.dart';
 import 'package:flutterdemo/global_components/side_bar.dart';
 import 'package:flutterdemo/home_page/home_page.dart';
 
@@ -39,12 +38,6 @@ class DriverSideBar extends StatelessWidget {
               title: const SideBarText(text: "Vehicles"),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const VehiclesListView()))),
-          ListTile(
-            leading: Icon(Icons.notifications),
-            title: const SideBarText(text: "Notification"),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const MapAutoComplete())),
-          ),
         ]);
   }
 }
