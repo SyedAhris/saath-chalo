@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 
 import '../../constants/convert_time.dart';
 import '../../global_components/booked_ride_card.dart';
@@ -8,10 +9,8 @@ import '../../global_components/main_button.dart';
 import '../../providers_repositories/passenger/home/home_provider.dart';
 
 class SendRequestToDriver extends StatefulWidget {
-  const SendRequestToDriver({
-    Key? key,
-    required this.rideDetails
-  }) : super(key: key);
+  const SendRequestToDriver({Key? key, required this.rideDetails})
+      : super(key: key);
 
   final PassengerHomeListDetails rideDetails;
   @override
@@ -23,12 +22,8 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: const MainAppBar(title: "SaathChalo"),
-        body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/backimg.png'))),
+        appBar: const MainAppBar(title: "Request Driver"),
+        body: MapWrapper(
           child: SizedBox(
             //needs to be changed so automatically fits whole screen
             height: double.infinity,
@@ -39,40 +34,24 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                  BookedRideCard(
-                  name:
-                  "${widget.rideDetails.driver.firstName} ${widget.rideDetails.driver.lastName}",
-                    car:
-                    "${widget.rideDetails.vehicle.color} ${widget.rideDetails.vehicle.make} ${widget.rideDetails.vehicle.model}",
-                    numberPlate: widget.rideDetails
-                        .vehicle
-                        .plateNumber,
-                    rating: widget.rideDetails
-                        .driver
-                        .rating,
-                    acStatus:
-                    widget.rideDetails.vehicle.ac,
-                    journeyStart: widget.rideDetails
-                        .ride
-                        .startingDestination,
-                    journeyEnd: widget.rideDetails
-                        .ride
-                        .endingDestination,
-                    journeyDate: ConvertTime
-                        .millisecondsToDate(
-                        widget.rideDetails
-                            .ride
-                            .date),
-                    journeyTime: ConvertTime
-                        .millisecondsToTime(
-                        widget.rideDetails
-                            .ride
-                            .time),
-                    estCost: widget.rideDetails
-                        .ride
-                        .totalFare,
-                    status: 'None',
-                  ),
+                      BookedRideCard(
+                        name:
+                            "${widget.rideDetails.driver.firstName} ${widget.rideDetails.driver.lastName}",
+                        car:
+                            "${widget.rideDetails.vehicle.color} ${widget.rideDetails.vehicle.make} ${widget.rideDetails.vehicle.model}",
+                        numberPlate: widget.rideDetails.vehicle.plateNumber,
+                        rating: widget.rideDetails.driver.rating,
+                        acStatus: widget.rideDetails.vehicle.ac,
+                        journeyStart:
+                            widget.rideDetails.ride.startingDestination,
+                        journeyEnd: widget.rideDetails.ride.endingDestination,
+                        journeyDate: ConvertTime.millisecondsToDate(
+                            widget.rideDetails.ride.date),
+                        journeyTime: ConvertTime.millisecondsToTime(
+                            widget.rideDetails.ride.time),
+                        estCost: widget.rideDetails.ride.totalFare,
+                        status: 'None',
+                      ),
                       const Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: LocationTextField(

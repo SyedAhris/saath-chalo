@@ -23,8 +23,10 @@ class _PassengerRequestsState extends State<PassengerRequests> {
   @override
   void initState() {
     super.initState();
-    context.read<PassengerRequestProvider>().fetchPassengers(
-        widget.passengerRequests.map((e) => e.passengerId).toList());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<PassengerRequestProvider>().fetchPassengers(
+          widget.passengerRequests.map((e) => e.passengerId).toList());
+    });
   }
 
   @override
@@ -54,33 +56,23 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                             "    Passengers Requests",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )),
-                      context.read<PassengerRequestProvider>().isFetching ?
-                          const CircularProgressIndicator() :
-                      ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: widget.passengerRequests.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  PassengerCard(
-                                    status: true,
-                                    name:
-                                        "${passengers[index].firstName} ${passengers[index].lastName}",
-                                    rating: passengers[index].rating,
-                                    journeyStart: widget
-                                        .passengerRequests[index]
-                                        .startingDestination,
-                                    journeyEnd: widget.passengerRequests[index]
-                                        .endingDestination,
-                                    onTap1: () {},
-                                    onTap2: () {},
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              PassengerRequestWidget(
-                                            status: false,
+                      context.read<PassengerRequestProvider>().isFetching
+                          ? const CircularProgressIndicator()
+                          : passengers.isEmpty
+                              ? const Padding(
+                                  padding: EdgeInsets.only(top: 20, bottom: 20),
+                                  child: Text("No Requests"),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: widget.passengerRequests.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          PassengerCard(
+                                            status: true,
                                             name:
                                                 "${passengers[index].firstName} ${passengers[index].lastName}",
                                             rating: passengers[index].rating,
@@ -90,26 +82,46 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                                             journeyEnd: widget
                                                 .passengerRequests[index]
                                                 .endingDestination,
+                                            onTap1: () {},
+                                            onTap2: () {},
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PassengerRequestWidget(
+                                                    status: false,
+                                                    name:
+                                                        "${passengers[index].firstName} ${passengers[index].lastName}",
+                                                    rating: passengers[index]
+                                                        .rating,
+                                                    journeyStart: widget
+                                                        .passengerRequests[
+                                                            index]
+                                                        .startingDestination,
+                                                    journeyEnd: widget
+                                                        .passengerRequests[
+                                                            index]
+                                                        .endingDestination,
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  Center(
-                                    child: index != pass.length - 1
-                                        ? const Divider(
-                                            color: Colors.black,
-                                            height: 5,
-                                            thickness: 2,
-                                            indent: 20,
-                                            endIndent: 20,
-                                          )
-                                        : const Text(""),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
+                                          Center(
+                                            child: index != pass.length - 1
+                                                ? const Divider(
+                                                    color: Colors.black,
+                                                    height: 5,
+                                                    thickness: 2,
+                                                    indent: 20,
+                                                    endIndent: 20,
+                                                  )
+                                                : const Text(""),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }),
                     ],
                   ),
                 )),

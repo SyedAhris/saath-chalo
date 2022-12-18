@@ -35,7 +35,7 @@ class DriverSideBar extends StatelessWidget {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const DriverRideHistory()))),
           ListTile(
-              leading: const Icon(Icons.history),
+              leading: const Icon(Icons.drive_eta),
               title: const SideBarText(text: "Vehicles"),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const VehiclesListView()))),

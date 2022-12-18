@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/booked_ride_card.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/passenger_pages/send_request_to_driver/send_request_to_driver.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import "package:google_maps_webservice/geocoding.dart";
 import 'package:provider/provider.dart';
+
 import '../../constants/convert_time.dart';
 import '../../global_components/location_text_field.dart';
 import '../../global_components/main_app_bar.dart';
@@ -11,16 +15,27 @@ import '../../global_components/passenger_side_bar.dart';
 import '../../models/coordinates.dart';
 
 class PassengerHome extends StatefulWidget {
-  const PassengerHome({Key? key}) : super(key: key);
+  PassengerHome({Key? key}) : super(key: key);
+  LatLng? latlng;
 
   @override
   State<PassengerHome> createState() => _PassengerHomeState();
 }
 
 class _PassengerHomeState extends State<PassengerHome> {
+  late TextEditingController pickUpLocationController;
+  late TextEditingController dropOffLocationController;
+
   @override
   void initState() {
     super.initState();
+    pickUpLocationController = TextEditingController()
+      ..addListener(() {
+        print("calling setstaate");
+        print(pickUpLocationController.value.text);
+        setState(() {});
+      });
+    dropOffLocationController = TextEditingController();
   }
 
   @override
@@ -28,11 +43,19 @@ class _PassengerHomeState extends State<PassengerHome> {
     return Scaffold(
       drawer: const PassengerSideBar(),
       appBar: const MainAppBar(title: "Home"),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/backimg.png'))),
+      body: MapWrapper(
+        startingCoordinate: Coordinates.fromLatlng(
+            widget.latlng ?? const LatLng(21.91792, 67.03194000000002)),
+        markers: widget.latlng != null
+            ? {
+                Marker(
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueMagenta),
+                  markerId: MarkerId('place_name'),
+                  position: widget.latlng!,
+                )
+              }
+            : {},
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
@@ -42,14 +65,27 @@ class _PassengerHomeState extends State<PassengerHome> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  const LocationTextField(
+                  LocationTextField(
+                    controller: pickUpLocationController,
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
+                    onSubmitted: (text) async {
+                      final geocoding = GoogleMapsGeocoding(
+                          apiKey: "AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE");
+                      GeocodingResponse response = await geocoding
+                          .searchByAddress(pickUpLocationController.value.text);
+                      widget.latlng = LatLng(
+                          response.results[0].geometry.location.lat,
+                          response.results[0].geometry.location.lng);
+                      setState(() {});
+                    },
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 20),
                     child: LocationTextField(
-                        labelText: "DropOff", hintText: "e.g Chaar Meenar"),
+                        controller: dropOffLocationController,
+                        labelText: "DropOff",
+                        hintText: "e.g Chaar Meenar"),
                   ),
                   Expanded(
                     child: Padding(
@@ -70,11 +106,10 @@ class _PassengerHomeState extends State<PassengerHome> {
                               final rideDetails =
                                   context.read<PassengerHomeProvider>().details;
                               showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20))
-                                ),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))),
                                   context: context,
                                   builder: (context) => ListView.builder(
                                       primary: false,
@@ -96,8 +131,9 @@ class _PassengerHomeState extends State<PassengerHome> {
                                                 rating: rideDetails[index]
                                                     .driver
                                                     .rating,
-                                                acStatus:
-                                                    rideDetails[index].vehicle.ac,
+                                                acStatus: rideDetails[index]
+                                                    .vehicle
+                                                    .ac,
                                                 journeyStart: rideDetails[index]
                                                     .ride
                                                     .startingDestination,
@@ -119,27 +155,28 @@ class _PassengerHomeState extends State<PassengerHome> {
                                                     .totalFare,
                                                 status: 'None',
                                               ),
-                                            MainButton(
-                                                text: "Send Request",
-                                                onTap: (){
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          SendRequestToDriver(
-                                                            rideDetails: rideDetails[index],
-                                                          ),
-                                                    ),
-                                                  );
-                                                }),
+                                              MainButton(
+                                                  text: "Send Request",
+                                                  onTap: () {
+                                                    Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SendRequestToDriver(
+                                                          rideDetails:
+                                                              rideDetails[
+                                                                  index],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }),
                                               Container(
-                                                child: index!=rideDetails.length-1?
-                                                const Divider(
-                                                  thickness: 3,
-                                                  color: Colors.black,
-                                                )
-                                                    :
-                                                    null
-                                              )
+                                                  child: index !=
+                                                          rideDetails.length - 1
+                                                      ? const Divider(
+                                                          thickness: 3,
+                                                          color: Colors.black,
+                                                        )
+                                                      : null)
                                             ],
                                           ),
                                         );

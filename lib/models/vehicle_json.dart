@@ -1,15 +1,15 @@
 class Vehicle {
   Vehicle({
-    required this.color,
-    required this.make,
-    required this.model,
-    required this.year,
-    required this.ac,
-    required this.carType,
-    required this.seatingCapacity,
-    required this.imageLink,
-    required this.plateNumber,
-    required this.isDelete,
+    this.color = "",
+    this.make = "",
+    this.model = "",
+    this.year = "",
+    this.ac = false,
+    this.carType = "",
+    this.seatingCapacity = -1,
+    this.imageLink = "",
+    this.plateNumber = "",
+    this.isDelete = false,
   });
 
   String color;

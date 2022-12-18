@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 
 import '../../global_components/booked_ride_card.dart';
 import '../../global_components/location_text_field.dart';
@@ -6,7 +7,8 @@ import '../../global_components/main_app_bar.dart';
 import '../../global_components/main_button.dart';
 
 class PassengerBookedRidesPending extends StatefulWidget {
-  const PassengerBookedRidesPending({Key? key, required this.rideId}) : super(key: key);
+  const PassengerBookedRidesPending({Key? key, required this.rideId})
+      : super(key: key);
 
   final String rideId;
 
@@ -22,11 +24,7 @@ class _PassengerBookedRidesPendingState
     return Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const MainAppBar(title: "SaathChalo"),
-        body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/backimg.png'))),
+        body: MapWrapper(
           child: SizedBox(
             //needs to be changed so automatically fits whole screen
             height: double.infinity,
