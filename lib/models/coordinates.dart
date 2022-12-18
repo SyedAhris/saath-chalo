@@ -20,4 +20,9 @@ class Coordinates {
       };
 
   LatLng toLatLng() => LatLng(double.parse(lat), double.parse(long));
+
+  static Coordinates fromLatlng(LatLng latlng) {
+    return Coordinates(
+        lat: latlng.latitude.toString(), long: latlng.longitude.toString());
+  }
 }
