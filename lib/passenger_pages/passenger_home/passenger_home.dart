@@ -4,7 +4,6 @@ import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/passenger_pages/send_request_to_driver/send_request_to_driver.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import "package:google_maps_webservice/geocoding.dart";
 import 'package:provider/provider.dart';
 
 import '../../constants/convert_time.dart';
@@ -16,7 +15,8 @@ import '../../models/coordinates.dart';
 
 class PassengerHome extends StatefulWidget {
   PassengerHome({Key? key}) : super(key: key);
-  LatLng? latlng;
+  LatLng? startingCoords;
+  LatLng? endingCoords;
 
   @override
   State<PassengerHome> createState() => _PassengerHomeState();
@@ -44,16 +44,20 @@ class _PassengerHomeState extends State<PassengerHome> {
       drawer: const PassengerSideBar(),
       appBar: const MainAppBar(title: "Home"),
       body: MapWrapper(
-        startingCoordinate: Coordinates.fromLatlng(
-            widget.latlng ?? const LatLng(21.91792, 67.03194000000002)),
-        markers: widget.latlng != null
+        markers: widget.startingCoords != null && widget.endingCoords != null
             ? {
                 Marker(
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueMagenta),
-                  markerId: MarkerId('place_name'),
-                  position: widget.latlng!,
-                )
+                  markerId: MarkerId('starting coords'),
+                  position: widget.startingCoords!,
+                ),
+                Marker(
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueRed),
+                  markerId: MarkerId('ending coords'),
+                  position: widget.endingCoords!,
+                ),
               }
             : {},
         child: SizedBox(
@@ -70,13 +74,9 @@ class _PassengerHomeState extends State<PassengerHome> {
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
                     onSubmitted: (text) async {
-                      final geocoding = GoogleMapsGeocoding(
-                          apiKey: "AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE");
-                      GeocodingResponse response = await geocoding
-                          .searchByAddress(pickUpLocationController.value.text);
-                      widget.latlng = LatLng(
-                          response.results[0].geometry.location.lat,
-                          response.results[0].geometry.location.lng);
+                      widget.startingCoords =
+                          await MapWrapper.getLocationFromAddress(
+                              pickUpLocationController.value.text);
                       setState(() {});
                     },
                   ),
@@ -85,7 +85,13 @@ class _PassengerHomeState extends State<PassengerHome> {
                     child: LocationTextField(
                         controller: dropOffLocationController,
                         labelText: "DropOff",
-                        hintText: "e.g Chaar Meenar"),
+                        hintText: "e.g Chaar Meenar",
+                        onSubmitted: (text) async {
+                          widget.endingCoords =
+                              await MapWrapper.getLocationFromAddress(
+                                  pickUpLocationController.value.text);
+                          setState(() {});
+                        }),
                   ),
                   Expanded(
                     child: Padding(
