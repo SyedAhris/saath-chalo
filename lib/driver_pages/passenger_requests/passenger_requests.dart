@@ -23,7 +23,7 @@ class _PassengerRequestsState extends State<PassengerRequests> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<PassengerRequestProvider>().fetchPassengers(
           widget.passengerRequests.map((e) => e.passengerId).toList());
     });
@@ -60,9 +60,9 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                           ? const CircularProgressIndicator()
                           : passengers.isEmpty
                               ? const Padding(
-                                padding: EdgeInsets.only(top: 20, bottom: 20),
-                                child: Text("No Requests"),
-                              )
+                                  padding: EdgeInsets.only(top: 20, bottom: 20),
+                                  child: Text("No Requests"),
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: widget.passengerRequests.length,

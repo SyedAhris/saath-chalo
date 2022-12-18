@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/convert_time.dart';
 import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
 import 'package:flutterdemo/providers_repositories/driver/scheduled_rides_detailed/driver_scheduled_rides_detailed_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../global_components/driver_booked_ride_card.dart';
 import '../../global_components/driver_side_bar.dart';
 import '../../global_components/main_app_bar.dart';
 import '../../global_components/main_button.dart';
-import 'package:provider/provider.dart';
 
 class ScheduledRideDetails extends StatefulWidget {
   const ScheduledRideDetails({Key? key, required this.rideId})

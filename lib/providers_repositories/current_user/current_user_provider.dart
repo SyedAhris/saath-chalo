@@ -1,7 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/models/customer_json.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutterdemo/models/vehicle_json.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_repository.dart';
 
 class CurrentUserProvider with ChangeNotifier {
@@ -54,7 +53,8 @@ class CurrentUserProvider with ChangeNotifier {
   signin(String email, String password) {}
 
   updateCustomer() async {
-    currentCustomer = await _currentUserRepository.updateCustomer(currentCustomer.id);
+    currentCustomer =
+        await _currentUserRepository.updateCustomer(currentCustomer.id);
     notifyListeners();
   }
 

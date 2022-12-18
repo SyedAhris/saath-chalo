@@ -1,13 +1,15 @@
 import 'dart:math';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class Coordinates {
-  Coordinates({
+  const Coordinates({
     required this.lat,
     required this.long,
   });
 
-  String lat;
-  String long;
+  final String lat;
+  final String long;
 
   factory Coordinates.fromJson(Map<String, dynamic> json) => Coordinates(
         lat: json["lat"],
@@ -19,8 +21,15 @@ class Coordinates {
         "long": long,
       };
 
+  LatLng toLatLng() => LatLng(double.parse(lat), double.parse(long));
+
+  static Coordinates fromLatlng(LatLng latlng) {
+    return Coordinates(
+        lat: latlng.latitude.toString(), long: latlng.longitude.toString());
+  }
+
   double getDistanceTo(Coordinates other) {
-    final double earthRadius = 6371; // Earth's radius in kilometers
+    const double earthRadius = 6371; // Earth's radius in kilometers
     final double lat1 = double.parse(lat) * pi / 180;
     final double lat2 = double.parse(other.lat) * pi / 180;
     final double lon1 = double.parse(long) * pi / 180;
@@ -36,15 +45,22 @@ class Coordinates {
 
   static double petrolPrice = 215;
 
-  static double calculateFare(double distance, double duration, bool isPeakHour) {
-    final baseFare = 100.0; // base fare in PKR
+  static double calculateFare(
+      double distance, double duration, bool isPeakHour) {
+    const baseFare = 100.0; // base fare in PKR
     final distanceFare = distance * 10; // PKR 10 per km
     final durationFare = duration * 5; // PKR 5 per minute
-    final petrolCost = distance * petrolPrice / 10; // cost of petrol for the distance traveled
+    final petrolCost =
+        distance * petrolPrice / 10; // cost of petrol for the distance traveled
     double peakHourSurcharge = 0;
     if (isPeakHour) {
-      peakHourSurcharge = (baseFare + distanceFare + durationFare + petrolCost) * 0.20;
+      peakHourSurcharge =
+          (baseFare + distanceFare + durationFare + petrolCost) * 0.20;
     }
-    return baseFare + distanceFare + durationFare + petrolCost + peakHourSurcharge;
+    return baseFare +
+        distanceFare +
+        durationFare +
+        petrolCost +
+        peakHourSurcharge;
   }
 }
