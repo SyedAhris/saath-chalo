@@ -11,6 +11,7 @@ import 'package:flutterdemo/models/rides_json.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/create_ride/create_ride_provider.dart';
 import 'package:google_directions_api/google_directions_api.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/vehicle_json.dart' as vehicle_model;
@@ -78,6 +79,23 @@ class _DriverHomeState extends State<DriverHome> {
       appBar: const MainAppBar(title: "Create Ride"),
       drawer: const DriverSideBar(),
       body: MapWrapper(
+        waypoints: waypoints,
+        markers: waypoints.length > 0
+            ? {
+                Marker(
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueRed),
+                  markerId: MarkerId('ending'),
+                  position: waypoints[waypoints.length - 1].toLatLng(),
+                ),
+                Marker(
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueGreen),
+                  markerId: MarkerId('starting'),
+                  position: waypoints[0].toLatLng(),
+                ),
+              }
+            : {},
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
@@ -93,19 +111,41 @@ class _DriverHomeState extends State<DriverHome> {
                     labelText: "PickUp",
                     hintText: "e.g IBA - Karachi University",
                     onSubmitted: (text) async {
-                      waypoints = await getRoute(
-                              startingCoordinate: text,
-                              endingCoordinate: "Nixor College") ??
-                          [];
-                      print('${waypoints.length} waypoints length');
+                      Coordinates coords = Coordinates.fromLatlng(
+                          await MapWrapper.getLocationFromAddress(text));
+                      waypoints.isNotEmpty
+                          ? waypoints[0] = coords
+                          : waypoints.add(coords);
+                      waypoints.length > 1
+                          ? waypoints = await getRoute(
+                                  startingCoordinate:
+                                      pickUpLocationController.value.text,
+                                  endingCoordinate:
+                                      dropOffLocationController.value.text) ??
+                              []
+                          : null;
+                      setState(() {});
                     },
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: LocationTextField(
-                        controller: dropOffLocationController,
-                        labelText: "DropOff",
-                        hintText: "e.g Chaar Meenar"),
+                      controller: dropOffLocationController,
+                      labelText: "DropOff",
+                      hintText: "e.g Chaar Meenar",
+                      onSubmitted: (text) async {
+                        Coordinates coords = Coordinates.fromLatlng(
+                            await MapWrapper.getLocationFromAddress(text));
+                        waypoints.add(coords);
+                        waypoints = await getRoute(
+                                startingCoordinate:
+                                    pickUpLocationController.value.text,
+                                endingCoordinate:
+                                    dropOffLocationController.value.text) ??
+                            [];
+                        setState(() {});
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
