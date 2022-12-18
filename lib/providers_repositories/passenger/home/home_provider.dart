@@ -13,7 +13,7 @@ import '../../../models/vehicle_json.dart';
 class PassengerHomeProvider with ChangeNotifier {
   List<PassengerHomeListDetails> details = [];
 
-  final PassengerHomeRepository _passengerHomeRepository = MockPassengerHomeRepository();
+  final PassengerHomeRepository _passengerHomeRepository = FirebasePassengerHomeRepository();
 
   void getSearchedRides(Coordinates startingCoordinates, Coordinates endingCoordinates) async {
     //TODO: connect with repository

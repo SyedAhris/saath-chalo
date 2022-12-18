@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../../models/approved_passenger.dart';
 import '../../../models/coordinates.dart';
 import '../../../models/customer_json.dart';
@@ -7,9 +9,56 @@ import '../../../models/vehicle_json.dart';
 
 abstract class DriverScheduledRidesDetailedRepository {
   Future<Ride> fetchRide(String rideID);
-  Future<Vehicle> fetchVehicle(String vehicleID);
+  Future<Vehicle> fetchVehicle(String vehicleId, String driverId);
   Future<Customer> fetchDriver(String driverID);
   Future<Customer> fetchPassenger(passengerId);
+}
+
+class DriverFirebaseScheduledRidesDetailedRepository
+    implements DriverScheduledRidesDetailedRepository {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  @override
+  Future<Ride> fetchRide(String rideID) async {
+    Ride? ride;
+    await db.collection("Ride").doc(rideID).get().then((value) {
+      ride = Ride.fromJson(value.data() ?? {});
+    });
+    return ride as Ride;
+  }
+
+  @override
+  Future<Vehicle> fetchVehicle(String vehicleId, String driverId) async {
+    Vehicle? vehicle;
+    print(driverId);
+    await db.collection("Customers").doc(driverId).get().then((event) {
+      Customer customer = Customer.fromJson(event.data() ?? {});
+      for (Vehicle veh in customer.vehicles) {
+        if (veh.plateNumber == vehicleId) {
+          vehicle = veh;
+        }
+      }
+    });
+    return vehicle as Vehicle;
+  }
+
+  @override
+  Future<Customer> fetchDriver(String driverID) async {
+    Customer? driver;
+    await db.collection("Customers").doc(driverID).get().then((value) {
+      driver = Customer.fromJson(value.data() ?? {});
+    });
+    return driver as Customer;
+  }
+
+  @override
+  Future<Customer> fetchPassenger(passengerId) async {
+    Customer? passenger;
+    await db.collection("Customer").doc(passengerId).get().then((value) {
+      passenger = Customer.fromJson(value.data() ?? {});
+    });
+    return passenger as Customer;
+  }
 }
 
 class DriverMockScheduledRidesDetailedRepository
@@ -63,8 +112,8 @@ class DriverMockScheduledRidesDetailedRepository
       approvedPassengers: [
         ApprovedPassenger(
           passengerId: "huzaifa@gmail.com",
-          startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
-          endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+          startingCoordinates: Coordinates(lat: "12.345678", long: "98.765432"),
+          endingCoordinates: Coordinates(lat: "56.345678", long: "54.765432"),
           startingDestination: "startingDestinationHuzaifa",
           endingDestination: "endingDestinationHuzaifa",
           waypoints: [
@@ -81,8 +130,8 @@ class DriverMockScheduledRidesDetailedRepository
         ),
         ApprovedPassenger(
           passengerId: "irtiza@gmail.com",
-          startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
-          endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+          startingCoordinates: Coordinates(lat: "12.345678", long: "98.765432"),
+          endingCoordinates: Coordinates(lat: "56.345678", long: "54.765432"),
           startingDestination: "startingDestinationIrtiza",
           endingDestination: "endingDestinationIrtiza",
           waypoints: [
@@ -99,8 +148,8 @@ class DriverMockScheduledRidesDetailedRepository
         ),
         ApprovedPassenger(
           passengerId: "ibrahim@gmail.com",
-          startingCoordinates:  Coordinates(lat: "12.345678", long: "98.765432"),
-          endingCoordinates:  Coordinates(lat: "56.345678", long: "54.765432"),
+          startingCoordinates: Coordinates(lat: "12.345678", long: "98.765432"),
+          endingCoordinates: Coordinates(lat: "56.345678", long: "54.765432"),
           startingDestination: "startingDestinationIbrahim",
           endingDestination: "endingDestinationIbrahim",
           waypoints: [
@@ -146,7 +195,7 @@ class DriverMockScheduledRidesDetailedRepository
   }
 
   @override
-  Future<Vehicle> fetchVehicle(String vehicleID) async {
+  Future<Vehicle> fetchVehicle(String vehicleId, String driverId) async {
     return (Vehicle(
       color: "Black",
       make: "Suzuki",

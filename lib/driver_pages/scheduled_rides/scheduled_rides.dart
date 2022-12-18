@@ -22,9 +22,11 @@ class _ScheduledRidesState extends State<ScheduledRides> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<DriverScheduledRidesProvider>()
-        .fetchRides(context.read<CurrentUserProvider>().currentCustomer.id);
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      context
+          .read<DriverScheduledRidesProvider>()
+          .fetchRides(context.read<CurrentUserProvider>().currentCustomer.id);
+    });
   }
 
   @override
@@ -32,105 +34,128 @@ class _ScheduledRidesState extends State<ScheduledRides> {
     final rideNow = context.watch<DriverScheduledRidesProvider>().rideNow;
     final upcomingRides =
         context.watch<DriverScheduledRidesProvider>().upcomingRide;
+    final isFetching = context.watch<DriverScheduledRidesProvider>().isFetching;
     return Scaffold(
       drawer: DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
-          child: Column(
-            children: [
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Text(
-                      "Ride Now",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                  ),
-                ],
-              ),
-              context.watch<DriverScheduledRidesProvider>().isFetching
-                  ? const CircularProgressIndicator()
-                  : ListView.builder(
-                      primary: false,
-                      shrinkWrap: true,
-                      itemCount: rideNow.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                         ScheduledRideBooking(rideId: rideNow[index].id,)));
-                              },
-                              child: RideCard(
-                                journeyStart: rideNow[index].startingDestination,
-                                journeyEnd: rideNow[index].endingDestination,
-                                journeyDate: ConvertTime.millisecondsToDate(rideNow[index].date),
-                                journeyTime: ConvertTime.millisecondsToTime(rideNow[index].time),
-                                estCost: rideNow[index].totalFare.toDouble(),
-                              ),
-                            ),
-                          ],
-                        );
-                      }),
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: Text(
-                      "Upcoming Rides",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      indent: 5,
-                      endIndent: 5,
-                    ),
-                  ),
-                ],
-              ),
-              ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: upcomingRides.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                     ScheduledRideDetails(rideId: upcomingRides[index].id,)));
-                          },
-                          child: RideCard(
-                            journeyStart: upcomingRides[index].startingDestination,
-                            journeyEnd: upcomingRides[index].endingDestination,
-                            journeyDate: ConvertTime.millisecondsToTime(upcomingRides[index].date),
-                            journeyTime: ConvertTime.millisecondsToTime(upcomingRides[index].time),
-                            estCost: upcomingRides[index].totalFare.toDouble(),
+        child: (isFetching)
+            ? const Padding(
+              padding: EdgeInsets.only(top: 80.0),
+              child: Center(child: CircularProgressIndicator(),),
+            )
+            : Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
+                child: Column(
+                  children: [
+                    Row(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            "Ride Now",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            indent: 5,
+                            endIndent: 5,
                           ),
                         ),
                       ],
-                    );
-                  }),
-            ],
-          ),
-        ),
+                    ),
+                    context.watch<DriverScheduledRidesProvider>().isFetching
+                        ? const CircularProgressIndicator()
+                        : ListView.builder(
+                            primary: false,
+                            shrinkWrap: true,
+                            itemCount: rideNow.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ScheduledRideBooking(
+                                                    rideId: rideNow[index].id,
+                                                  )));
+                                    },
+                                    child: RideCard(
+                                      journeyStart:
+                                          rideNow[index].startingDestination,
+                                      journeyEnd:
+                                          rideNow[index].endingDestination,
+                                      journeyDate:
+                                          ConvertTime.millisecondsToDate(
+                                              rideNow[index].date),
+                                      journeyTime:
+                                          ConvertTime.millisecondsToTime(
+                                              rideNow[index].time),
+                                      estCost:
+                                          rideNow[index].totalFare.toDouble(),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
+                    Row(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Text(
+                            "Upcoming Rides",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            indent: 5,
+                            endIndent: 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                    ListView.builder(
+                        primary: false,
+                        shrinkWrap: true,
+                        itemCount: upcomingRides.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          ScheduledRideDetails(
+                                            rideId: upcomingRides[index].id,
+                                          )));
+                                },
+                                child: RideCard(
+                                  journeyStart:
+                                      upcomingRides[index].startingDestination,
+                                  journeyEnd:
+                                      upcomingRides[index].endingDestination,
+                                  journeyDate: ConvertTime.millisecondsToDate(
+                                      upcomingRides[index].date),
+                                  journeyTime: ConvertTime.millisecondsToTime(
+                                      upcomingRides[index].time),
+                                  estCost:
+                                      upcomingRides[index].totalFare.toDouble(),
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
+                  ],
+                ),
+              ),
       ),
     );
   }
