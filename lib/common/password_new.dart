@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/common/password_changed/password_changed.dart';
+import 'package:flutterdemo/common/password_changed.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 
 class PasswordNew extends StatefulWidget {

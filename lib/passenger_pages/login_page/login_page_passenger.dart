@@ -4,7 +4,7 @@ import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 import 'package:sign_button/sign_button.dart';
 
-import '../../common/password_reset/password_reset.dart';
+import '../../common/password_reset.dart';
 import '../../global_components/main_text_field.dart';
 import '../signup_page/signup_page_passenger.dart';
 

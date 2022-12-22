@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutterdemo/constants/constants.dart';
+import 'package:google_directions_api/google_directions_api.dart';
+import "package:google_maps_webservice/geocoding.dart";
+import 'package:google_maps_webservice/places.dart';
 
 class LocationTextField extends StatefulWidget {
   const LocationTextField(
@@ -20,6 +24,26 @@ class LocationTextField extends StatefulWidget {
 
 class _LocationTextFieldState extends State<LocationTextField> {
   // late TextEditingController controller;
+
+  late List<GeoCoord>? waypoints;
+
+  Future<String> callSearch() async {
+    Prediction? prediction = await PlacesAutocomplete.show(
+      offset: 0,
+      radius: 1000,
+      types: ['establishment'],
+      strictbounds: false,
+      region: "pk",
+      mode: Mode.overlay, // Mode.fullscreen
+      language: "en",
+      components: [Component(Component.country, "pk")],
+      context: context,
+      apiKey: 'AIzaSyC-5vfdeyQ3AYLbu6p720MjcqL0THkLCIE',
+    );
+    print('${prediction?.description}  prediction');
+    return prediction?.description ?? "";
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -31,6 +55,9 @@ class _LocationTextFieldState extends State<LocationTextField> {
   Widget build(BuildContext context) {
     return TextField(
       onSubmitted: widget.onSubmitted,
+      onTap: () async {
+        widget.controller?.text = await callSearch();
+      },
       controller: widget.controller,
       decoration: InputDecoration(
           filled: true,

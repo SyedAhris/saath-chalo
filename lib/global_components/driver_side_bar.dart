@@ -4,7 +4,6 @@ import 'package:flutterdemo/driver_pages/driver_ride_history/driver_ride_history
 import 'package:flutterdemo/driver_pages/scheduled_rides/scheduled_rides.dart';
 import 'package:flutterdemo/driver_pages/vehicles/vehicles_list/vehicle_list_view.dart';
 import 'package:flutterdemo/global_components/side_bar.dart';
-import 'package:flutterdemo/home_page/home_page.dart';
 
 import '../home_page/login.dart';
 
@@ -14,8 +13,8 @@ class DriverSideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SideBar(
-        onTapLogOut: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const Login())),
+        onTapLogOut: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const Login())),
         listTiles: [
           ListTile(
             leading: const Icon(Icons.home),

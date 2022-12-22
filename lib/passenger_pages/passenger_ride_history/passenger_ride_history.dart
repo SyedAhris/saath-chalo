@@ -9,7 +9,6 @@ import 'package:flutterdemo/providers_repositories/passenger/rides_history/ride_
 import 'package:provider/provider.dart';
 
 import '../../constants/convert_time.dart';
-import '../../models/rides_json.dart';
 
 class PassengerRideHistory extends StatefulWidget {
   const PassengerRideHistory({Key? key}) : super(key: key);

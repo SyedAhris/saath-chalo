@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:flutterdemo/common/password_new/password_new.dart';
+import 'package:flutterdemo/common/password_new.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 
 class EnterResetCode extends StatefulWidget {

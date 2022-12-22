@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../global_components/main_app_bar.dart';
+import '../global_components/main_app_bar.dart';
 
 class PasswordChanged extends StatelessWidget {
   const PasswordChanged({super.key});

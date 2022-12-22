@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/booked_ride_card.dart';
 import 'package:flutterdemo/global_components/map_wrapper.dart';
@@ -44,22 +45,33 @@ class _PassengerHomeState extends State<PassengerHome> {
       drawer: const PassengerSideBar(),
       appBar: const MainAppBar(title: "Home"),
       body: MapWrapper(
-        markers: widget.startingCoords != null && widget.endingCoords != null
-            ? {
-                Marker(
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueMagenta),
-                  markerId: MarkerId('starting coords'),
-                  position: widget.startingCoords!,
-                ),
-                Marker(
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueRed),
-                  markerId: MarkerId('ending coords'),
-                  position: widget.endingCoords!,
-                ),
-              }
-            : {},
+        markers: [widget.startingCoords, widget.endingCoords]
+            .where((coordinate) => coordinate != null)
+            .mapIndexed((index, coordinate) => Marker(
+                  icon: BitmapDescriptor.defaultMarkerWithHue([
+                    BitmapDescriptor.hueMagenta,
+                    BitmapDescriptor.hueRed
+                  ][index]),
+                  markerId: MarkerId(index.toString()),
+                  position: coordinate!,
+                ))
+            .toSet(),
+        // markers: widget.startingCoords != null && widget.endingCoords != null
+        //     ? {
+        //         Marker(
+        //           icon: BitmapDescriptor.defaultMarkerWithHue(
+        //               BitmapDescriptor.hueMagenta),
+        //           markerId: MarkerId('starting coords'),
+        //           position: widget.startingCoords!,
+        //         ),
+        //         Marker(
+        //           icon: BitmapDescriptor.defaultMarkerWithHue(
+        //               BitmapDescriptor.hueRed),
+        //           markerId: MarkerId('ending coords'),
+        //           position: widget.endingCoords!,
+        //         ),
+        //       }
+        //     : {},
         child: SizedBox(
           //needs to be changed so automatically fits whole screen
           height: double.infinity,
@@ -89,7 +101,7 @@ class _PassengerHomeState extends State<PassengerHome> {
                         onSubmitted: (text) async {
                           widget.endingCoords =
                               await MapWrapper.getLocationFromAddress(
-                                  pickUpLocationController.value.text);
+                                  dropOffLocationController.value.text);
                           setState(() {});
                         }),
                   ),
@@ -101,13 +113,15 @@ class _PassengerHomeState extends State<PassengerHome> {
                           child: MainButton(
                             text: "Search",
                             onTap: () {
+                              if (widget.startingCoords == null ||
+                                  widget.endingCoords == null) return;
                               context
                                   .read<PassengerHomeProvider>()
                                   .getSearchedRides(
-                                    Coordinates(
-                                        lat: "12.345678", long: "98.765432"), //TODO : Ibrahim change to map coordinates
-                                    Coordinates(
-                                        lat: "21.345678", long: "87.765432"), //TODO : Ibrahim change to map coordinates
+                                    Coordinates.fromLatlng(
+                                        widget.startingCoords!),
+                                    Coordinates.fromLatlng(widget
+                                        .endingCoords!), //TODO : Ibrahim change to map coordinates
                                   );
                               final rideDetails =
                                   context.read<PassengerHomeProvider>().details;
@@ -160,8 +174,8 @@ class _PassengerHomeState extends State<PassengerHome> {
                                                     .ride
                                                     .totalFare,
                                                 status: 'None',
-                                                  seats:
-                                                  "${rideDetails[index].ride.availableSeats}/${rideDetails[index].vehicle.seatingCapacity}",
+                                                seats:
+                                                    "${rideDetails[index].ride.availableSeats}/${rideDetails[index].vehicle.seatingCapacity}",
                                               ),
                                               MainButton(
                                                   text: "Send Request",

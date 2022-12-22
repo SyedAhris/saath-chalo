@@ -58,8 +58,8 @@ class _PassengerRequestWidgetState extends State<PassengerRequestWidget> {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                            style:
-                                ElevatedButton.styleFrom(primary: Colors.red),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red),
                             onPressed: () {},
                             child: const Text("Deny")),
                       ),
@@ -70,8 +70,8 @@ class _PassengerRequestWidgetState extends State<PassengerRequestWidget> {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                            style:
-                                ElevatedButton.styleFrom(primary: Colors.green),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green),
                             onPressed: () {},
                             child: const Text("Approve")),
                       ),

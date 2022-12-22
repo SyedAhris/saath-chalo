@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_directions_api/google_directions_api.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import "package:google_maps_webservice/geocoding.dart";
 import 'package:google_maps_webservice/places.dart';
 
@@ -59,44 +58,6 @@ class _MapAutoCompleteState extends State<MapAutoComplete> {
         print(response.geocodedWaypoints.toString());
         print(response.geocodedWaypoints?.toList().toString());
         print("waypoints");
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => Scaffold(
-                  floatingActionButton: FloatingActionButton(
-                      child: Text("Map"),
-                      onPressed: () => waypoints != null
-                          ? Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => GoogleMap(
-                                  initialCameraPosition: CameraPosition(
-                                    target: LatLng(waypoints![0].latitude,
-                                        waypoints![0].longitude),
-                                    zoom: 11.0,
-                                  ),
-                                  polylines: {
-                                    Polyline(
-                                      polylineId: const PolylineId('1'),
-                                      width: 4,
-                                      points: response.routes?[0].overviewPath
-                                              ?.map((e) => const LatLng(1, 2))
-                                              .toList() ??
-                                          [const LatLng(1, 1)],
-                                      color: Colors.red,
-                                    )
-                                  },
-                                ),
-                              ),
-                            )
-                          : null),
-                  body: ListView(
-                    children: waypoints
-                            ?.map((waypoint) => ListTile(
-                                  trailing: Text(waypoint.latitude.toString()),
-                                  leading: Text(waypoint.longitude.toString()),
-                                ))
-                            .toList() ??
-                        [Text("nothing yet")],
-                  ),
-                )));
       } else {
         // do something with error response
       }
@@ -104,10 +65,12 @@ class _MapAutoCompleteState extends State<MapAutoComplete> {
   }
 
   late List<GeoCoord>? waypoints;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    callSearch();
   }
 
   @override

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/side_bar.dart';
-import 'package:flutterdemo/home_page/home_page.dart';
 import 'package:flutterdemo/home_page/login.dart';
 import 'package:flutterdemo/passenger_pages/passenger_booked_rides/passenger_booked_rides.dart';
 import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
@@ -12,8 +11,8 @@ class PassengerSideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SideBar(
-        onTapLogOut: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const Login())),
+        onTapLogOut: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const Login())),
         listTiles: [
           ListTile(
             leading: const Icon(Icons.home),
