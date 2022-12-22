@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
 
 import '../../../models/customer_json.dart';
 
@@ -27,7 +26,7 @@ class MockPassengerRequestRepository implements PassengerRequestRepository {
   }
 }
 
-class FirebasePassengerRequestRepository implements PassengerRequestRepository{
+class FirebasePassengerRequestRepository implements PassengerRequestRepository {
   FirebaseFirestore db = FirebaseFirestore.instance;
   @override
   Future<Customer> fetchDriver(String driverId) async {

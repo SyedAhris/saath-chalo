@@ -2,12 +2,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/common/enter_reset_code/enter_reset_code.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../../global_components/main_text_form_field.dart';
-import '../../providers_repositories/current_user/current_user_provider.dart';
+import '../global_components/main_text_form_field.dart';
+import '../providers_repositories/current_user/current_user_provider.dart';
 
 class PasswordReset extends StatefulWidget {
   const PasswordReset({super.key});
@@ -18,8 +17,8 @@ class PasswordReset extends StatefulWidget {
 
 class _PasswordResetState extends State<PasswordReset> {
   final _formKey = GlobalKey<FormState>();
-  bool isEmpty=false;
-  TextEditingController emailController= TextEditingController();
+  bool isEmpty = false;
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,8 +121,8 @@ class _PasswordResetState extends State<PasswordReset> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      String email=emailController.text;
-                      email=email.replaceAll(' ', '');
+                      String email = emailController.text;
+                      email = email.replaceAll(' ', '');
                       String error = await context
                           .read<CurrentUserProvider>()
                           .changePassword(email);
@@ -131,8 +130,7 @@ class _PasswordResetState extends State<PasswordReset> {
                         final snackBar = SnackBar(
                           content: Text(error),
                         );
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
                         Navigator.of(context).pop();
                       }

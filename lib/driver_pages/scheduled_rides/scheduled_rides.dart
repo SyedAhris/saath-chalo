@@ -4,7 +4,6 @@ import 'package:flutterdemo/driver_pages/scheduled_ride_booking/scheduled_ride_b
 import 'package:flutterdemo/driver_pages/scheduled_ride_details/scheduled_ride_details.dart';
 import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
-import 'package:flutterdemo/passenger_pages/passenger_booked_rides/booked_rides_demo.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:flutterdemo/providers_repositories/driver/scheduled_rides/driver_scheduled_rides_provider.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +21,7 @@ class _ScheduledRidesState extends State<ScheduledRides> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       context
           .read<DriverScheduledRidesProvider>()
           .fetchRides(context.read<CurrentUserProvider>().currentCustomer.id);
@@ -41,9 +40,11 @@ class _ScheduledRidesState extends State<ScheduledRides> {
       body: SingleChildScrollView(
         child: (isFetching)
             ? const Padding(
-              padding: EdgeInsets.only(top: 80.0),
-              child: Center(child: CircularProgressIndicator(),),
-            )
+                padding: EdgeInsets.only(top: 80.0),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
             : Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
                 child: Column(

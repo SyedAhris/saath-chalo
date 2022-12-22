@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterdemo/models/approved_passenger.dart';
-import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/models/customer_json.dart';
+import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 
 import '../../../models/coordinates.dart';
@@ -17,7 +17,7 @@ abstract class PassengerHomeRepository {
 class FirebasePassengerHomeRepository implements PassengerHomeRepository {
   FirebaseFirestore db = FirebaseFirestore.instance;
   @override
-  Future<List<PassengerHomeListDetails>> searchRides (
+  Future<List<PassengerHomeListDetails>> searchRides(
       Coordinates startingCoordinates, Coordinates endingCoordinates) async {
     Ride? ride;
     Customer? driver;
@@ -31,13 +31,18 @@ class FirebasePassengerHomeRepository implements PassengerHomeRepository {
       for (var element in value.docs) {
         ride = Ride.fromJson(element.data());
         print(ride?.driverId);
-        await db.collection("Customers").doc(ride!.driverId).get().then((value) {
+        await db
+            .collection("Customers")
+            .doc(ride!.driverId)
+            .get()
+            .then((value) {
           driver = Customer.fromJson(value.data()!);
           print(driver?.vehicles.length);
           for (Vehicle veh in driver!.vehicles) {
             if (veh.plateNumber == ride!.vehicleId) {
               vehicle = veh;
-              details.add(PassengerHomeListDetails(ride: ride!, driver: driver!, vehicle: vehicle!));
+              details.add(PassengerHomeListDetails(
+                  ride: ride!, driver: driver!, vehicle: vehicle!));
             }
           }
         });
@@ -62,20 +67,20 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
         vehicleId: "ABC-123",
         startingDestination: "startingCoordinatesApproved",
         endingDestination: "endingCoordinatesApproved",
-        startingCoordinates: Coordinates(
+        startingCoordinates: const Coordinates(
           lat: "123",
           long: "123",
         ),
-        endingCoordinates: Coordinates(
+        endingCoordinates: const Coordinates(
           lat: "123",
           long: "123",
         ),
         waypoints: [
-          Coordinates(lat: "12.345678", long: "98.765432"),
-          Coordinates(lat: "21.345678", long: "87.765432"),
-          Coordinates(lat: "34.345678", long: "76.765432"),
-          Coordinates(lat: "45.345678", long: "65.765432"),
-          Coordinates(lat: "56.345678", long: "54.765432"),
+          const Coordinates(lat: "12.345678", long: "98.765432"),
+          const Coordinates(lat: "21.345678", long: "87.765432"),
+          const Coordinates(lat: "34.345678", long: "76.765432"),
+          const Coordinates(lat: "45.345678", long: "65.765432"),
+          const Coordinates(lat: "56.345678", long: "54.765432"),
         ],
         totalFare: 1200,
         availableSeats: 3,
@@ -86,16 +91,17 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
           ApprovedPassenger(
             passengerId: "52345",
             startingCoordinates:
-                Coordinates(lat: "12.345678", long: "98.765432"),
-            endingCoordinates: Coordinates(lat: "56.345678", long: "54.765432"),
+                const Coordinates(lat: "12.345678", long: "98.765432"),
+            endingCoordinates:
+                const Coordinates(lat: "56.345678", long: "54.765432"),
             startingDestination: "startingDestination",
             endingDestination: "endingDestination",
             waypoints: [
-              Coordinates(lat: "12.345678", long: "98.765432"),
-              Coordinates(lat: "21.345678", long: "87.765432"),
-              Coordinates(lat: "34.345678", long: "76.765432"),
-              Coordinates(lat: "45.345678", long: "65.765432"),
-              Coordinates(lat: "56.345678", long: "54.765432"),
+              const Coordinates(lat: "12.345678", long: "98.765432"),
+              const Coordinates(lat: "21.345678", long: "87.765432"),
+              const Coordinates(lat: "34.345678", long: "76.765432"),
+              const Coordinates(lat: "45.345678", long: "65.765432"),
+              const Coordinates(lat: "56.345678", long: "54.765432"),
             ],
             rideFare: 400,
             isDelete: false,
@@ -107,17 +113,17 @@ class MockPassengerHomeRepository implements PassengerHomeRepository {
           PassengerRequest(
               passengerId: "1245",
               startingCoordinates:
-                  Coordinates(lat: "12.345678", long: "98.765432"),
+                  const Coordinates(lat: "12.345678", long: "98.765432"),
               endingCoordinates:
-                  Coordinates(lat: "56.345678", long: "54.765432"),
+                  const Coordinates(lat: "56.345678", long: "54.765432"),
               startingDestination: "startingDestination",
               endingDestination: "endingDestination",
               waypoints: [
-                Coordinates(lat: "12.345678", long: "98.765432"),
-                Coordinates(lat: "21.345678", long: "87.765432"),
-                Coordinates(lat: "34.345678", long: "76.765432"),
-                Coordinates(lat: "45.345678", long: "65.765432"),
-                Coordinates(lat: "56.345678", long: "54.765432"),
+                const Coordinates(lat: "12.345678", long: "98.765432"),
+                const Coordinates(lat: "21.345678", long: "87.765432"),
+                const Coordinates(lat: "34.345678", long: "76.765432"),
+                const Coordinates(lat: "45.345678", long: "65.765432"),
+                const Coordinates(lat: "56.345678", long: "54.765432"),
               ],
               status: "Pending",
               isDelete: false),

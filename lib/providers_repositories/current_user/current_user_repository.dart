@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import '../../models/customer_json.dart';
 
@@ -49,11 +48,9 @@ class FirebaseCurrentUserRepository implements CurrentUserRepository {
     try {
       Customer? customer;
       UserCredential result = await auth.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+          email: email, password: password);
       final User user = result.user!;
-      String uid=user.uid;
+      String uid = user.uid;
       await db.collection("Customers").doc(uid).get().then((value) {
         customer = Customer.fromJson(value.data() ?? {});
       });
@@ -65,14 +62,11 @@ class FirebaseCurrentUserRepository implements CurrentUserRepository {
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
         return (["", e.code, ""]);
-      }
-      else {
+      } else {
         return (["", e.code, ""]);
       }
     }
   }
-
-
 
   @override
   Future<Customer> updateCustomer(String customerId) async {

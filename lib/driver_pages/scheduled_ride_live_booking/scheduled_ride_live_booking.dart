@@ -25,8 +25,6 @@ class _ScheduledRideLiveBookingState extends State<ScheduledRideLiveBooking> {
         context.watch<DriverScheduledRidesDetailedProvider>().vehicle;
     final passengers =
         context.watch<DriverScheduledRidesDetailedProvider>().passengers;
-    final isFetching =
-        context.watch<DriverScheduledRidesDetailedProvider>().isFetching;
     return Scaffold(
       drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),

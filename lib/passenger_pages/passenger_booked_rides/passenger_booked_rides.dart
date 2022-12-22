@@ -3,13 +3,11 @@ import 'package:flutterdemo/constants/convert_time.dart';
 import 'package:flutterdemo/global_components/passenger_side_bar.dart';
 import 'package:flutterdemo/global_components/ride_card.dart';
 import 'package:flutterdemo/passenger_pages/booked_ride_details/passenger_booked_rides_accepted.dart';
-import 'package:flutterdemo/passenger_pages/booked_ride_details/passenger_booked_rides_declined.dart';
-import 'package:flutterdemo/passenger_pages/booked_ride_details/passenger_booked_rides_pending.dart';
 import 'package:flutterdemo/passenger_pages/passenger_booked_rides/booked_rides_demo.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
 import 'package:flutterdemo/providers_repositories/passenger/booked_rides/booked_rides_provider.dart';
-import 'package:flutterdemo/providers_repositories/passenger/booked_rides_details/booked_rides_details_provider.dart';
 import 'package:provider/provider.dart';
+
 import '../../global_components/main_app_bar.dart';
 
 class PassengerBookedRides extends StatefulWidget {
@@ -74,7 +72,8 @@ class _PassengerBookedRidesState extends State<PassengerBookedRides> {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
                                     PassengerBookedRidesAccepted(
-                                      rideId: approvedRides[index].id, status: 'Accepted',
+                                      rideId: approvedRides[index].id,
+                                      status: 'Accepted',
                                     )));
                           },
                           child: RideCard(
@@ -124,7 +123,8 @@ class _PassengerBookedRidesState extends State<PassengerBookedRides> {
                               MaterialPageRoute(
                                 builder: (context) =>
                                     PassengerBookedRidesAccepted(
-                                  rideId: pendingRides[index].id, status: 'None',
+                                  rideId: pendingRides[index].id,
+                                  status: 'None',
                                 ),
                               ),
                             );
@@ -176,7 +176,8 @@ class _PassengerBookedRidesState extends State<PassengerBookedRides> {
                               MaterialPageRoute(
                                 builder: (context) =>
                                     PassengerBookedRidesAccepted(
-                                  rideId: rejectedRides[index].id, status: 'Rejected',
+                                  rideId: rejectedRides[index].id,
+                                  status: 'Rejected',
                                 ),
                               ),
                             );

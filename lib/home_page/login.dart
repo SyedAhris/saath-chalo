@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/home_page/sign_up.dart';
-import 'package:flutterdemo/passenger_pages/passenger_home/passenger_home.dart';
 import 'package:provider/provider.dart';
-import '../../common/password_reset/password_reset.dart';
-import '../../global_components/main_text_field.dart';
+
+import '../common/password_reset.dart';
 import '../global_components/main_text_form_field.dart';
 import '../providers_repositories/current_user/current_user_provider.dart';
 import 'home_page.dart';
@@ -36,7 +35,7 @@ class _LoginState extends State<Login> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only( left: 32),
+                  padding: const EdgeInsets.only(left: 32),
                   child: Row(
                     children: const [
                       Text("Login",
@@ -57,7 +56,8 @@ class _LoginState extends State<Login> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(" Please login to proceed", style: TextStyle(fontSize: 28)),
+                            Text(" Please login to proceed",
+                                style: TextStyle(fontSize: 28)),
                           ],
                         ),
                       ),
@@ -70,41 +70,40 @@ class _LoginState extends State<Login> {
                     key: _formKey,
                     child: Column(
                       children: [
-                      MainTextFormField(
-                      labelText: "Email",
-                      hintText: "someone@someone.com",
-                      controller: emailController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Required Field';
-                        }
-                        return null;
-                      },
-                      obscureText: false,
-                      enableSuggestions: true,
-                    ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: MainTextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Required Field";
-                              }
-                              return null;
-                            },
-                            controller: passwordController,
-                            obscureText: true,
-                            enableSuggestions: false,
-                            labelText: 'Password',
-                            hintText: '*****',
-                          )
+                        MainTextFormField(
+                          labelText: "Email",
+                          hintText: "someone@someone.com",
+                          controller: emailController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Required Field';
+                            }
+                            return null;
+                          },
+                          obscureText: false,
+                          enableSuggestions: true,
                         ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: MainTextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Required Field";
+                                }
+                                return null;
+                              },
+                              controller: passwordController,
+                              obscureText: true,
+                              enableSuggestions: false,
+                              labelText: 'Password',
+                              hintText: '*****',
+                            )),
                       ],
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 40,top: 10),
+                  padding: const EdgeInsets.only(right: 40, top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -131,8 +130,8 @@ class _LoginState extends State<Login> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            String email=emailController.text;
-                            email=email.replaceAll(' ', '');
+                            String email = emailController.text;
+                            email = email.replaceAll(' ', '');
                             String error = await context
                                 .read<CurrentUserProvider>()
                                 .signin(email, passwordController.text);
@@ -143,11 +142,16 @@ class _LoginState extends State<Login> {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
                             } else {
-                              print(context.read<CurrentUserProvider>().currentCustomer.id,);
+                              print(
+                                context
+                                    .read<CurrentUserProvider>()
+                                    .currentCustomer
+                                    .id,
+                              );
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                  const HomePage(title: "Saath Chalo"),
+                                      const HomePage(title: "Saath Chalo"),
                                 ),
                               );
                             }

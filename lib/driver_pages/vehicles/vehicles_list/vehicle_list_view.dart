@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/vehicles/add_vehicles/add_vehicles_view.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
-import 'package:flutterdemo/providers_repositories/driver/vehicles/vehicles_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
@@ -21,20 +20,22 @@ class _VehiclesListViewState extends State<VehiclesListView> {
     // TODO: implement initState
     context.read<CurrentUserProvider>().updateCustomer();
   }
+
   @override
   Widget build(BuildContext context) {
-    final vehicles = context.watch<CurrentUserProvider>().currentCustomer.vehicles;
+    final vehicles =
+        context.watch<CurrentUserProvider>().currentCustomer.vehicles;
     return Scaffold(
       appBar: const MainAppBar(
         title: 'Vehicles',
       ),
       body: ListView.builder(
-              itemCount: vehicles.length,
-              itemBuilder: (context, index) {
-                return VehiclesListTile(
-                  vehicles: vehicles[index],
-                );
-              }),
+          itemCount: vehicles.length,
+          itemBuilder: (context, index) {
+            return VehiclesListTile(
+              vehicles: vehicles[index],
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(

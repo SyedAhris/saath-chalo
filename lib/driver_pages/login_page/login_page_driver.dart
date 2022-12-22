@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/common/password_reset/password_reset.dart';
+import 'package:flutterdemo/common/password_reset.dart';
 import 'package:flutterdemo/driver_pages/driver_home/driver_home.dart';
 import 'package:flutterdemo/driver_pages/signup_page/signup_page_driver.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';

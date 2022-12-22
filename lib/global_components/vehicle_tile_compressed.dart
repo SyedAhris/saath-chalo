@@ -22,7 +22,7 @@ class VehicleTileCompressed extends StatelessWidget {
       child: TextButton(
         onPressed: () => {},
         style: TextButton.styleFrom(
-            primary: Colors.white, backgroundColor: MainColors.primary),
+            foregroundColor: Colors.white, backgroundColor: MainColors.primary),
         child: Row(
           children: [
             const Icon(Icons.car_crash),
