@@ -89,7 +89,7 @@ class _PassengerHomeState extends State<PassengerHome> {
                         onSubmitted: (text) async {
                           widget.endingCoords =
                               await MapWrapper.getLocationFromAddress(
-                                  pickUpLocationController.value.text);
+                                  dropOffLocationController.value.text);
                           setState(() {});
                         }),
                   ),
