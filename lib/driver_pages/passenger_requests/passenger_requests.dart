@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterdemo/driver_pages/passenger_request/passenger_request.dart';
 import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/global_components/passenger_card.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/providers_repositories/driver/passenger_requests/passenger_request_provider.dart';
@@ -24,8 +25,11 @@ class _PassengerRequestsState extends State<PassengerRequests> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<PassengerRequestProvider>().fetchPassengers(
-          widget.passengerRequests.where((e) => e.status == "Pending").map((e) => e.passengerId).toList());
+      context.read<PassengerRequestProvider>().fetchPassengers(widget
+          .passengerRequests
+          .where((e) => e.status == "Pending")
+          .map((e) => e.passengerId)
+          .toList());
     });
   }
 
@@ -36,11 +40,7 @@ class _PassengerRequestsState extends State<PassengerRequests> {
     return Scaffold(
       drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/backimg.png'))),
+      body: MapWrapper(
         child: Column(
           children: [
             Padding(
@@ -87,10 +87,13 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                                                       .passengerRequests[index]
                                                       .endingDestination,
                                                   onTap1: () {
-                                                    for (PassengerRequest pr in widget.passengerRequests){
-                                                      if (pr.passengerId == passengers[index].id){
+                                                    for (PassengerRequest pr
+                                                        in widget
+                                                            .passengerRequests) {
+                                                      if (pr.passengerId ==
+                                                          passengers[index]
+                                                              .id) {
                                                         pr.status = "Rejected";
-
                                                       }
                                                     }
                                                   },
