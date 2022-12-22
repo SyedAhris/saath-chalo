@@ -4,6 +4,7 @@ import 'package:flutterdemo/global_components/passenger_side_bar.dart';
 import 'package:flutterdemo/models/coordinates.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/providers_repositories/current_user/current_user_provider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/convert_time.dart';
@@ -14,10 +15,10 @@ import '../../global_components/main_button.dart';
 import '../../providers_repositories/passenger/home/home_provider.dart';
 
 class SendRequestToDriver extends StatefulWidget {
-  const SendRequestToDriver({
-    Key? key,
-    required this.rideDetails
-  }) : super(key: key);
+  SendRequestToDriver({Key? key, required this.rideDetails}) : super(key: key);
+
+  LatLng? startingCoords;
+  LatLng? endingCoords;
 
   final PassengerHomeListDetails rideDetails;
   @override
@@ -25,6 +26,19 @@ class SendRequestToDriver extends StatefulWidget {
 }
 
 class _SendRequestToDriverState extends State<SendRequestToDriver> {
+  late TextEditingController pickUpLocationController;
+  late TextEditingController dropOffLocationController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+
+    pickUpLocationController = TextEditingController();
+    dropOffLocationController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +46,22 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
         drawer: const PassengerSideBar(),
         appBar: const MainAppBar(title: "Request Driver"),
         body: MapWrapper(
+          markers: widget.startingCoords != null && widget.endingCoords != null
+              ? {
+                  Marker(
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueMagenta),
+                    markerId: MarkerId('starting coords'),
+                    position: widget.startingCoords!,
+                  ),
+                  Marker(
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueRed),
+                    markerId: MarkerId('ending coords'),
+                    position: widget.endingCoords!,
+                  ),
+                }
+              : {},
           child: SizedBox(
             //needs to be changed so automatically fits whole screen
             height: double.infinity,
@@ -60,17 +90,31 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
                         estCost: widget.rideDetails.ride.totalFare,
                         status: 'None',
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: LocationTextField(
-                          labelText: "PickUp",
-                          hintText: "e.g IBA - Karachi University",
-                        ),
+                            controller: pickUpLocationController,
+                            labelText: "PickUp",
+                            hintText: "e.g IBA - Karachi University",
+                            onSubmitted: (text) async {
+                              widget.startingCoords =
+                                  await MapWrapper.getLocationFromAddress(
+                                      pickUpLocationController.value.text);
+                              setState(() {});
+                            }),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: LocationTextField(
-                            labelText: "DropOff", hintText: "e.g Chaar Meenar"),
+                            controller: dropOffLocationController,
+                            labelText: "DropOff",
+                            hintText: "e.g Chaar Meenar",
+                            onSubmitted: (text) async {
+                              widget.endingCoords =
+                                  await MapWrapper.getLocationFromAddress(
+                                      pickUpLocationController.value.text);
+                              setState(() {});
+                            }),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,13 +203,18 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
                                       passengerId: passengerId,
                                       startingDestination:
                                           "startingDestination", //TODO : Ibrahim change this
-                                      endingDestination: "endingDestination", //TODO : Ibrahim change this
+                                      endingDestination:
+                                          "endingDestination", //TODO : Ibrahim change this
                                       startingCoordinates: Coordinates(
-                                          lat: "24.91704", long: "67.03143"), //TODO : Ibrahim change this
+                                          lat: "24.91704",
+                                          long:
+                                              "67.03143"), //TODO : Ibrahim change this
                                       endingCoordinates: Coordinates(
                                           lat: "24.91017",
-                                          long: "67.03816999999998"),//TODO : Ibrahim change this
-                                      waypoints: sampleCoordinates, //TODO : Ibrahim change this
+                                          long:
+                                              "67.03816999999998"), //TODO : Ibrahim change this
+                                      waypoints:
+                                          sampleCoordinates, //TODO : Ibrahim change this
                                       status: "Pending",
                                       isDelete: false);
                                   context

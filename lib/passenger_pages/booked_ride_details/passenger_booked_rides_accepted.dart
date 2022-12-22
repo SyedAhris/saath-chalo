@@ -24,10 +24,15 @@ class PassengerBookedRidesAccepted extends StatefulWidget {
 
 class _PassengerBookedRidesAcceptedState
     extends State<PassengerBookedRidesAccepted> {
+  late TextEditingController pickUpLocationController;
+  late TextEditingController dropOffLocationController;
+
   @override
   void initState() {
     super.initState();
     context.read<BookedRidesDetailProvider>().fetchRide(widget.rideId);
+    pickUpLocationController = TextEditingController();
+    dropOffLocationController = TextEditingController();
   }
 
   @override
@@ -65,17 +70,20 @@ class _PassengerBookedRidesAcceptedState
                               ConvertTime.millisecondsToTime(ride.time),
                           estCost: ride.totalFare,
                           status: widget.status),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: LocationTextField(
+                          controller: pickUpLocationController,
                           labelText: "PickUp",
                           hintText: "e.g IBA - Karachi University",
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: LocationTextField(
-                            labelText: "DropOff", hintText: "e.g Chaar Meenar"),
+                            controller: dropOffLocationController,
+                            labelText: "DropOff",
+                            hintText: "e.g Chaar Meenar"),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

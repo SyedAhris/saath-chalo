@@ -52,7 +52,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   ]),
             ],
             totalRepeatCount: 1,
-            pause: const Duration(milliseconds: 700),
+            pause: const Duration(milliseconds: 500),
             displayFullTextOnTap: true,
             stopPauseOnTap: true,
           ),

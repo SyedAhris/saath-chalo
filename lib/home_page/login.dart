@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/common/password_reset.dart';
 import 'package:flutterdemo/constants/constants.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/home_page/sign_up.dart';
 import 'package:provider/provider.dart';
 
-import '../common/password_reset.dart';
 import '../global_components/main_text_form_field.dart';
 import '../providers_repositories/current_user/current_user_provider.dart';
 import 'home_page.dart';
