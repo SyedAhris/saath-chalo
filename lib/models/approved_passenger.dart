@@ -42,8 +42,10 @@ class ApprovedPassenger {
 
   Map<String, dynamic> toJson() => {
         "passengerID": passengerId,
-        "startingCoordinates": startingCoordinates,
-        "endingCoordinates": endingCoordinates,
+        "startingDestination": startingDestination,
+        "endingDestination": endingDestination,
+        "startingCoordinates": startingCoordinates.toJson(),
+        "endingCoordinates": endingCoordinates.toJson(),
         "waypoints": List<dynamic>.from(waypoints.map((x) => x.toJson())),
         "rideFare": rideFare,
         "driverRating": driverRating,
