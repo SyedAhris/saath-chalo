@@ -151,7 +151,7 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                                                                         index]
                                                                     .waypoints,
                                                                 rideFare:
-                                                                    Coordinates //TODO: Ibrahim calculate correct ride fare for passengers
+                                                                    Coordinates //TODO : Ibrahim calculate correct ride fare for passengers
                                                                             .calculateFare(
                                                                                 12,
                                                                                 20,
@@ -162,6 +162,7 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                                                                     0,
                                                                 isDelete:
                                                                     false));
+                                                        widget.ride.availableSeats = widget.ride.availableSeats - 1;
                                                         widget.ride
                                                             .passengerRequests
                                                             .removeAt(index);
