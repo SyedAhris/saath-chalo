@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/global_components/passenger_side_bar.dart';
@@ -42,194 +43,142 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         drawer: const PassengerSideBar(),
         appBar: const MainAppBar(title: "Request Driver"),
         body: MapWrapper(
-          markers: widget.startingCoords != null && widget.endingCoords != null
-              ? {
-                  Marker(
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueMagenta),
-                    markerId: MarkerId('starting coords'),
-                    position: widget.startingCoords!,
-                  ),
-                  Marker(
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueRed),
-                    markerId: MarkerId('ending coords'),
-                    position: widget.endingCoords!,
-                  ),
-                }
-              : {},
+          waypoints: widget.rideDetails.ride.waypoints,
+          markers: [
+            widget.startingCoords,
+            widget.endingCoords,
+            widget.rideDetails.ride.waypoints[0].toLatLng(),
+            widget.rideDetails.ride
+                .waypoints[widget.rideDetails.ride.waypoints.length - 1]
+                .toLatLng()
+          ].where((element) => element != null).mapIndexed((index, coordinate) {
+            return Marker(
+              icon: BitmapDescriptor.defaultMarkerWithHue([
+                BitmapDescriptor.hueMagenta,
+                BitmapDescriptor.hueRed,
+                BitmapDescriptor.hueGreen,
+                BitmapDescriptor.hueOrange
+              ][index]),
+              markerId: MarkerId(index.toString()),
+              position: coordinate!,
+            );
+          }).toSet(),
           child: SizedBox(
-            //needs to be changed so automatically fits whole screen
             height: double.infinity,
-            // height: 631,
             child: Padding(
-                padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      BookedRideCard(
-                        name:
-                            "${widget.rideDetails.driver.firstName} ${widget.rideDetails.driver.lastName}",
-                        car:
-                            "${widget.rideDetails.vehicle.color} ${widget.rideDetails.vehicle.make} ${widget.rideDetails.vehicle.model}",
-                        numberPlate: widget.rideDetails.vehicle.plateNumber,
-                        rating: widget.rideDetails.driver.rating,
-                        acStatus: widget.rideDetails.vehicle.ac,
-                        journeyStart:
-                            widget.rideDetails.ride.startingDestination,
-                        journeyEnd: widget.rideDetails.ride.endingDestination,
-                        journeyDate: ConvertTime.millisecondsToDate(
-                            widget.rideDetails.ride.date),
-                        journeyTime: ConvertTime.millisecondsToTime(
-                            widget.rideDetails.ride.time),
-                        estCost: widget.rideDetails.ride.totalFare,
-                        status: 'None',
+                padding: const EdgeInsets.only(
+                    left: 50, right: 50, top: 40, bottom: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        BookedRideCard(
+                          name:
+                              "${widget.rideDetails.driver.firstName} ${widget.rideDetails.driver.lastName}",
+                          car:
+                              "${widget.rideDetails.vehicle.color} ${widget.rideDetails.vehicle.make} ${widget.rideDetails.vehicle.model}",
+                          numberPlate: widget.rideDetails.vehicle.plateNumber,
+                          rating: widget.rideDetails.driver.rating,
+                          acStatus: widget.rideDetails.vehicle.ac,
+                          journeyStart:
+                              widget.rideDetails.ride.startingDestination,
+                          journeyEnd: widget.rideDetails.ride.endingDestination,
+                          journeyDate: ConvertTime.millisecondsToDate(
+                              widget.rideDetails.ride.date),
+                          journeyTime: ConvertTime.millisecondsToTime(
+                              widget.rideDetails.ride.time),
+                          estCost: widget.rideDetails.ride.totalFare,
+                          status: 'None',
                           seats:
-                          "${widget.rideDetails.ride.availableSeats}/${widget.rideDetails.vehicle.seatingCapacity}",
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: LocationTextField(
-                            controller: pickUpLocationController,
-                            labelText: "PickUp",
-                            hintText: "e.g IBA - Karachi University",
-                            onSubmitted: (text) async {
-                              widget.startingCoords =
-                                  await MapWrapper.getLocationFromAddress(
-                                      pickUpLocationController.value.text);
-                              setState(() {});
-                            }),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: LocationTextField(
-                            controller: dropOffLocationController,
-                            labelText: "DropOff",
-                            hintText: "e.g Chaar Meenar",
-                            onSubmitted: (text) async {
-                              widget.endingCoords =
-                                  await MapWrapper.getLocationFromAddress(
-                                      pickUpLocationController.value.text);
-                              setState(() {});
-                            }),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text("Choose pickup and dropoff points on the "),
-                          Text("selected route")
+                              "${widget.rideDetails.ride.availableSeats}/${widget.rideDetails.vehicle.seatingCapacity}",
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: LocationTextField(
+                              controller: pickUpLocationController,
+                              labelText: "PickUp",
+                              hintText: "e.g IBA - Karachi University",
+                              onSubmitted: (text) async {
+                                widget.startingCoords =
+                                    await MapWrapper.getLocationFromAddress(
+                                        pickUpLocationController.value.text);
+                                setState(() {});
+                              }),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: LocationTextField(
+                              controller: dropOffLocationController,
+                              labelText: "DropOff",
+                              hintText: "e.g Chaar Meenar",
+                              onSubmitted: (text) async {
+                                widget.endingCoords =
+                                    await MapWrapper.getLocationFromAddress(
+                                        dropOffLocationController.value.text);
+                                setState(() {});
+                              }),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text("Choose pickup and dropoff points on the "),
+                            Text("selected route")
+                          ],
+                        ),
+                      ],
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          MainButton(
+                            text: "Confirm",
+                            width: 300,
+                            onTap: () {
+                              if (widget.startingCoords == null ||
+                                  widget.endingCoords == null) {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        "Please enter both pick and drop off locations")));
+                                return;
+                              }
+                              String passengerId = context
+                                  .read<CurrentUserProvider>()
+                                  .currentCustomer
+                                  .id;
+                              PassengerRequest pr = PassengerRequest(
+                                  passengerId: passengerId,
+                                  startingDestination:
+                                      pickUpLocationController.value.text,
+                                  endingDestination:
+                                      dropOffLocationController.value.text,
+                                  startingCoordinates: Coordinates.fromLatlng(
+                                      widget.startingCoords ?? LatLng(0, 0)),
+                                  endingCoordinates: Coordinates.fromLatlng(
+                                      widget.endingCoords ?? LatLng(0, 0)),
+                                  waypoints: widget.rideDetails.ride
+                                      .waypoints, //TODO : Ibrahim change this
+                                  status: "Pending",
+                                  isDelete: false);
+                              context
+                                  .read<PassengerHomeProvider>()
+                                  .sendRequest(pr, widget.rideDetails.ride);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text("Request sent to driver")));
+                            },
+                          )
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 230, bottom: 20),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              MainButton(
-                                text: "Confirm",
-                                width: 300,
-                                onTap: () {
-                                  List<Coordinates> sampleCoordinates = [
-                                    Coordinates(
-                                        lat: "24.91704", long: "67.03143"),
-                                    Coordinates(
-                                        lat: "24.91596",
-                                        long: "67.03138999999999"),
-                                    Coordinates(
-                                        lat: "24.91566",
-                                        long: "67.03138000000001"),
-                                    Coordinates(
-                                        lat: "24.91429", long: "67.03133"),
-                                    Coordinates(
-                                        lat: "24.91377",
-                                        long: "67.03131000000002"),
-                                    Coordinates(
-                                        lat: "24.91372",
-                                        long: "67.03136999999998"),
-                                    Coordinates(
-                                        lat: "24.91366", long: "67.03141"),
-                                    Coordinates(
-                                        lat: "24.91356", long: "67.03144"),
-                                    Coordinates(
-                                        lat: "24.91306", long: "67.03141"),
-                                    Coordinates(
-                                        lat: "24.91142", long: "67.03134"),
-                                    Coordinates(
-                                        lat: "24.91091", long: "67.03161"),
-                                    Coordinates(
-                                        lat: "24.91084",
-                                        long: "67.03165999999999"),
-                                    Coordinates(
-                                        lat: "24.91078", long: "67.03172"),
-                                    Coordinates(
-                                        lat: "24.91075",
-                                        long: "67.03228000000001"),
-                                    Coordinates(
-                                        lat: "24.91065",
-                                        long: "67.03291999999999"),
-                                    Coordinates(
-                                        lat: "24.91058", long: "67.03401"),
-                                    Coordinates(
-                                        lat: "24.91054",
-                                        long: "67.03451000000001"),
-                                    Coordinates(
-                                        lat: "24.91062",
-                                        long: "67.03462999999999"),
-                                    Coordinates(
-                                        lat: "24.9106",
-                                        long: "67.03487999999999"),
-                                    Coordinates(
-                                        lat: "24.91053", long: "67.03548"),
-                                    Coordinates(
-                                        lat: "24.91046",
-                                        long: "67.03629000000001"),
-                                    Coordinates(
-                                        lat: "24.91035", long: "67.03626"),
-                                    Coordinates(
-                                        lat: "24.91022", long: "67.03718"),
-                                    Coordinates(
-                                        lat: "24.91017",
-                                        long: "67.03816999999998"),
-                                  ];
-                                  String passengerId = context
-                                      .read<CurrentUserProvider>()
-                                      .currentCustomer
-                                      .id;
-                                  PassengerRequest pr = PassengerRequest(
-                                      passengerId: passengerId,
-                                      startingDestination:
-                                          "startingDestination", //TODO : Ibrahim change this
-                                      endingDestination:
-                                          "endingDestination", //TODO : Ibrahim change this
-                                      startingCoordinates: Coordinates(
-                                          lat: "24.91704",
-                                          long:
-                                              "67.03143"), //TODO : Ibrahim change this
-                                      endingCoordinates: Coordinates(
-                                          lat: "24.91017",
-                                          long:
-                                              "67.03816999999998"), //TODO : Ibrahim change this
-                                      waypoints:
-                                          sampleCoordinates, //TODO : Ibrahim change this
-                                      status: "Pending",
-                                      isDelete: false);
-                                  context
-                                      .read<PassengerHomeProvider>()
-                                      .sendRequest(pr, widget.rideDetails.ride);
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 )),
           ),
         ));

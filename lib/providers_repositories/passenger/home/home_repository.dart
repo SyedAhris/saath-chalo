@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterdemo/models/approved_passenger.dart';
-import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/models/customer_json.dart';
+import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/providers_repositories/passenger/home/home_provider.dart';
 
 import '../../../models/coordinates.dart';
@@ -41,7 +41,9 @@ class FirebasePassengerHomeRepository implements PassengerHomeRepository {
           print(startingCoordinates.long);
           print(ride!.startingCoordinates.lat);
           print(ride!.startingCoordinates.long);
-          if (startingCoordinates.getDistanceTo(ride!.startingCoordinates)<5 && endingCoordinates.getDistanceTo(ride!.endingCoordinates)<5) {
+          if (startingCoordinates.getDistanceTo(ride!.startingCoordinates) <
+                  5 &&
+              endingCoordinates.getDistanceTo(ride!.endingCoordinates) < 5) {
             await db
                 .collection("Customers")
                 .doc(ride!.driverId)
