@@ -56,20 +56,21 @@ class _PassengerBookedRidesAcceptedState
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       BookedRideCard(
-                          name: "${driver.firstName} ${driver.lastName}",
-                          car:
-                              "${vehicle.color} ${vehicle.make} ${vehicle.model}",
-                          numberPlate: vehicle.plateNumber,
-                          journeyStart: ride.startingDestination,
-                          journeyEnd: ride.endingDestination,
-                          rating: driver.rating,
-                          acStatus: vehicle.ac,
-                          journeyDate:
-                              ConvertTime.millisecondsToDate(ride.date),
-                          journeyTime:
-                              ConvertTime.millisecondsToTime(ride.time),
-                          estCost: ride.totalFare,
-                          status: widget.status),
+                        name: "${driver.firstName} ${driver.lastName}",
+                        car:
+                            "${vehicle.color} ${vehicle.make} ${vehicle.model}",
+                        numberPlate: vehicle.plateNumber,
+                        journeyStart: ride.startingDestination,
+                        journeyEnd: ride.endingDestination,
+                        rating: driver.rating,
+                        acStatus: vehicle.ac,
+                        journeyDate: ConvertTime.millisecondsToDate(ride.date),
+                        journeyTime: ConvertTime.millisecondsToTime(ride.time),
+                        estCost: ride.totalFare,
+                        status: widget.status,
+                        seats:
+                            "${ride.availableSeats}/${vehicle.seatingCapacity}",
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: LocationTextField(

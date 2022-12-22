@@ -76,7 +76,7 @@ class _ScheduledRideBookingState extends State<ScheduledRideBooking> {
                             estCost: ride.totalFare,
                             passengers: passengers
                                 .map((e) => "${e.firstName} ${e.lastName}")
-                                .toList(),
+                                .toList(), seats: '${ride.availableSeats}/${vehicle.seatingCapacity}',
                           ),
                           MainButton(
                               width: 250,

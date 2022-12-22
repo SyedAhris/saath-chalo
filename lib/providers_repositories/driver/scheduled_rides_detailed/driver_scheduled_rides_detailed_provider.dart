@@ -38,11 +38,16 @@ class DriverScheduledRidesDetailedProvider with ChangeNotifier {
     passengers = [];
     notifyListeners();
     ride = await _driverScheduledRidesDetailedRepository.fetchRide(rideID);
+    for (int i =0 ; i< ride.passengerRequests.length; i++) {
+      if (ride.passengerRequests[i].status == "Denied" ) {
+        ride.passengerRequests.removeAt(i);
+      }
+    }
     await fetchVehicle(ride.vehicleId, ride.driverId);
     await fetchDriver(ride.driverId);
     print(ride.approvedPassengers.length);
     for (int i = 0; i < ride.approvedPassengers.length; i++) {
-      fetchPassenger(ride.approvedPassengers[i].passengerId);
+      await fetchPassenger(ride.approvedPassengers[i].passengerId);
     }
     isFetching = false;
     notifyListeners();
@@ -62,5 +67,11 @@ class DriverScheduledRidesDetailedProvider with ChangeNotifier {
     passengers.add(await _driverScheduledRidesDetailedRepository
         .fetchPassenger(passengerId));
     print(passengers);
+  }
+
+  updateRide(Ride changedRide)async{
+    ride =  changedRide;
+    await _driverScheduledRidesDetailedRepository.updateRide(ride);
+    notifyListeners();
   }
 }

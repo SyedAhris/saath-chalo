@@ -13,7 +13,8 @@ class BookedRideCard extends StatelessWidget {
       required this.journeyDate,
       required this.journeyTime,
       required this.estCost,
-      required this.status})
+      required this.status,
+      required this.seats})
       : super(key: key);
 
   final String name;
@@ -27,6 +28,7 @@ class BookedRideCard extends StatelessWidget {
   final String journeyTime;
   final int estCost;
   final String status;
+  final String seats;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -74,7 +76,7 @@ class BookedRideCard extends StatelessWidget {
                       children: [
                         Text(rating.toString()),
                         const SizedBox(height: 3),
-                        const Text("2/3"),
+                        Text(seats),
                         const SizedBox(height: 3),
                         acStatus == true
                             ? const Icon(
