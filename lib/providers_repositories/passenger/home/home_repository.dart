@@ -17,7 +17,7 @@ abstract class PassengerHomeRepository {
 class FirebasePassengerHomeRepository implements PassengerHomeRepository {
   FirebaseFirestore db = FirebaseFirestore.instance;
   @override
-  Future<List<PassengerHomeListDetails>> searchRides (
+  Future<List<PassengerHomeListDetails>> searchRides(
       Coordinates startingCoordinates, Coordinates endingCoordinates) async {
     Ride? ride;
     Customer? driver;
@@ -30,20 +30,28 @@ class FirebasePassengerHomeRepository implements PassengerHomeRepository {
         .then((value) async {
       for (var element in value.docs) {
         ride = Ride.fromJson(element.data());
-        print(ride?.driverId);
-        await db.collection("Customers").doc(ride!.driverId).get().then((value) {
-          driver = Customer.fromJson(value.data()!);
-          print(driver?.vehicles.length);
-          for (Vehicle veh in driver!.vehicles) {
-            if (veh.plateNumber == ride!.vehicleId) {
-              vehicle = veh;
-              details.add(PassengerHomeListDetails(ride: ride!, driver: driver!, vehicle: vehicle!));
+        DateTime rideDate = DateTime.fromMillisecondsSinceEpoch(ride!.date);
+        DateTime rideTime = DateTime.fromMillisecondsSinceEpoch(ride!.time);
+        DateTime dateTime = DateTime(rideDate.year, rideDate.month,
+            rideDate.day, rideTime.hour, rideTime.minute);
+        if (dateTime.isAfter(DateTime.now())) {
+          await db
+              .collection("Customers")
+              .doc(ride!.driverId)
+              .get()
+              .then((value) {
+            driver = Customer.fromJson(value.data()!);
+            for (Vehicle veh in driver!.vehicles) {
+              if (veh.plateNumber == ride!.vehicleId) {
+                vehicle = veh;
+                details.add(PassengerHomeListDetails(
+                    ride: ride!, driver: driver!, vehicle: vehicle!));
+              }
             }
-          }
-        });
+          });
+        }
       }
     });
-    print(details[0].vehicle.plateNumber);
     return details;
   }
 
