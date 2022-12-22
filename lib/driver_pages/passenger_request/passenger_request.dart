@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/global_components/passenger_card.dart';
 
 class PassengerRequestWidget extends StatefulWidget {
@@ -28,11 +29,7 @@ class _PassengerRequestWidgetState extends State<PassengerRequestWidget> {
     return Scaffold(
       drawer: const DriverSideBar(),
       appBar: const MainAppBar(title: "Scheduled Rides"),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/backimg.png'))),
+      body: MapWrapper(
         child: Column(
           children: [
             Padding(

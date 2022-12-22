@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/constants/convert_time.dart';
 import 'package:flutterdemo/driver_pages/passenger_requests/passenger_requests.dart';
+import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/providers_repositories/driver/scheduled_rides_detailed/driver_scheduled_rides_detailed_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -49,11 +50,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                 child: CircularProgressIndicator(),
               ),
             )
-          : Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/backimg.png'))),
+          : MapWrapper(
               child: Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50, top: 40),
                 child: SafeArea(
