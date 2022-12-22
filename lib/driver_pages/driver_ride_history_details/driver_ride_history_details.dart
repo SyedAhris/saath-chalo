@@ -33,7 +33,7 @@ class _DriverRideHistoryDetailsState extends State<DriverRideHistoryDetails> {
                   journeyDate: "26/11/2022",
                   journeyTime: "09:15",
                   estCost: 600,
-                  passengers: ["Mohammad Irtiza", "Ahris"],
+                  passengers: ["Mohammad Irtiza", "Ahris"], seats: '1/3',
                 )
               ],
             ),

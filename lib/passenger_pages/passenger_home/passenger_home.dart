@@ -160,6 +160,8 @@ class _PassengerHomeState extends State<PassengerHome> {
                                                     .ride
                                                     .totalFare,
                                                 status: 'None',
+                                                  seats:
+                                                  "${rideDetails[index].ride.availableSeats}/${rideDetails[index].vehicle.seatingCapacity}",
                                               ),
                                               MainButton(
                                                   text: "Send Request",

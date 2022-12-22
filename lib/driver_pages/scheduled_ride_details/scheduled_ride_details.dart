@@ -68,7 +68,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                         estCost: ride.totalFare,
                         passengers: passengers
                             .map((e) => "${e.firstName} ${e.lastName}")
-                            .toList(),
+                            .toList(), seats: '${ride.availableSeats}/${vehicle.seatingCapacity}',
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
