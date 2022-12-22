@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/providers_repositories/passenger/rides_history/ride_history_repository.dart';
 
 import '../../../models/rides_json.dart';
 import 'driver_ride_history_repository.dart';
@@ -9,7 +8,8 @@ class DriverRideHistoryProvider with ChangeNotifier {
 
   bool isFetching = false;
 
-  final DriverRideHistoryRepository _driverRideHistoryRepository = DriverMockRideHistoryRepository();
+  final DriverRideHistoryRepository _driverRideHistoryRepository =
+      DriverMockRideHistoryRepository();
   //would be called in initState of rideHistory Screen
   fetchRide(String driverId) async {
     isFetching = true;
