@@ -12,6 +12,7 @@ abstract class DriverScheduledRidesDetailedRepository {
   Future<Vehicle> fetchVehicle(String vehicleId, String driverId);
   Future<Customer> fetchDriver(String driverID);
   Future<Customer> fetchPassenger(passengerId);
+  updateRide (Ride ride);
 }
 
 class DriverFirebaseScheduledRidesDetailedRepository
@@ -54,10 +55,14 @@ class DriverFirebaseScheduledRidesDetailedRepository
   @override
   Future<Customer> fetchPassenger(passengerId) async {
     Customer? passenger;
-    await db.collection("Customer").doc(passengerId).get().then((value) {
+    await db.collection("Customers").doc(passengerId).get().then((value) {
       passenger = Customer.fromJson(value.data() ?? {});
     });
     return passenger as Customer;
+  }
+
+  updateRide(Ride ride) async {
+    await db.collection("Ride").doc(ride.id).set(ride.toJson());
   }
 }
 

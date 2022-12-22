@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DriverBookedRideCard extends StatelessWidget {
-  const DriverBookedRideCard(
-      {Key? key,
-      required this.car,
-      required this.numberPlate,
-      required this.journeyStart,
-      required this.journeyEnd,
-      required this.acStatus,
-      required this.journeyDate,
-      required this.journeyTime,
-      required this.estCost,
-      required this.passengers})
-      : super(key: key);
+  const DriverBookedRideCard({
+    Key? key,
+    required this.car,
+    required this.numberPlate,
+    required this.journeyStart,
+    required this.journeyEnd,
+    required this.acStatus,
+    required this.journeyDate,
+    required this.journeyTime,
+    required this.estCost,
+    required this.passengers,
+    required this.seats,
+  }) : super(key: key);
 
   final String car;
   final String numberPlate;
@@ -24,6 +25,7 @@ class DriverBookedRideCard extends StatelessWidget {
   final String journeyTime;
   final int estCost;
   final List<String> passengers;
+  final String seats;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -50,7 +52,7 @@ class DriverBookedRideCard extends StatelessWidget {
                 const SizedBox(width: 10),
                 Column(
                   children: [
-                    const Text("2/3"),
+                    Text(seats),
                     const SizedBox(height: 3),
                     acStatus == true
                         ? const Icon(

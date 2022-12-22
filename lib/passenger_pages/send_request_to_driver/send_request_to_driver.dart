@@ -59,6 +59,8 @@ class _SendRequestToDriverState extends State<SendRequestToDriver> {
                             widget.rideDetails.ride.time),
                         estCost: widget.rideDetails.ride.totalFare,
                         status: 'None',
+                          seats:
+                          "${widget.rideDetails.ride.availableSeats}/${widget.rideDetails.vehicle.seatingCapacity}",
                       ),
                       const Padding(
                         padding: EdgeInsets.only(top: 20),

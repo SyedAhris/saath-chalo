@@ -68,7 +68,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                         estCost: ride.totalFare,
                         passengers: passengers
                             .map((e) => "${e.firstName} ${e.lastName}")
-                            .toList(),
+                            .toList(), seats: '${ride.availableSeats}/${vehicle.seatingCapacity}',
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
@@ -82,7 +82,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => PassengerRequests(
                                           passengerRequests:
-                                              ride.passengerRequests,
+                                              ride.passengerRequests, ride: ride,
                                         )));
                               },
                               child: Row(
