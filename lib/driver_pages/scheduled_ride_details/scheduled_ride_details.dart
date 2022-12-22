@@ -82,7 +82,7 @@ class _ScheduledRideDetailsState extends State<ScheduledRideDetails> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => PassengerRequests(
                                           passengerRequests:
-                                              ride.passengerRequests,
+                                              ride.passengerRequests, ride: ride,
                                         )));
                               },
                               child: Row(

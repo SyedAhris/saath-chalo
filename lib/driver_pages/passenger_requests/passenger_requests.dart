@@ -4,16 +4,22 @@ import 'package:flutterdemo/global_components/driver_side_bar.dart';
 import 'package:flutterdemo/global_components/main_app_bar.dart';
 import 'package:flutterdemo/global_components/map_wrapper.dart';
 import 'package:flutterdemo/global_components/passenger_card.dart';
+import 'package:flutterdemo/models/approved_passenger.dart';
 import 'package:flutterdemo/models/passenger_request.dart';
 import 'package:flutterdemo/providers_repositories/driver/passenger_requests/passenger_request_provider.dart';
+import 'package:flutterdemo/providers_repositories/driver/scheduled_rides_detailed/driver_scheduled_rides_detailed_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/coordinates.dart';
+import '../../models/rides_json.dart';
 import 'passenger_demo.dart';
 
 class PassengerRequests extends StatefulWidget {
-  const PassengerRequests({Key? key, required this.passengerRequests})
+  const PassengerRequests(
+      {Key? key, required this.passengerRequests, required this.ride})
       : super(key: key);
 
+  final Ride ride;
   final List<PassengerRequest> passengerRequests;
 
   @override
@@ -74,54 +80,123 @@ class _PassengerRequestsState extends State<PassengerRequests> {
                                         children: [
                                           (isFetching)
                                               ? const CircularProgressIndicator()
-                                              : PassengerCard(
-                                                  status: true,
-                                                  name:
-                                                      "${passengers[index].firstName} ${passengers[index].lastName}",
-                                                  rating:
-                                                      passengers[index].rating,
-                                                  journeyStart: widget
-                                                      .passengerRequests[index]
-                                                      .startingDestination,
-                                                  journeyEnd: widget
-                                                      .passengerRequests[index]
-                                                      .endingDestination,
-                                                  onTap1: () {
-                                                    for (PassengerRequest pr
-                                                        in widget
-                                                            .passengerRequests) {
-                                                      if (pr.passengerId ==
-                                                          passengers[index]
-                                                              .id) {
-                                                        pr.status = "Rejected";
-                                                      }
-                                                    }
-                                                  },
-                                                  onTap2: () {},
-                                                  onTap: () {
-                                                    Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PassengerRequestWidget(
-                                                          status: false,
-                                                          name:
-                                                              "${passengers[index].firstName} ${passengers[index].lastName}",
-                                                          rating:
-                                                              passengers[index]
-                                                                  .rating,
-                                                          journeyStart: widget
+                                              : (passengers[index].id !=
+                                                          widget
                                                               .passengerRequests[
                                                                   index]
-                                                              .startingDestination,
-                                                          journeyEnd: widget
+                                                              .passengerId) &&
+                                                      (widget
                                                               .passengerRequests[
                                                                   index]
-                                                              .endingDestination,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
+                                                              .status !=
+                                                          "Pending")
+                                                  ? Container()
+                                                  : PassengerCard(
+                                                      status: true,
+                                                      name:
+                                                          "${passengers[index].firstName} ${passengers[index].lastName}",
+                                                      rating: passengers[index]
+                                                          .rating,
+                                                      journeyStart: widget
+                                                          .passengerRequests[
+                                                              index]
+                                                          .startingDestination,
+                                                      journeyEnd: widget
+                                                          .passengerRequests[
+                                                              index]
+                                                          .endingDestination,
+                                                      onTap1: () {
+                                                        // on click of deny button
+                                                        widget
+                                                            .passengerRequests[
+                                                                index]
+                                                            .status = "Denied";
+                                                        //context.read<PassengerRequestProvider>().approveRequest(widget.passengerRequests[index]);
+                                                        widget.ride
+                                                                .passengerRequests =
+                                                            widget
+                                                                .passengerRequests;
+                                                        context
+                                                            .read<
+                                                                DriverScheduledRidesDetailedProvider>()
+                                                            .updateRide(
+                                                                widget.ride);
+                                                      },
+                                                      onTap2: () {
+                                                        //on click of accept button
+                                                        widget.ride.approvedPassengers.add(
+                                                            ApprovedPassenger(
+                                                                passengerId: widget
+                                                                    .passengerRequests[
+                                                                        index]
+                                                                    .passengerId,
+                                                                startingDestination: widget
+                                                                    .passengerRequests[
+                                                                        index]
+                                                                    .startingDestination,
+                                                                endingDestination: widget
+                                                                    .passengerRequests[
+                                                                        index]
+                                                                    .endingDestination,
+                                                                startingCoordinates: widget
+                                                                    .passengerRequests[
+                                                                        index]
+                                                                    .startingCoordinates,
+                                                                endingCoordinates: widget
+                                                                    .passengerRequests[
+                                                                        index]
+                                                                    .endingCoordinates,
+                                                                waypoints: widget
+                                                                    .passengerRequests[
+                                                                        index]
+                                                                    .waypoints,
+                                                                rideFare:
+                                                                    Coordinates //TODO: Ibrahim calculate correct ride fare for passengers
+                                                                            .calculateFare(
+                                                                                12,
+                                                                                20,
+                                                                                false)
+                                                                        .toInt(),
+                                                                driverRating: 0,
+                                                                passengerRating:
+                                                                    0,
+                                                                isDelete:
+                                                                    false));
+                                                        widget.ride
+                                                            .passengerRequests
+                                                            .removeAt(index);
+                                                        context
+                                                            .read<
+                                                                DriverScheduledRidesDetailedProvider>()
+                                                            .updateRide(
+                                                                widget.ride);
+                                                      },
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                PassengerRequestWidget(
+                                                              status: false,
+                                                              name:
+                                                                  "${passengers[index].firstName} ${passengers[index].lastName}",
+                                                              rating:
+                                                                  passengers[
+                                                                          index]
+                                                                      .rating,
+                                                              journeyStart: widget
+                                                                  .passengerRequests[
+                                                                      index]
+                                                                  .startingDestination,
+                                                              journeyEnd: widget
+                                                                  .passengerRequests[
+                                                                      index]
+                                                                  .endingDestination,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
                                           Center(
                                             child: index != pass.length - 1
                                                 ? const Divider(
