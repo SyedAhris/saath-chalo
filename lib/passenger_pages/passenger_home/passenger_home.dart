@@ -105,9 +105,9 @@ class _PassengerHomeState extends State<PassengerHome> {
                                   .read<PassengerHomeProvider>()
                                   .getSearchedRides(
                                     Coordinates(
-                                        lat: "12.345678", long: "98.765432"),
+                                        lat: "12.345678", long: "98.765432"), //TODO : Ibrahim change to map coordinates
                                     Coordinates(
-                                        lat: "21.345678", long: "87.765432"),
+                                        lat: "21.345678", long: "87.765432"), //TODO : Ibrahim change to map coordinates
                                   );
                               final rideDetails =
                                   context.read<PassengerHomeProvider>().details;

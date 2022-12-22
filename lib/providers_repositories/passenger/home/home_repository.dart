@@ -35,20 +35,28 @@ class FirebasePassengerHomeRepository implements PassengerHomeRepository {
         DateTime dateTime = DateTime(rideDate.year, rideDate.month,
             rideDate.day, rideTime.hour, rideTime.minute);
         if (dateTime.isAfter(DateTime.now())) {
-          await db
-              .collection("Customers")
-              .doc(ride!.driverId)
-              .get()
-              .then((value) {
-            driver = Customer.fromJson(value.data()!);
-            for (Vehicle veh in driver!.vehicles) {
-              if (veh.plateNumber == ride!.vehicleId) {
-                vehicle = veh;
-                details.add(PassengerHomeListDetails(
-                    ride: ride!, driver: driver!, vehicle: vehicle!));
+          print(startingCoordinates.getDistanceTo(ride!.startingCoordinates));
+          print(endingCoordinates.getDistanceTo(ride!.endingCoordinates));
+          print(startingCoordinates.lat);
+          print(startingCoordinates.long);
+          print(ride!.startingCoordinates.lat);
+          print(ride!.startingCoordinates.long);
+          if (startingCoordinates.getDistanceTo(ride!.startingCoordinates)<5 && endingCoordinates.getDistanceTo(ride!.endingCoordinates)<5) {
+            await db
+                .collection("Customers")
+                .doc(ride!.driverId)
+                .get()
+                .then((value) {
+              driver = Customer.fromJson(value.data()!);
+              for (Vehicle veh in driver!.vehicles) {
+                if (veh.plateNumber == ride!.vehicleId) {
+                  vehicle = veh;
+                  details.add(PassengerHomeListDetails(
+                      ride: ride!, driver: driver!, vehicle: vehicle!));
+                }
               }
-            }
-          });
+            });
+          }
         }
       }
     });
